@@ -9,7 +9,7 @@
 <section class="gg-section {{ bg_class }} gg-section--rule-top">
   <div class="gg-container gg-section__inner" style="display:flex;flex-direction:column;gap:{% if section.settings.align == 'center' %}32px{% else %}28px{% endif %}">
     {%- render 'gg-heading', eyebrow: section.settings.eyebrow, title: section.settings.heading, lead: section.settings.lead, align: section.settings.align -%}
-    <div class="gg-grid gg-grid--3">
+    <div class="gg-grid gg-grid--3{% if section.blocks.size == 2 %} gg-grid--two{% endif %}">
       {%- for block in section.blocks -%}
         <div class="gg-card{{ card_class }}" {{ block.shopify_attributes }}>
           {%- if block.settings.icon != 'none' -%}<span class="gg-card__icon">{% render 'gg-icon', icon: block.settings.icon %}</span>{%- endif -%}

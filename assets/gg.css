@@ -708,3 +708,6 @@ body.gg-has-sticky-buy { padding-bottom: 76px; }
 /* Card subtitle: at most two lines, no mid-word cut */
 .gg-pcard__subtitle { -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 @media screen and (min-width: 990px) { .gg-pcard__subtitle { display: -webkit-box; } }
+
+/* Icon cards: two cards share the row evenly */
+@media screen and (min-width: 750px) { .gg-grid--3.gg-grid--two { grid-template-columns: repeat(2, 1fr); } }

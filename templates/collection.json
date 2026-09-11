@@ -35,20 +35,11 @@
             "title": "Thirty days to decide",
             "body": "Return anything unused in its packaging. Email us your order number and we send the address; the refund goes back the way you paid."
           }
-        },
-        "c3": {
-          "type": "card",
-          "settings": {
-            "icon": "shield-check",
-            "title": "Two-year warranty",
-            "body": "If a piece chips, frays or fails in normal use, we replace it or refund you. No forms, no ticket numbers, just a reply from a person."
-          }
         }
       },
       "block_order": [
         "c1",
-        "c2",
-        "c3"
+        "c2"
       ],
       "settings": {
         "eyebrow": "Before you order",
