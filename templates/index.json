@@ -1,5 +1,16 @@
 {
   "sections": {
+    "test_banner": {
+      "type": "test-banner",
+      "settings": {
+        "heading": "hallo",
+        "background_color": "#000000",
+        "text_color": "#ffffff",
+        "text_size": 72,
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
     "image_banner": {
       "type": "image-banner",
       "blocks": {
@@ -69,6 +80,7 @@
     }
   },
   "order": [
+    "test_banner",
     "image_banner",
     "featured_collection"
   ]
