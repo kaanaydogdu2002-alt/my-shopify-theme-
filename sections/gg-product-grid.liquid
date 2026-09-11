@@ -12,7 +12,7 @@
     {%- render 'gg-heading', eyebrow: section.settings.eyebrow, title: section.settings.heading, lead: section.settings.lead -%}
     <div class="gg-products__grid">
       {%- for product in products limit: limit -%}
-        {%- render 'gg-product-card', product: product -%}
+        {%- render 'gg-product-card', product: product, show_rating: section.settings.show_rating, placeholder_rating: section.settings.placeholder_rating, placeholder_count: section.settings.placeholder_count -%}
       {%- else -%}
         <div class="gg-products__empty" style="grid-column: 1 / -1">No products yet. Add products in Shopify and they will appear here.</div>
       {%- endfor -%}
@@ -36,6 +36,9 @@
     { "type": "text", "id": "lead", "label": "Lead", "default": "Small batches, named materials, and a repair or refund if one of them lets you down." },
     { "type": "collection", "id": "collection", "label": "Collection", "info": "Leave empty to show all products." },
     { "type": "range", "id": "limit", "label": "Products to show", "min": 2, "max": 12, "step": 1, "default": 6 },
+    { "type": "checkbox", "id": "show_rating", "label": "Show star rating on cards", "default": true, "info": "Uses the product's reviews.rating metafield (filled by a reviews app)." },
+    { "type": "range", "id": "placeholder_rating", "label": "Placeholder rating until real ratings exist", "min": 0, "max": 5, "step": 0.1, "default": 0, "info": "0 = show nothing until a reviews app provides real ratings." },
+    { "type": "number", "id": "placeholder_count", "label": "Placeholder review count" },
     { "type": "checkbox", "id": "show_payments", "label": "Show payment methods", "default": true },
     { "type": "text", "id": "payments_label", "label": "Payment label", "default": "Secure checkout with" }
   ],

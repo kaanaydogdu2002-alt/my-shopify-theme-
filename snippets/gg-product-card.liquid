@@ -14,7 +14,20 @@
   assign img_alt = product.featured_image.alt | default: product.title | escape
   assign benefits = product.metafields.custom.benefits.value
   if subtitle == blank
-    assign subtitle = product.description | strip_html | truncate: 70
+    assign plain = product.description | strip_html | strip
+    assign subtitle = plain | split: '. ' | first
+    if subtitle.size > 90
+      assign subtitle = plain | split: ' — ' | first
+    endif
+    if subtitle.size > 90
+      assign subtitle = plain | truncatewords: 12, ''
+    endif
+  endif
+  assign rating_value = product.metafields.reviews.rating.value.rating
+  assign rating_count = product.metafields.reviews.rating_count.value
+  if rating_value == blank and placeholder_rating > 0
+    assign rating_value = placeholder_rating
+    assign rating_count = placeholder_count
   endif
 -%}
 <a href="{{ product.url }}" class="gg-pcard">
@@ -30,10 +43,10 @@
   </span>
   <span class="gg-pcard__body">
     <span class="gg-pcard__title">{{ product.title }}</span>
-    {%- if subtitle != blank -%}<span class="gg-pcard__subtitle">{{ subtitle }}</span>{%- endif -%}
-    {%- if product.metafields.reviews.rating.value != blank -%}
-      {%- render 'gg-rating', value: product.metafields.reviews.rating.value.rating, count: product.metafields.reviews.rating_count.value, size: 13 -%}
+    {%- if show_rating != false and rating_value != blank -%}
+      {%- render 'gg-rating', value: rating_value, count: rating_count, size: 13, show_value: true -%}
     {%- endif -%}
+    {%- if subtitle != blank -%}<span class="gg-pcard__subtitle">{{ subtitle }}</span>{%- endif -%}
     {%- render 'gg-price', product: product -%}
     {%- if show_benefits and benefits != blank -%}
       <span class="gg-pcard__benefits">

@@ -37,7 +37,7 @@
     {%- paginate collection.products by section.settings.per_page -%}
       <div class="gg-products__grid gg-products__grid--shop">
         {%- for product in collection.products -%}
-          {%- render 'gg-product-card', product: product, show_benefits: section.settings.show_benefits -%}
+          {%- render 'gg-product-card', product: product, show_benefits: section.settings.show_benefits, show_rating: true -%}
         {%- else -%}
           <div class="gg-products__empty" style="grid-column: 1 / -1">{{ section.settings.empty_text }}</div>
         {%- endfor -%}

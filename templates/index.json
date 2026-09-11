@@ -68,7 +68,9 @@
         "collection": "",
         "limit": 6,
         "show_payments": true,
-        "payments_label": "Secure checkout with"
+        "payments_label": "Secure checkout with",
+        "show_rating": true,
+        "placeholder_rating": 0
       }
     },
     "reviews": {
@@ -78,7 +80,7 @@
           "type": "review",
           "settings": {
             "stars": 5,
-            "body": "The pour-over set replaced two things on my counter, which was the point. Third month of daily use and the glaze still looks new. Packed properly, arrived in two days.",
+            "body": "The pour-over set replaced two things on my counter, which was the point. Third month of daily use and the glaze still looks new.",
             "who": "Marieke, Netherlands",
             "verified": true,
             "note": ""
@@ -129,7 +131,7 @@
         "large_text": false,
         "button_label": "",
         "button_link": "",
-        "image_note": "Workshop image — hands folding linen, warm daylight",
+        "image_note": "Still life — linen, ceramic and wood on a wooden table, natural light",
         "ratio": "1x1",
         "image_position": "left",
         "mobile_image_first": true,

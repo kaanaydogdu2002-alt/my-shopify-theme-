@@ -44,12 +44,7 @@
     {%- endif -%}
 
     <div class="gg-footer__legal">
-      <span>
-        {{ shop.name }}
-        {%- if section.settings.legal != blank %} · {{ section.settings.legal }}{% endif -%}
-        <span class="gg-hide-desktop"> · © {{ 'now' | date: '%Y' }}</span>
-      </span>
-      <span class="gg-hide-mobile">© {{ 'now' | date: '%Y' }} {{ shop.name }}</span>
+      <span>{{ shop.name }}{% if section.settings.legal != blank %} · {{ section.settings.legal }}{% endif %} · © {{ 'now' | date: '%Y' }}</span>
       {%- if section.settings.show_policy_links -%}
         <span class="gg-hide-desktop">
           {%- for policy in shop.policies -%}
@@ -91,7 +86,7 @@
       "type": "text",
       "id": "legal",
       "label": "Legal line (KVK / VAT)",
-      "default": "KVK 42156789 · BTW NL004215678B01",
+      "default": "KVK 42156789",
       "info": "Placeholder from the design — replace with your real registration numbers."
     },
     {

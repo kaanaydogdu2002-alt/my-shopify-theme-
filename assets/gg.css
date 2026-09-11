@@ -704,3 +704,7 @@ body.gg-has-sticky-buy { padding-bottom: 76px; }
   .gg-products__grid--shop { grid-template-columns: repeat(3, 1fr); }
   .gg-pcard__benefit { font-size: 13px; }
 }
+
+/* Card subtitle: at most two lines, no mid-word cut */
+.gg-pcard__subtitle { -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+@media screen and (min-width: 990px) { .gg-pcard__subtitle { display: -webkit-box; } }

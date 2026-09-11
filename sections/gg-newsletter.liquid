@@ -12,7 +12,7 @@
           <input id="gg-newsletter-email" class="gg-field__input" type="email" name="contact[email]" value="{{ form.email }}" placeholder="{{ section.settings.placeholder }}" required autocomplete="email">
           {%- if form.errors -%}<span class="gg-field__error">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</span>{%- endif -%}
         </div>
-        <button type="submit" class="gg-btn gg-btn--gold">{{ section.settings.button_label }}</button>
+        <button type="submit" class="gg-btn">{{ section.settings.button_label }}</button>
       {%- endif -%}
     {%- endform -%}
     {%- if section.settings.note != blank -%}<span class="gg-small">{{ section.settings.note }}</span>{%- endif -%}
