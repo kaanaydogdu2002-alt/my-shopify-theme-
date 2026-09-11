@@ -103,6 +103,11 @@
                             height="{{ 150 | divided_by: item.image.aspect_ratio | ceil }}"
                           >
                         </div>
+                      {% else %}
+                        <a href="{{ item.url }}" class="cart-item__link" aria-hidden="true" tabindex="-1"> </a>
+                        <div class="cart-item__image-container gg-cart-placeholder" aria-hidden="true">
+                          {%- render 'gg-icon', icon: 'photo' -%}
+                        </div>
                       {% endif %}
                     </td>
 

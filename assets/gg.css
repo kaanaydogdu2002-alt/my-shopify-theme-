@@ -740,3 +740,11 @@ body.gg-has-sticky-buy { padding-bottom: 76px; }
 .gg-cart-trust__line { margin: 0; font-family: var(--gg-sans); font-size: 12px; line-height: 1.6; color: var(--gg-text-muted); text-align: center; }
 /* Dawn cart pieces in the brand fonts */
 .cart__checkout-button { font-family: var(--gg-sans); }
+
+/* Cart: readable totals in the UI font, placeholder for products without a photo yet */
+.totals__total, .totals__total-value, .totals__subtotal, .totals__subtotal-value, .tax-note, .cart__note label, .cart-item__name, .cart-item__details, .cart-item__quantity, .cart__warnings, .cart__empty-text, .cart__login-title, .cart__login-paragraph { font-family: var(--gg-sans); }
+.totals__total { font-family: var(--gg-sans); font-weight: 400; letter-spacing: 0; color: var(--gg-text-body); }
+.totals__total-value { font-family: var(--gg-sans); font-weight: 500; color: var(--gg-ink-800); }
+.gg-cart-placeholder { width: 100px; aspect-ratio: 1 / 1; display: flex; align-items: center; justify-content: center; background: var(--gg-surface-sunken); border: 1px solid var(--gg-border); border-radius: var(--gg-radius-md); color: var(--gg-text-quiet); }
+.gg-cart-placeholder .gg-icon { font-size: 22px; }
+@media screen and (min-width: 750px) { .gg-cart-placeholder { width: 150px; } }
