@@ -273,9 +273,10 @@
     var path = window.location.pathname.replace(/\/$/, '');
     qsa('.gg-header__nav a, .gg-drawer__nav a').forEach(function (a) {
       var href = a.getAttribute('href') || '';
-      var clean = href.split('#')[0].replace(/\/$/, '');
-      if (clean !== '' && clean === path) a.setAttribute('aria-current', 'page');
-      if (clean === '' && (path === '' || path === '/')) a.setAttribute('aria-current', 'page');
+      if (href.indexOf('#') > -1 && href.split('#')[0] === '') return; /* in-page anchors never mark current */
+      var clean = href.split('#')[0].split('?')[0].replace(/\/$/, '');
+      var isCurrent = (clean === '' ? (path === '' || path === '/') : clean === path);
+      if (isCurrent) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
     });
   }
 

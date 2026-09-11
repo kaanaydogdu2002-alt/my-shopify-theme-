@@ -4,7 +4,7 @@
   assign summary = product.metafields.custom.summary.value
   assign rating = product.metafields.reviews.rating.value
   assign rating_count = product.metafields.reviews.rating_count.value
-  assign shop_link = section.settings.shop_link | default: '/#shop'
+  assign shop_link = section.settings.shop_link | default: '/collections/all'
   assign has_real_options = false
   if product.has_only_default_variant == false
     assign has_real_options = true
@@ -209,13 +209,13 @@
   "settings": [
     { "type": "header", "content": "Breadcrumb" },
     { "type": "text", "id": "shop_label", "label": "Shop crumb label", "default": "Shop" },
-    { "type": "url", "id": "shop_link", "label": "Shop crumb link", "info": "Leave empty to link to the homepage product grid." },
+    { "type": "url", "id": "shop_link", "label": "Shop crumb link", "info": "Defaults to /collections/all." },
     { "type": "header", "content": "Price notes" },
     { "type": "text", "id": "price_note_1", "label": "Note 1", "default": "Shown in [currency] · converted at checkout", "info": "[currency] is replaced with the active currency." },
     { "type": "text", "id": "price_note_2", "label": "Note 2", "default": "Shipping from €4,95 · exact cost shown at checkout for your country" },
     { "type": "header", "content": "Benefits and reviews" },
     { "type": "checkbox", "id": "show_benefits", "label": "Show benefit bullets (product metafield custom.benefits)", "default": true },
-    { "type": "checkbox", "id": "show_review_slider", "label": "Show review slider (product metafield custom.reviews)", "default": true },
+    { "type": "checkbox", "id": "show_review_slider", "label": "Show review slider (product metafield custom.reviews)", "default": false },
     { "type": "range", "id": "slider_interval", "label": "Auto-rotate every", "min": 0, "max": 15, "step": 1, "unit": "s", "default": 6, "info": "0 = no auto-rotate." },
     { "type": "header", "content": "Buy button" },
     { "type": "text", "id": "add_label", "label": "Add to bag label", "default": "Add to bag" },

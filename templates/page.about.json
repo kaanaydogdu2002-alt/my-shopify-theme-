@@ -84,7 +84,7 @@
         "text": "Or write to us first. We reply within one working day, usually sooner.",
         "prefix_price": false,
         "button_label": "Shop the range",
-        "button_link": "/#shop",
+        "button_link": "/collections/all",
         "button_adds_to_bag": false,
         "button2_label": "Contact us",
         "button2_link": "/pages/contact",

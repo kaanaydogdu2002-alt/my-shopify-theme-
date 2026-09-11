@@ -1,0 +1,72 @@
+{%- liquid
+  assign title = collection.title
+  if collection.handle == 'all' and section.settings.all_title != blank
+    assign title = section.settings.all_title
+  endif
+  assign lead = section.settings.lead
+  if collection.handle != 'all' and collection.description != blank
+    assign lead = collection.description | strip_html
+  endif
+  assign filters = section.settings.filters | split: ','
+  assign base_url = collection.url
+  if collection.handle == 'all'
+    assign base_url = '/collections/all'
+  endif
+  assign active_tag = current_tags | first
+-%}
+<section class="gg-collection gg-section gg-section--page">
+  <div class="gg-container gg-collection__intro">
+    {%- if section.settings.eyebrow != blank -%}<span class="gg-eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+    <h1 class="gg-h1" style="max-width:16ch">{{ title }}</h1>
+    {%- if lead != blank -%}<p class="gg-lead gg-measure">{{ lead }}</p>{%- endif -%}
+
+    {%- if section.settings.show_filters and filters.size > 0 -%}
+      <nav class="gg-chips" aria-label="Filter">
+        <a href="{{ base_url }}" class="gg-chip{% unless active_tag %} is-active{% endunless %}">{{ section.settings.all_label }}</a>
+        {%- for f in filters -%}
+          {%- assign parts = f | split: ':' -%}
+          {%- assign label = parts[0] | strip -%}
+          {%- assign tag = parts[1] | default: parts[0] | strip | downcase -%}
+          <a href="{{ base_url }}/{{ tag | handleize }}" class="gg-chip{% if active_tag == tag %} is-active{% endif %}">{{ label }}</a>
+        {%- endfor -%}
+      </nav>
+    {%- endif -%}
+  </div>
+
+  <div class="gg-container gg-collection__body">
+    {%- paginate collection.products by section.settings.per_page -%}
+      <div class="gg-products__grid gg-products__grid--shop">
+        {%- for product in collection.products -%}
+          {%- render 'gg-product-card', product: product, show_benefits: section.settings.show_benefits -%}
+        {%- else -%}
+          <div class="gg-products__empty" style="grid-column: 1 / -1">{{ section.settings.empty_text }}</div>
+        {%- endfor -%}
+      </div>
+      {%- if paginate.pages > 1 -%}
+        <nav class="gg-pagination" aria-label="Pagination">
+          {%- if paginate.previous -%}<a href="{{ paginate.previous.url }}" class="gg-btn gg-btn--secondary gg-btn--sm">{% render 'gg-icon', icon: 'chevron-left' %}Previous</a>{%- endif -%}
+          <span class="gg-small">Page {{ paginate.current_page }} of {{ paginate.pages }}</span>
+          {%- if paginate.next -%}<a href="{{ paginate.next.url }}" class="gg-btn gg-btn--secondary gg-btn--sm">Next{% render 'gg-icon', icon: 'chevron-right' %}</a>{%- endif -%}
+        </nav>
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "GG Collection",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Shop" },
+    { "type": "text", "id": "all_title", "label": "Title for the 'All products' page", "default": "The full range, six pieces" },
+    { "type": "textarea", "id": "lead", "label": "Intro", "default": "Everything we sell, on one page. Each piece earned its place by solving one small daily problem, and by still doing it a year later. Filter by where it lives in your home, or read the three facts under each one." },
+    { "type": "checkbox", "id": "show_filters", "label": "Show filter chips", "default": true },
+    { "type": "text", "id": "all_label", "label": "'All' chip label", "default": "All" },
+    { "type": "text", "id": "filters", "label": "Filter chips (Label:tag, comma separated)", "default": "Kitchen:kitchen, Living:living, Desk:desk", "info": "Each chip filters the collection by a product tag." },
+    { "type": "checkbox", "id": "show_benefits", "label": "Show the three benefits on each card", "default": true },
+    { "type": "range", "id": "per_page", "label": "Products per page", "min": 6, "max": 24, "step": 6, "default": 12 },
+    { "type": "text", "id": "empty_text", "label": "Empty text", "default": "Nothing here yet. Try another filter, or write to us." }
+  ]
+}
+{% endschema %}

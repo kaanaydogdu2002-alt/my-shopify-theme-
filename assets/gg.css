@@ -673,3 +673,25 @@ body.gg-has-sticky-buy { padding-bottom: 76px; }
 .gg-rslider__dots { display: flex; gap: 6px; }
 .gg-rslider__dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gg-sand-600); border: 0; padding: 0; cursor: pointer; transition: background var(--gg-transition), transform var(--gg-transition); }
 .gg-rslider__dot.is-active { background: var(--gg-gold-500); transform: scale(1.3); }
+
+/* --------------------------------------------------------------------------
+   Shop / collection page
+   -------------------------------------------------------------------------- */
+.gg-collection__intro { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; padding-top: 28px; padding-bottom: 8px; }
+.gg-collection__body { padding-top: 24px; padding-bottom: 40px; display: flex; flex-direction: column; gap: 24px; }
+.gg-chips { display: flex; flex-wrap: wrap; gap: 8px; padding-top: 6px; }
+.gg-chip { display: inline-flex; align-items: center; min-height: 36px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--gg-border); background: var(--gg-surface-card); font-size: 13px; color: var(--gg-text-body); text-decoration: none; transition: border-color var(--gg-transition), color var(--gg-transition), background var(--gg-transition); }
+.gg-chip:hover { border-color: var(--gg-border-strong); color: var(--gg-ink-800); }
+.gg-chip.is-active { background: var(--gg-ink-800); border-color: var(--gg-ink-800); color: var(--gg-sand-100); }
+.gg-products__grid--shop { grid-template-columns: 1fr; }
+.gg-pcard__benefits { display: flex; flex-direction: column; gap: 5px; padding-top: 6px; border-top: 1px solid var(--gg-border); margin-top: 4px; }
+.gg-pcard__benefit { display: flex; gap: 7px; align-items: flex-start; font-size: 12px; line-height: 1.45; color: var(--gg-text-muted); }
+.gg-pcard__benefit .gg-icon { font-size: 13px; color: var(--gg-gold-600); margin-top: 2px; }
+.gg-pagination { display: flex; align-items: center; justify-content: center; gap: 16px; }
+@media screen and (min-width: 750px) { .gg-products__grid--shop { grid-template-columns: 1fr 1fr; } }
+@media screen and (min-width: 990px) {
+  .gg-collection__intro { gap: 16px; padding-top: 72px; padding-bottom: 16px; }
+  .gg-collection__body { padding-top: 32px; padding-bottom: 80px; gap: 32px; }
+  .gg-products__grid--shop { grid-template-columns: repeat(3, 1fr); }
+  .gg-pcard__benefit { font-size: 13px; }
+}

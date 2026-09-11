@@ -52,7 +52,7 @@
       "type": "gg-product-main",
       "settings": {
         "shop_label": "Shop",
-        "shop_link": "",
+        "shop_link": "/collections/all",
         "price_note_1": "Shown in [currency] · converted at checkout",
         "price_note_2": "Shipping from €4,95 · exact cost shown at checkout for your country",
         "add_label": "Add to bag",
@@ -68,7 +68,7 @@
         "image_note": "Product image — add photos to this product in Shopify",
         "thumb_notes": "Detail, Scale, Set, In use",
         "show_benefits": true,
-        "show_review_slider": true,
+        "show_review_slider": false,
         "slider_interval": 6
       }
     },

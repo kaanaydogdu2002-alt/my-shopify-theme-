@@ -12,6 +12,7 @@
   endfor
   assign subtitle = product.metafields.custom.subtitle.value
   assign img_alt = product.featured_image.alt | default: product.title | escape
+  assign benefits = product.metafields.custom.benefits.value
   if subtitle == blank
     assign subtitle = product.description | strip_html | truncate: 70
   endif
@@ -34,6 +35,13 @@
       {%- render 'gg-rating', value: product.metafields.reviews.rating.value.rating, count: product.metafields.reviews.rating_count.value, size: 13 -%}
     {%- endif -%}
     {%- render 'gg-price', product: product -%}
+    {%- if show_benefits and benefits != blank -%}
+      <span class="gg-pcard__benefits">
+        {%- for line in benefits limit: 3 -%}
+          <span class="gg-pcard__benefit">{% render 'gg-icon', icon: 'check' %}<span>{{ line }}</span></span>
+        {%- endfor -%}
+      </span>
+    {%- endif -%}
   </span>
   <span class="gg-pcard__foot">View{% render 'gg-icon', icon: 'arrow-right' %}</span>
 </a>

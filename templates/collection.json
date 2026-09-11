@@ -1,36 +1,129 @@
 {
   "sections": {
-    "banner": {
-      "type": "main-collection-banner",
+    "main": {
+      "type": "gg-collection",
       "settings": {
-        "show_collection_description": true,
-        "show_collection_image": false,
-        "color_scheme": "scheme-1"
+        "eyebrow": "Shop",
+        "all_title": "The full range, six pieces",
+        "lead": "Everything we sell, on one page. Each piece earned its place by solving one small daily problem, and by still doing it a year later. Filter by where it lives in your home, or read the three facts under each one.",
+        "show_filters": true,
+        "all_label": "All",
+        "filters": "Kitchen:kitchen, Living:living, Desk:desk",
+        "show_benefits": true,
+        "per_page": 12,
+        "empty_text": "Nothing here yet. Try another filter, or write to us."
       }
     },
-    "product-grid": {
-      "type": "main-collection-product-grid",
+    "before": {
+      "type": "gg-icon-cards",
+      "blocks": {
+        "c1": {
+          "type": "card",
+          "settings": {
+            "icon": "truck",
+            "title": "Ships within one working day",
+            "body": "From our shelf in Den Haag, tracked, to most of the world. The exact cost shows at checkout before you pay."
+          }
+        },
+        "c2": {
+          "type": "card",
+          "settings": {
+            "icon": "rotate",
+            "title": "Thirty days to decide",
+            "body": "Return anything unused in its packaging. Email us your order number and we send the address; the refund goes back the way you paid."
+          }
+        },
+        "c3": {
+          "type": "card",
+          "settings": {
+            "icon": "shield-check",
+            "title": "Two-year warranty",
+            "body": "If a piece chips, frays or fails in normal use, we repair or replace it. No forms, no ticket numbers, just a reply from a person."
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3"
+      ],
       "settings": {
-        "products_per_page": 16,
-        "columns_desktop": 4,
-        "color_scheme": "scheme-1",
-        "image_ratio": "adapt",
-        "image_shape": "default",
-        "show_secondary_image": false,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "none",
-        "enable_filtering": true,
-        "filter_type": "horizontal",
-        "enable_sorting": true,
-        "columns_mobile": "2",
-        "padding_top": 36,
-        "padding_bottom": 36
+        "eyebrow": "Before you order",
+        "heading": "Three things to know",
+        "lead": "",
+        "align": "left",
+        "background": "card"
+      }
+    },
+    "faq": {
+      "type": "gg-faq",
+      "blocks": {
+        "q1": {
+          "type": "question",
+          "settings": {
+            "title": "What does shipping cost?",
+            "content": "<p>Netherlands and Belgium €4,95, free on orders over €40. Rest of Europe €9,95. Rest of the world €14,95. The exact amount is shown at checkout before you pay.</p>",
+            "use_product_metafield": false
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "title": "Do you ship to my country?",
+            "content": "<p>Yes, we ship worldwide with tracking. Outside the EU, import duties and local taxes are charged by your customs office and are not included in our price.</p>",
+            "use_product_metafield": false
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "title": "Are the prices including VAT?",
+            "content": "<p>Yes. All prices include Dutch VAT. If you order from outside the EU, VAT is removed at checkout automatically.</p>",
+            "use_product_metafield": false
+          }
+        },
+        "q4": {
+          "type": "question",
+          "settings": {
+            "title": "Can I order several pieces in one parcel?",
+            "content": "<p>Yes, orders ship together. If one piece is a few weeks from restock, we tell you before you pay so you can decide whether to wait or split the order.</p>",
+            "use_product_metafield": false
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4"
+      ],
+      "settings": {
+        "eyebrow": "Ordering",
+        "heading": "Questions about ordering",
+        "lead": "",
+        "open_first": true
+      }
+    },
+    "cta": {
+      "type": "gg-cta",
+      "settings": {
+        "heading": "Not sure which one?",
+        "use_product_title": false,
+        "text": "Write to us and say what you are after. We will tell you honestly which piece fits, or if none of them does.",
+        "prefix_price": false,
+        "button_label": "Contact us",
+        "button_link": "/pages/contact",
+        "button_adds_to_bag": false,
+        "button2_label": "",
+        "button2_link": "",
+        "background": "card"
       }
     }
   },
   "order": [
-    "banner",
-    "product-grid"
+    "main",
+    "before",
+    "faq",
+    "cta"
   ]
 }
