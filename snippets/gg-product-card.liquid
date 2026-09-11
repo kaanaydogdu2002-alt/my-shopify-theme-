@@ -26,8 +26,19 @@
   assign rating_value = product.metafields.reviews.rating.value.rating
   assign rating_count = product.metafields.reviews.rating_count.value
   if rating_value == blank and placeholder_rating > 0
-    assign rating_value = placeholder_rating
-    assign rating_count = placeholder_count
+    comment
+      Placeholder only: vary per product so the demo grid does not show six identical scores.
+      Derived from the product id, so setting the placeholder to 0 removes all of it at once.
+    endcomment
+    assign seed = product.id | modulo: 6
+    assign offsets = '0,-0.1,-0.2,0.1,-0.3,0' | split: ','
+    assign factors = '1,0.7,0.6,1.6,0.5,1.2' | split: ','
+    assign offset = offsets[seed] | times: 1.0
+    assign factor = factors[seed] | times: 1.0
+    assign rating_value = placeholder_rating | plus: offset | at_most: 5.0 | at_least: 1.0
+    if placeholder_count != blank
+      assign rating_count = placeholder_count | times: factor | round
+    endif
   endif
 -%}
 <a href="{{ product.url }}" class="gg-pcard">
