@@ -1,0 +1,147 @@
+{%- liquid
+  assign menu = section.settings.menu
+  assign country_label = localization.country.name | default: shop.address.country
+  assign currency_label = localization.country.currency.iso_code | default: cart.currency.iso_code
+-%}
+
+<div class="gg-header-wrap">
+  <header class="gg-header gg-section" role="banner">
+    <div class="gg-container gg-header__inner">
+      <div class="gg-header__side">
+        <button type="button" class="gg-header__icon gg-header__menu-toggle" aria-label="{{ 'sections.header.menu' | t }}" aria-expanded="false" aria-controls="gg-drawer" data-gg-drawer-open>
+          {%- render 'gg-icon', icon: 'menu' -%}
+        </button>
+        <button type="button" class="gg-header__icon gg-hide-desktop" aria-label="{{ 'general.search.search' | t }}" aria-expanded="false" aria-controls="gg-search" data-gg-search-toggle>
+          {%- render 'gg-icon', icon: 'search' -%}
+        </button>
+        <a href="{{ routes.root_url }}" class="gg-header__brand gg-hide-mobile">
+          {%- render 'gg-logo-mark', size: 34 -%}
+          <span class="gg-header__wordmark">{{ shop.name }}</span>
+        </a>
+      </div>
+
+      <a href="{{ routes.root_url }}" class="gg-header__brand gg-hide-desktop">
+        {%- render 'gg-logo-mark', size: 28 -%}
+        <span class="gg-header__wordmark">{{ shop.name }}</span>
+      </a>
+
+      {%- if menu != blank -%}
+        <nav class="gg-header__nav" aria-label="{{ 'sections.header.menu' | t }}">
+          {%- for link in menu.links -%}
+            <a href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title }}</a>
+          {%- endfor -%}
+        </nav>
+      {%- endif -%}
+
+      <div class="gg-header__side gg-header__side--end">
+        {%- if section.settings.show_locale -%}
+          <div class="gg-header__locale">
+            {%- if localization.available_countries.size > 1 -%}
+              {%- form 'localization', id: 'gg-localization-header', class: 'gg-locale' -%}
+                {%- render 'gg-icon', icon: 'world', class: 'gg-icon--globe' -%}
+                <span>{{ country_label }} · {{ currency_label }}</span>
+                {%- render 'gg-icon', icon: 'chevron-down', class: 'gg-icon--chevron' -%}
+                <select name="country_code" aria-label="{{ 'localization.country_label' | t }}" onchange="this.form.submit()">
+                  {%- for country in localization.available_countries -%}
+                    <option value="{{ country.iso_code }}"{% if country.iso_code == localization.country.iso_code %} selected{% endif %}>{{ country.name }} · {{ country.currency.iso_code }}</option>
+                  {%- endfor -%}
+                </select>
+              {%- endform -%}
+            {%- else -%}
+              <span class="gg-locale" aria-hidden="true">
+                {%- render 'gg-icon', icon: 'world', class: 'gg-icon--globe' -%}
+                <span>{{ country_label }} · {{ currency_label }}</span>
+              </span>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+        <button type="button" class="gg-header__icon gg-hide-mobile" aria-label="{{ 'general.search.search' | t }}" aria-expanded="false" aria-controls="gg-search" data-gg-search-toggle>
+          {%- render 'gg-icon', icon: 'search' -%}
+        </button>
+        <a href="{{ routes.cart_url }}" class="gg-header__icon" id="cart-icon-bubble" aria-label="{{ 'templates.cart.cart' | t }}">
+          {%- render 'cart-icon-bubble' -%}
+        </a>
+      </div>
+    </div>
+
+    <div class="gg-search" id="gg-search" data-gg-search>
+      <div class="gg-container">
+        <form action="{{ routes.search_url }}" method="get" role="search" class="gg-search__form">
+          <div class="gg-field">
+            <label class="gg-visually-hidden" for="gg-search-input">{{ 'general.search.search' | t }}</label>
+            <input id="gg-search-input" class="gg-field__input" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.search' | t }}" autocomplete="off">
+          </div>
+          <input type="hidden" name="options[prefix]" value="last">
+          <button type="submit" class="gg-btn">{{ 'general.search.search' | t }}</button>
+        </form>
+      </div>
+    </div>
+  </header>
+</div>
+
+<div class="gg-drawer" id="gg-drawer" data-gg-drawer aria-hidden="true">
+  <button type="button" class="gg-drawer__overlay" aria-label="{{ 'accessibility.close' | t }}" data-gg-drawer-close tabindex="-1"></button>
+  <div class="gg-drawer__panel gg-section" role="dialog" aria-modal="true" aria-label="{{ 'sections.header.menu' | t }}">
+    <div class="gg-drawer__head">
+      <a href="{{ routes.root_url }}" class="gg-header__brand">
+        {%- render 'gg-logo-mark', size: 28 -%}
+        <span class="gg-header__wordmark">{{ shop.name }}</span>
+      </a>
+      <button type="button" class="gg-header__icon" aria-label="{{ 'accessibility.close' | t }}" data-gg-drawer-close>
+        {%- render 'gg-icon', icon: 'x' -%}
+      </button>
+    </div>
+    {%- if menu != blank -%}
+      <nav class="gg-drawer__nav">
+        {%- for link in menu.links -%}
+          <a href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title }}{% render 'gg-icon', icon: 'chevron-right' %}</a>
+        {%- endfor -%}
+      </nav>
+    {%- endif -%}
+    <div class="gg-drawer__foot">
+      {%- if section.settings.drawer_note != blank -%}<span>{{ section.settings.drawer_note }}</span>{%- endif -%}
+      {%- if shop.email != blank -%}<a href="mailto:{{ shop.email }}">{{ shop.email }}</a>{%- endif -%}
+      {%- if section.settings.show_locale and localization.available_countries.size > 1 -%}
+        {%- form 'localization', id: 'gg-localization-drawer', class: 'gg-locale' -%}
+          {%- render 'gg-icon', icon: 'world', class: 'gg-icon--globe' -%}
+          <span>{{ country_label }} · {{ currency_label }}</span>
+          {%- render 'gg-icon', icon: 'chevron-down', class: 'gg-icon--chevron' -%}
+          <select name="country_code" aria-label="{{ 'localization.country_label' | t }}" onchange="this.form.submit()">
+            {%- for country in localization.available_countries -%}
+              <option value="{{ country.iso_code }}"{% if country.iso_code == localization.country.iso_code %} selected{% endif %}>{{ country.name }} · {{ country.currency.iso_code }}</option>
+            {%- endfor -%}
+          </select>
+        {%- endform -%}
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "GG Header",
+  "tag": "div",
+  "class": "gg-header-section",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_locale",
+      "label": "Show country / currency",
+      "default": true,
+      "info": "Shows a selector when more than one market is enabled, otherwise the store's country and currency."
+    },
+    {
+      "type": "text",
+      "id": "drawer_note",
+      "label": "Mobile menu note",
+      "default": "We reply within one working day."
+    }
+  ]
+}
+{% endschema %}

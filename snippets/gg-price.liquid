@@ -1,0 +1,22 @@
+{% comment %}
+  Product price in the design's format (money filter from the store, e.g. €68,00).
+  Usage: {% render 'gg-price', product: product, size: 'lg' %}
+         {% render 'gg-price', variant: variant, size: 'sm' %}
+{% endcomment %}
+{%- liquid
+  if variant == blank and product != blank
+    assign variant = product.selected_or_first_available_variant
+  endif
+  assign size_class = ''
+  if size == 'sm'
+    assign size_class = ' gg-price--sm'
+  elsif size == 'lg'
+    assign size_class = ' gg-price--lg'
+  endif
+-%}
+<span class="gg-price{{ size_class }}"{% if id %} id="{{ id }}"{% endif %}>
+  <span class="gg-price__amount">{{ variant.price | money }}</span>
+  {%- if variant.compare_at_price > variant.price -%}
+    <span class="gg-price__compare">{{ variant.compare_at_price | money }}</span>
+  {%- endif -%}
+</span>

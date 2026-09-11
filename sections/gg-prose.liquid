@@ -1,0 +1,43 @@
+{%- liquid
+  assign bg_class = 'gg-section--page'
+  if section.settings.background == 'card'
+    assign bg_class = 'gg-section--card'
+  endif
+  assign heading_tag = 'h2'
+  assign heading_class = 'gg-h2'
+  if section.settings.heading_level == 'h1'
+    assign heading_tag = 'h1'
+    assign heading_class = 'gg-h1'
+  endif
+-%}
+<section class="gg-prose gg-section {{ bg_class }}{% if section.settings.rule_top %} gg-section--rule-top{% endif %}">
+  <div class="gg-container {% if section.settings.narrow %}gg-container--narrow{% endif %} gg-section__inner gg-prose__inner{% if section.settings.align == 'center' %} gg-prose__inner--center{% endif %}">
+    {%- if section.settings.eyebrow != blank -%}<span class="gg-eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+    {%- if section.settings.heading != blank -%}<{{ heading_tag }} class="{{ heading_class }}" style="max-width:{{ section.settings.heading_measure }}ch">{{ section.settings.heading }}</{{ heading_tag }}>{%- endif -%}
+    {%- if section.settings.text != blank -%}<div class="gg-rte gg-body{% unless section.settings.narrow %} gg-measure{% endunless %}">{{ section.settings.text }}</div>{%- endif -%}
+    {%- if section.settings.button_label != blank -%}
+      <a href="{{ section.settings.button_link }}" class="gg-btn">{{ section.settings.button_label }}</a>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "GG Text",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "How we choose what to sell" },
+    { "type": "select", "id": "heading_level", "label": "Heading level", "default": "h2", "options": [ { "value": "h1", "label": "H1 (page title)" }, { "value": "h2", "label": "H2" } ] },
+    { "type": "range", "id": "heading_measure", "label": "Heading max width (characters)", "min": 10, "max": 40, "step": 1, "default": 30 },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>We keep the range at six. Adding a seventh means one has to go, and that rule has saved us from a lot of mediocre products.</p>" },
+    { "type": "text", "id": "button_label", "label": "Button label" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "checkbox", "id": "narrow", "label": "Narrow column (760px)", "default": true },
+    { "type": "select", "id": "align", "label": "Alignment", "default": "left", "options": [ { "value": "left", "label": "Left" }, { "value": "center", "label": "Center" } ] },
+    { "type": "select", "id": "background", "label": "Background", "default": "page", "options": [ { "value": "page", "label": "Cream" }, { "value": "card", "label": "White" } ] },
+    { "type": "checkbox", "id": "rule_top", "label": "Hairline above", "default": true }
+  ],
+  "presets": [ { "name": "GG Text" } ]
+}
+{% endschema %}

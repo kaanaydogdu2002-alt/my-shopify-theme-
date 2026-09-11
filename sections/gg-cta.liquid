@@ -1,0 +1,56 @@
+{%- liquid
+  assign inverse = true
+  if section.settings.background == 'card'
+    assign inverse = false
+  endif
+-%}
+<section class="gg-cta gg-section gg-section--rule-top {% if inverse %}gg-section--inverse{% else %}gg-section--card gg-cta--light{% endif %}">
+  <div class="gg-container gg-container--narrow gg-section__inner gg-cta__inner">
+    {%- if section.settings.use_product_title and product != blank -%}
+      <h2 class="gg-cta__title">{{ product.title }}</h2>
+    {%- elsif section.settings.heading != blank -%}
+      <h2 class="gg-cta__title">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    {%- if section.settings.text != blank -%}
+      <p class="gg-cta__meta">
+        {%- if section.settings.prefix_price and product != blank -%}<span data-gg-price>{{ product.selected_or_first_available_variant.price | money }}</span> · {% endif -%}
+        {{- section.settings.text -}}
+      </p>
+    {%- endif -%}
+    <div class="gg-cta__actions">
+      {%- if section.settings.button_label != blank -%}
+        {%- if section.settings.button_adds_to_bag and product != blank -%}
+          <button type="button" class="gg-btn gg-btn--lg gg-btn--gold" data-gg-submit-product-form>
+            {%- render 'gg-icon', icon: 'shopping-bag' -%}
+            <span>{{ section.settings.button_label }} · <span data-gg-price>{{ product.selected_or_first_available_variant.price | money }}</span></span>
+          </button>
+        {%- else -%}
+          <a href="{{ section.settings.button_link }}" class="gg-btn gg-btn--lg{% if inverse %} gg-btn--gold{% endif %}">{{ section.settings.button_label }}{% unless inverse %}{% render 'gg-icon', icon: 'arrow-right' %}{% endunless %}</a>
+        {%- endif -%}
+      {%- endif -%}
+      {%- if section.settings.button2_label != blank -%}
+        <a href="{{ section.settings.button2_link }}" class="gg-btn gg-btn--lg gg-btn--secondary">{{ section.settings.button2_label }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "GG Call to action",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Have a look at the six" },
+    { "type": "checkbox", "id": "use_product_title", "label": "On product pages, use the product title as heading", "default": false },
+    { "type": "text", "id": "text", "label": "Text", "default": "Or write to us first. We reply within one working day, usually sooner." },
+    { "type": "checkbox", "id": "prefix_price", "label": "On product pages, start the text with the price", "default": false },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop the range" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "checkbox", "id": "button_adds_to_bag", "label": "On product pages, the button adds the product to the bag", "default": false },
+    { "type": "text", "id": "button2_label", "label": "Second button label" },
+    { "type": "url", "id": "button2_link", "label": "Second button link" },
+    { "type": "select", "id": "background", "label": "Background", "default": "inverse", "options": [ { "value": "inverse", "label": "Ink (dark)" }, { "value": "card", "label": "White" } ] }
+  ],
+  "presets": [ { "name": "GG Call to action" } ]
+}
+{% endschema %}

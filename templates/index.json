@@ -1,87 +1,159 @@
 {
   "sections": {
-    "test_banner": {
-      "type": "test-banner",
-      "settings": {
-        "heading": "hallo",
-        "background_color": "#000000",
-        "text_color": "#ffffff",
-        "text_size": 72,
-        "padding_top": 80,
-        "padding_bottom": 80
-      }
-    },
-    "image_banner": {
-      "type": "image-banner",
+    "trust": {
+      "type": "gg-trust-bar",
       "blocks": {
-        "heading": {
-          "type": "heading",
+        "reviews": {
+          "type": "item",
           "settings": {
-            "heading": "Browse our latest products",
-            "heading_size": "h0"
+            "icon": "star-filled",
+            "icon_class": "gg-icon--gold",
+            "text": "4,7 from 312 reviews",
+            "text_mobile": "4,7 · 312 reviews"
           }
         },
-        "button": {
-          "type": "buttons",
+        "secure": {
+          "type": "item",
           "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "icon": "lock",
+            "icon_class": "",
+            "text": "Secure checkout",
+            "text_mobile": ""
+          }
+        },
+        "shipping": {
+          "type": "item",
+          "settings": {
+            "icon": "truck",
+            "icon_class": "",
+            "text": "Tracked worldwide shipping",
+            "text_mobile": "Tracked worldwide"
+          }
+        },
+        "returns": {
+          "type": "item",
+          "settings": {
+            "icon": "rotate",
+            "icon_class": "",
+            "text": "30-day returns",
+            "text_mobile": ""
           }
         }
       },
       "block_order": [
-        "heading",
-        "button"
+        "reviews",
+        "secure",
+        "shipping",
+        "returns"
       ],
+      "settings": {}
+    },
+    "hero": {
+      "type": "gg-hero",
       "settings": {
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "desktop_content_position": "bottom-center",
-        "show_text_box": false,
-        "image_behavior": "none",
-        "desktop_content_alignment": "center",
-        "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
+        "eyebrow": "Everyday objects",
+        "heading": "Everyday things, chosen to last",
+        "text": "We keep the range to six pieces. Each one solves a small daily problem, and keeps doing it after a year of use.",
+        "button_label": "Shop the range",
+        "button_link": "",
+        "image_note": "Hero lifestyle image — pour-over set on a kitchen counter, natural daylight"
       }
     },
-    "featured_collection": {
-      "type": "featured-collection",
+    "range": {
+      "type": "gg-product-grid",
       "settings": {
-        "title": "Featured products",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "collection": "all",
-        "products_to_show": 8,
-        "columns_desktop": 4,
-        "color_scheme": "scheme-1",
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "swipe_on_mobile": false,
-        "image_ratio": "adapt",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "none",
-        "columns_mobile": "2",
-        "padding_top": 44,
-        "padding_bottom": 36
+        "eyebrow": "The range",
+        "heading": "Six things we stand behind",
+        "lead": "Small batches, named materials, and a repair or refund if one of them lets you down.",
+        "collection": "",
+        "limit": 6,
+        "show_payments": true,
+        "payments_label": "Secure checkout with"
+      }
+    },
+    "reviews": {
+      "type": "gg-reviews",
+      "blocks": {
+        "r1": {
+          "type": "review",
+          "settings": {
+            "stars": 5,
+            "body": "The pour-over set replaced two things on my counter, which was the point. Third month of daily use and the glaze still looks new. Packed properly, arrived in two days.",
+            "who": "Marieke, Netherlands",
+            "verified": true,
+            "note": ""
+          }
+        },
+        "r2": {
+          "type": "review",
+          "settings": {
+            "stars": 4,
+            "body": "I ordered the apron expecting something stiff. It softened after one wash and the ties are long enough to knot in front. The pocket could be a little deeper.",
+            "who": "Jonas, Germany",
+            "verified": true,
+            "note": ""
+          }
+        },
+        "r3": {
+          "type": "review",
+          "settings": {
+            "stars": 5,
+            "body": "Wrote on a Sunday about a delayed parcel and had a real answer on Monday morning. The lamp itself is heavier and better made than the photos suggest.",
+            "who": "Aoife, Ireland",
+            "verified": true,
+            "note": ""
+          }
+        }
+      },
+      "block_order": [
+        "r1",
+        "r2",
+        "r3"
+      ],
+      "settings": {
+        "eyebrow": "What customers say",
+        "heading": "4,7 from 312 reviews",
+        "lead": "",
+        "use_section_heading": false,
+        "background": "warm"
+      }
+    },
+    "story": {
+      "type": "gg-text-image",
+      "settings": {
+        "eyebrow": "Our story",
+        "heading": "Why we keep the range small",
+        "heading_level": "h2",
+        "heading_measure": 16,
+        "text": "<p>Most online shops sell thousands of things. We sell six. That is not modesty; it is the whole idea. Every piece here had to earn its place. It has to solve something small you deal with every day, and still be worth having a year from now. Most things we look at do not make the cut. We are a small business, not a warehouse. If something we sell does not hold up, we want to hear about it, and we will make it right.</p>",
+        "large_text": false,
+        "button_label": "",
+        "button_link": "",
+        "image_note": "Workshop image — hands folding linen, warm daylight",
+        "ratio": "1x1",
+        "image_position": "left",
+        "mobile_image_first": true,
+        "background": "card",
+        "rule_top": true
+      }
+    },
+    "newsletter": {
+      "type": "gg-newsletter",
+      "settings": {
+        "heading": "One letter a month",
+        "text": "New pieces, restocks, and what we learned about the makers. No more than twelve emails a year, and you can leave in one click.",
+        "placeholder": "you@example.com",
+        "button_label": "Subscribe",
+        "note": "We never share your address."
       }
     }
   },
   "order": [
-    "test_banner",
-    "image_banner",
-    "featured_collection"
+    "trust",
+    "hero",
+    "range",
+    "reviews",
+    "story",
+    "newsletter"
   ]
 }

@@ -1,0 +1,39 @@
+{% comment %}
+  Product card for the range grid.
+  Usage: {% render 'gg-product-card', product: product, badge_tag_prefix: 'badge:' %}
+  A product tag like "badge:Best seller" is shown as a badge on the image.
+{% endcomment %}
+{%- liquid
+  assign badge = blank
+  for tag in product.tags
+    if tag contains 'badge:'
+      assign badge = tag | remove_first: 'badge:' | strip
+    endif
+  endfor
+  assign subtitle = product.metafields.custom.subtitle.value
+  assign img_alt = product.featured_image.alt | default: product.title | escape
+  if subtitle == blank
+    assign subtitle = product.description | strip_html | truncate: 70
+  endif
+-%}
+<a href="{{ product.url }}" class="gg-pcard">
+  <span class="gg-pcard__media">
+    {%- if product.featured_image != blank -%}
+      {{ product.featured_image | image_url: width: 800 | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 380px, 50vw', widths: '300, 400, 600, 800', alt: img_alt }}
+    {%- else -%}
+      <span class="gg-media__placeholder">{%- render 'gg-icon', icon: 'photo' -%}</span>
+    {%- endif -%}
+    {%- if badge != blank -%}
+      <span class="gg-pcard__badge"><span class="gg-badge">{{ badge }}</span></span>
+    {%- endif -%}
+  </span>
+  <span class="gg-pcard__body">
+    <span class="gg-pcard__title">{{ product.title }}</span>
+    {%- if subtitle != blank -%}<span class="gg-pcard__subtitle">{{ subtitle }}</span>{%- endif -%}
+    {%- if product.metafields.reviews.rating.value != blank -%}
+      {%- render 'gg-rating', value: product.metafields.reviews.rating.value.rating, count: product.metafields.reviews.rating_count.value, size: 13 -%}
+    {%- endif -%}
+    {%- render 'gg-price', product: product -%}
+  </span>
+  <span class="gg-pcard__foot">View{% render 'gg-icon', icon: 'arrow-right' %}</span>
+</a>

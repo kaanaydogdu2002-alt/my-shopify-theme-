@@ -1,0 +1,56 @@
+<section class="gg-section gg-section--page gg-section--rule-top">
+  <div class="gg-container gg-section__inner">
+    <div class="gg-split">
+      <div class="gg-split__text">
+        {%- if section.settings.eyebrow != blank -%}<span class="gg-eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+        {%- if section.settings.heading != blank -%}<h2 class="gg-h2" style="max-width:16ch">{{ section.settings.heading }}</h2>{%- endif -%}
+        <div class="gg-steps">
+          {%- for block in section.blocks -%}
+            <div class="gg-step" {{ block.shopify_attributes }}>
+              <span class="gg-step__n">{{ forloop.index }}</span>
+              <span class="gg-step__text"><strong>{{ block.settings.title }}</strong>{% if block.settings.body != blank %} — {{ block.settings.body }}{% endif %}</span>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+      <div class="gg-split__media">
+        {%- render 'gg-media', image: section.settings.image, ratio: '4x5', placeholder: section.settings.image_note, sizes: '(min-width: 990px) 560px, 100vw' -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "GG Steps with image",
+  "tag": "div",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "What is included" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Two pieces, one method, four minutes" },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "image_note", "label": "Placeholder note", "default": "In-use image — cone seated on the carafe, kettle mid-pour" }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Stoneware cone" },
+        { "type": "text", "id": "body", "label": "Text", "default": "reusable filter, no paper needed." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "GG Steps with image",
+      "blocks": [
+        { "type": "step", "settings": { "title": "Stoneware cone", "body": "reusable filter, no paper needed." } },
+        { "type": "step", "settings": { "title": "600 ml carafe", "body": "two large cups, marked at 300 and 600 ml." } },
+        { "type": "step", "settings": { "title": "Rinse and fill", "body": "22 g of medium grind, then pour in three passes." } },
+        { "type": "step", "settings": { "title": "Four minutes", "body": "lift the cone off, serve straight from the carafe." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

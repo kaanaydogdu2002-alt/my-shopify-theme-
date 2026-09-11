@@ -1,0 +1,20 @@
+{% comment %}
+  Image with a labelled placeholder when no image has been chosen.
+  Usage: {% render 'gg-media', image: section.settings.image, ratio: '4x3', placeholder: 'Hero image', sizes: '(min-width: 990px) 640px, 100vw' %}
+{% endcomment %}
+{%- liquid
+  assign ratio = ratio | default: '4x3'
+  assign sizes = sizes | default: '(min-width: 990px) 600px, 100vw'
+  assign loading = loading | default: 'lazy'
+  assign alt_text = image.alt | default: alt | escape
+-%}
+<div class="gg-media gg-media--{{ ratio }}{% if class %} {{ class }}{% endif %}">
+  {%- if image != blank -%}
+    {{ image | image_url: width: 1600 | image_tag: loading: loading, sizes: sizes, widths: '400, 600, 800, 1000, 1200, 1600', alt: alt_text }}
+  {%- else -%}
+    <span class="gg-media__placeholder">
+      {%- render 'gg-icon', icon: 'photo' -%}
+      {%- if placeholder != blank -%}<span>{{ placeholder }}</span>{%- endif -%}
+    </span>
+  {%- endif -%}
+</div>

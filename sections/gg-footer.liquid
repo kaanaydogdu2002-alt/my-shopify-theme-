@@ -1,0 +1,147 @@
+{%- liquid
+  assign country_label = localization.country.name | default: shop.address.country
+  assign currency_label = localization.country.currency.iso_code | default: cart.currency.iso_code
+-%}
+<footer class="gg-footer gg-section gg-section--inverse" role="contentinfo">
+  <div class="gg-container gg-footer__top">
+    <div class="gg-footer__cols">
+      <div class="gg-footer__col gg-footer__col--brand">
+        <div class="gg-footer__brand">
+          {%- render 'gg-logo-mark', inverse: true, size: 26 -%}
+          <span class="gg-footer__wordmark">{{ shop.name }}</span>
+        </div>
+        {%- if section.settings.tagline != blank -%}
+          <p class="gg-footer__tagline">{{ section.settings.tagline }}</p>
+        {%- endif -%}
+      </div>
+
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'menu' -%}
+            {%- if block.settings.menu != blank -%}
+              <div class="gg-footer__col{% if block.settings.hide_on_mobile %} gg-footer__col--hide-mobile{% endif %}" {{ block.shopify_attributes }}>
+                <span class="gg-footer__heading">{{ block.settings.heading | default: block.settings.menu.title }}</span>
+                {%- for link in block.settings.menu.links -%}
+                  <a href="{{ link.url }}">{{ link.title }}</a>
+                {%- endfor -%}
+              </div>
+            {%- endif -%}
+          {%- when 'contact' -%}
+            <div class="gg-footer__col" {{ block.shopify_attributes }}>
+              <span class="gg-footer__heading">{{ block.settings.heading }}</span>
+              {%- if block.settings.email != blank -%}<a href="mailto:{{ block.settings.email }}">{{ block.settings.email }}</a>{%- endif -%}
+              {%- if block.settings.phone != blank -%}<span>{{ block.settings.phone }}</span>{%- endif -%}
+              {%- if block.settings.address != blank -%}<span class="gg-footer__muted">{{ block.settings.address }}</span>{%- endif -%}
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.show_payments -%}
+      <div class="gg-footer__payments">
+        {%- render 'gg-payments' -%}
+      </div>
+    {%- endif -%}
+
+    <div class="gg-footer__legal">
+      <span>
+        {{ shop.name }}
+        {%- if section.settings.legal != blank %} · {{ section.settings.legal }}{% endif -%}
+        <span class="gg-hide-desktop"> · © {{ 'now' | date: '%Y' }}</span>
+      </span>
+      <span class="gg-hide-mobile">© {{ 'now' | date: '%Y' }} {{ shop.name }}</span>
+      {%- if section.settings.show_policy_links -%}
+        <span class="gg-hide-desktop">
+          {%- for policy in shop.policies -%}
+            {%- if policy != blank -%}<a href="{{ policy.url }}">{{ policy.title }}</a>{% unless forloop.last %} · {% endunless %}{%- endif -%}
+          {%- endfor -%}
+        </span>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.show_locale and localization.available_countries.size > 1 -%}
+      <div class="gg-footer__locale">
+        {%- form 'localization', id: 'gg-localization-footer', class: 'gg-locale' -%}
+          {%- render 'gg-icon', icon: 'world', class: 'gg-icon--globe' -%}
+          <span>{{ country_label }} · {{ currency_label }}</span>
+          {%- render 'gg-icon', icon: 'chevron-down', class: 'gg-icon--chevron' -%}
+          <select name="country_code" aria-label="{{ 'localization.country_label' | t }}" onchange="this.form.submit()">
+            {%- for country in localization.available_countries -%}
+              <option value="{{ country.iso_code }}"{% if country.iso_code == localization.country.iso_code %} selected{% endif %}>{{ country.name }} · {{ country.currency.iso_code }}</option>
+            {%- endfor -%}
+          </select>
+        {%- endform -%}
+      </div>
+    {%- endif -%}
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "GG Footer",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "A small, curated home and lifestyle shop. We reply within one working day."
+    },
+    {
+      "type": "text",
+      "id": "legal",
+      "label": "Legal line (KVK / VAT)",
+      "default": "KVK 42156789 · BTW NL004215678B01",
+      "info": "Placeholder from the design — replace with your real registration numbers."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payments",
+      "label": "Show payment methods",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_policy_links",
+      "label": "Show policy links on mobile",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_locale",
+      "label": "Show country selector on mobile",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "menu",
+      "name": "Link column",
+      "limit": 3,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading" },
+        { "type": "link_list", "id": "menu", "label": "Menu" },
+        { "type": "checkbox", "id": "hide_on_mobile", "label": "Hide this column on phones", "default": false }
+      ]
+    },
+    {
+      "type": "contact",
+      "name": "Contact column",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Contact" },
+        { "type": "text", "id": "email", "label": "Email", "default": "contact.grainandgold@gmail.com" },
+        { "type": "text", "id": "phone", "label": "Phone", "default": "+31 614493964" },
+        { "type": "text", "id": "address", "label": "Address", "default": "Kristiansandstraat 8, 2548 JT Den Haag" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "menu", "settings": { "heading": "Shop", "menu": "main-menu", "hide_on_mobile": true } },
+      { "type": "menu", "settings": { "heading": "Policies", "menu": "footer" } },
+      { "type": "contact" }
+    ]
+  }
+}
+{% endschema %}

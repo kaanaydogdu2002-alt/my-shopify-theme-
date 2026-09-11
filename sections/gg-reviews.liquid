@@ -1,0 +1,84 @@
+{%- liquid
+  assign bg_class = 'gg-section--warm'
+  if section.settings.background == 'card'
+    assign bg_class = 'gg-section--card'
+  elsif section.settings.background == 'page'
+    assign bg_class = 'gg-section--page'
+  endif
+  assign card_class = ''
+  if section.settings.background == 'card'
+    assign card_class = ' gg-review--page'
+  endif
+-%}
+<section class="gg-reviews gg-section {{ bg_class }} gg-section--rule-top">
+  <div class="gg-container gg-section__inner gg-reviews__inner">
+    {%- if section.settings.use_section_heading -%}
+      {%- render 'gg-heading', eyebrow: section.settings.eyebrow, title: section.settings.heading, lead: section.settings.lead -%}
+    {%- else -%}
+      <div class="gg-reviews__head">
+        {%- if section.settings.eyebrow != blank -%}<span class="gg-eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+        {%- if section.settings.heading != blank -%}<h2 class="gg-h2">{{ section.settings.heading }}</h2>{%- endif -%}
+      </div>
+    {%- endif -%}
+    <div class="gg-reviews__grid">
+      {%- for block in section.blocks -%}
+        <div class="gg-review{{ card_class }}" {{ block.shopify_attributes }}>
+          {%- render 'gg-rating', value: block.settings.stars, size: 15 -%}
+          <p class="gg-review__body">{{ block.settings.body }}</p>
+          <div class="gg-review__meta">
+            {%- if block.settings.who != blank -%}<span class="gg-review__who">{{ block.settings.who }}</span>{%- endif -%}
+            {%- if block.settings.verified -%}
+              <span class="gg-review__verified">{% render 'gg-icon', icon: 'shield-check' %}Verified purchase</span>
+            {%- endif -%}
+            {%- if block.settings.note != blank -%}<span class="gg-review__note">{{ block.settings.note }}</span>{%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "GG Reviews",
+  "tag": "div",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "What customers say" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "4,7 from 312 reviews", "info": "Placeholder from the design — use your real numbers." },
+    { "type": "text", "id": "lead", "label": "Lead (only with section heading style)" },
+    { "type": "checkbox", "id": "use_section_heading", "label": "Use section heading style (eyebrow, title, lead)", "default": false },
+    {
+      "type": "select", "id": "background", "label": "Background", "default": "warm",
+      "options": [
+        { "value": "warm", "label": "Warm sand" },
+        { "value": "card", "label": "White" },
+        { "value": "page", "label": "Cream" }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "range", "id": "stars", "label": "Stars", "min": 1, "max": 5, "step": 1, "default": 5 },
+        { "type": "textarea", "id": "body", "label": "Review", "default": "Third month of daily use and the glaze still looks new." },
+        { "type": "text", "id": "who", "label": "Name and place", "default": "Marieke, Netherlands" },
+        { "type": "checkbox", "id": "verified", "label": "Show 'Verified purchase'", "default": true },
+        { "type": "text", "id": "note", "label": "Extra line (optional)" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "GG Reviews",
+      "blocks": [
+        { "type": "review", "settings": { "stars": 5, "body": "The pour-over set replaced two things on my counter, which was the point. Third month of daily use and the glaze still looks new. Packed properly, arrived in two days.", "who": "Marieke, Netherlands" } },
+        { "type": "review", "settings": { "stars": 4, "body": "I ordered the apron expecting something stiff. It softened after one wash and the ties are long enough to knot in front. The pocket could be a little deeper.", "who": "Jonas, Germany" } },
+        { "type": "review", "settings": { "stars": 5, "body": "Wrote on a Sunday about a delayed parcel and had a real answer on Monday morning. The lamp itself is heavier and better made than the photos suggest.", "who": "Aoife, Ireland" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,21 @@
+{% comment %}
+  Payment method chips. Uses the store's enabled payment types.
+  Usage: {% render 'gg-payments', center: true %}
+{% endcomment %}
+{%- liquid
+  assign labels = 'ideal:iDEAL,visa:Visa,master:Mastercard,paypal:PayPal,apple_pay:Apple Pay,google_pay:Google Pay,shopify_pay:Shop Pay,american_express:American Express,maestro:Maestro,bancontact:Bancontact,klarna:Klarna,sofort:SOFORT,diners_club:Diners Club,discover:Discover,unionpay:UnionPay,jcb:JCB,eps:EPS,giropay:Giropay' | split: ','
+-%}
+<div class="gg-payments{% if center %} gg-payments--center{% endif %}">
+  {%- for type in shop.enabled_payment_types -%}
+    {%- liquid
+      assign label = type | replace: '_', ' ' | capitalize
+      for pair in labels
+        assign parts = pair | split: ':'
+        if parts[0] == type
+          assign label = parts[1]
+        endif
+      endfor
+    -%}
+    <span class="gg-payments__chip">{{ label }}</span>
+  {%- endfor -%}
+</div>

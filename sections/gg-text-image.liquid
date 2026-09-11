@@ -1,0 +1,61 @@
+{%- liquid
+  assign bg_class = 'gg-section--card'
+  if section.settings.background == 'page'
+    assign bg_class = 'gg-section--page'
+  endif
+  assign heading_tag = 'h2'
+  assign heading_class = 'gg-h2'
+  if section.settings.heading_level == 'h1'
+    assign heading_tag = 'h1'
+    assign heading_class = 'gg-h1'
+  endif
+  assign split_class = ''
+  if section.settings.image_position == 'left'
+    assign split_class = ' gg-split--media-first'
+  endif
+  if section.settings.mobile_image_first
+    assign split_class = split_class | append: ' gg-split--mobile-media-first'
+  endif
+-%}
+<section class="gg-section {{ bg_class }}{% if section.settings.rule_top %} gg-section--rule-top{% endif %}">
+  <div class="gg-container gg-section__inner">
+    <div class="gg-split{{ split_class }}">
+      <div class="gg-split__text">
+        {%- if section.settings.eyebrow != blank -%}<span class="gg-eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+        {%- if section.settings.heading != blank -%}<{{ heading_tag }} class="{{ heading_class }}" style="max-width: {{ section.settings.heading_measure }}ch">{{ section.settings.heading }}</{{ heading_tag }}>{%- endif -%}
+        {%- if section.settings.text != blank -%}<div class="gg-rte {% if section.settings.large_text %}gg-lead{% else %}gg-body{% endif %} gg-measure">{{ section.settings.text }}</div>{%- endif -%}
+        {%- if section.settings.button_label != blank -%}
+          <a href="{{ section.settings.button_link }}" class="gg-btn">{{ section.settings.button_label }}</a>
+        {%- endif -%}
+      </div>
+      <div class="gg-split__media">
+        {%- render 'gg-media', image: section.settings.image, ratio: section.settings.ratio, placeholder: section.settings.image_note, sizes: '(min-width: 990px) 560px, 100vw' -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "GG Text with image",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Our story" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Why we keep the range small" },
+    { "type": "select", "id": "heading_level", "label": "Heading level", "default": "h2", "options": [ { "value": "h1", "label": "H1 (page title)" }, { "value": "h2", "label": "H2" } ] },
+    { "type": "range", "id": "heading_measure", "label": "Heading max width (characters)", "min": 10, "max": 30, "step": 1, "default": 16 },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Most online shops sell thousands of things. We sell six. That is not modesty; it is the whole idea. Every piece here had to earn its place. It has to solve something small you deal with every day, and still be worth having a year from now. Most things we look at do not make the cut. We are a small business, not a warehouse. If something we sell does not hold up, we want to hear about it, and we will make it right.</p>" },
+    { "type": "checkbox", "id": "large_text", "label": "Larger text", "default": false },
+    { "type": "text", "id": "button_label", "label": "Button label" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "image_note", "label": "Placeholder note (shown until an image is chosen)", "default": "Workshop image — hands folding linen, warm daylight" },
+    { "type": "select", "id": "ratio", "label": "Image ratio", "default": "1x1", "options": [ { "value": "1x1", "label": "Square" }, { "value": "4x3", "label": "4:3" }, { "value": "4x5", "label": "4:5" } ] },
+    { "type": "select", "id": "image_position", "label": "Image position (desktop)", "default": "left", "options": [ { "value": "left", "label": "Left" }, { "value": "right", "label": "Right" } ] },
+    { "type": "checkbox", "id": "mobile_image_first", "label": "Image above text on phones", "default": true },
+    { "type": "select", "id": "background", "label": "Background", "default": "card", "options": [ { "value": "card", "label": "White" }, { "value": "page", "label": "Cream" } ] },
+    { "type": "checkbox", "id": "rule_top", "label": "Hairline above", "default": true }
+  ],
+  "presets": [ { "name": "GG Text with image" } ]
+}
+{% endschema %}

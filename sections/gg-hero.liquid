@@ -1,0 +1,36 @@
+<section class="gg-hero gg-section gg-section--page">
+  <div class="gg-container gg-hero__inner">
+    <div class="gg-split gg-split--wide-media">
+      <div class="gg-split__text">
+        {%- if section.settings.eyebrow != blank -%}<span class="gg-eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+        {%- if section.settings.heading != blank -%}<h1 class="gg-display">{{ section.settings.heading }}</h1>{%- endif -%}
+        {%- if section.settings.text != blank -%}<p class="gg-lead">{{ section.settings.text }}</p>{%- endif -%}
+        {%- if section.settings.button_label != blank -%}
+          <div class="gg-hero__actions">
+            <a href="{{ section.settings.button_link | default: '#shop' }}" class="gg-btn gg-btn--lg">{{ section.settings.button_label }}{% render 'gg-icon', icon: 'arrow-right' %}</a>
+          </div>
+        {%- endif -%}
+      </div>
+      <div class="gg-split__media">
+        {%- render 'gg-media', image: section.settings.image, ratio: '4x3', placeholder: section.settings.image_note, loading: 'eager', sizes: '(min-width: 990px) 640px, 100vw' -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "GG Hero",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Everyday objects" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Everyday things, chosen to last" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "We keep the range to six pieces. Each one solves a small daily problem, and keeps doing it after a year of use." },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop the range" },
+    { "type": "url", "id": "button_link", "label": "Button link", "info": "Leave empty to scroll to the product grid." },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "image_note", "label": "Placeholder note (shown until an image is chosen)", "default": "Hero lifestyle image — pour-over set on a kitchen counter, natural daylight" }
+  ],
+  "presets": [ { "name": "GG Hero" } ]
+}
+{% endschema %}

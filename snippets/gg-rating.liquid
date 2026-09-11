@@ -1,0 +1,28 @@
+{% comment %}
+  Star rating. value: 0–5 (decimal allowed), count: number of reviews (optional),
+  show_value: boolean, size: star size in px.
+  Usage: {% render 'gg-rating', value: 4.8, count: 126, size: 14, show_value: true %}
+{% endcomment %}
+{%- liquid
+  assign value = value | default: 0 | times: 1.0
+  assign size = size | default: 14
+  assign value_x2 = value | times: 2 | round
+  assign full = value_x2 | divided_by: 2
+  assign half = value_x2 | modulo: 2
+  assign next = full | plus: 1
+-%}
+<span class="gg-rating" style="--gg-star: {{ size }}px" aria-label="{{ value | round: 1 }} out of 5">
+  <span class="gg-rating__stars">
+    {%- for i in (1..5) -%}
+      {%- if i <= full -%}
+        {%- render 'gg-icon', icon: 'star-filled' -%}
+      {%- elsif half == 1 and i == next -%}
+        {%- render 'gg-icon', icon: 'star-half' -%}
+      {%- else -%}
+        {%- render 'gg-icon', icon: 'star' -%}
+      {%- endif -%}
+    {%- endfor -%}
+  </span>
+  {%- if show_value -%}<span>{{ value | round: 1 | replace: '.', ',' }}</span>{%- endif -%}
+  {%- if count != blank -%}<span>({{ count }} reviews)</span>{%- endif -%}
+</span>

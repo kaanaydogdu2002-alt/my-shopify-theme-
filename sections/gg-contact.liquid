@@ -1,0 +1,124 @@
+<section class="gg-contact gg-section gg-section--page">
+  <div class="gg-container gg-contact__intro">
+    {%- if section.settings.eyebrow != blank -%}<span class="gg-eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+    {%- if section.settings.heading != blank -%}<h1 class="gg-h1">{{ section.settings.heading }}</h1>{%- endif -%}
+    {%- if section.settings.text != blank -%}<p class="gg-lead">{{ section.settings.text }}</p>{%- endif -%}
+  </div>
+
+  <div class="gg-container gg-contact__layout">
+    <div class="gg-contact__channels">
+      {%- for block in section.blocks -%}
+        <div class="gg-channel" {{ block.shopify_attributes }}>
+          {%- render 'gg-icon', icon: block.settings.icon -%}
+          <div class="gg-channel__text">
+            <span class="gg-channel__title">{{ block.settings.title }}</span>
+            <span class="gg-channel__value">
+              {%- if block.settings.icon == 'mail' and block.settings.value contains '@' -%}
+                <a href="mailto:{{ block.settings.value }}">{{ block.settings.value }}</a>
+              {%- elsif block.settings.icon == 'phone' -%}
+                <a href="tel:{{ block.settings.value | remove: ' ' }}">{{ block.settings.value }}</a>
+              {%- else -%}
+                {{ block.settings.value }}
+              {%- endif -%}
+            </span>
+            {%- if block.settings.note != blank -%}<span class="gg-channel__note">{{ block.settings.note }}</span>{%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <div class="gg-contact__form">
+      <div class="gg-contact__form-head">
+        <h2 class="gg-contact__form-title">{{ section.settings.form_heading }}</h2>
+        {%- if section.settings.form_note != blank -%}<span class="gg-small">{{ section.settings.form_note }}</span>{%- endif -%}
+      </div>
+      {%- form 'contact', id: 'gg-contact-form', class: 'gg-contact__fields', style: 'display:flex;flex-direction:column;gap:16px' -%}
+        {%- if form.posted_successfully? -%}
+          <div class="gg-contact__status gg-contact__status--ok" role="status">{{ 'templates.contact.form.post_success' | t }}</div>
+        {%- elsif form.errors -%}
+          <div class="gg-contact__status gg-contact__status--error" role="alert">
+            {{ 'templates.contact.form.error_heading' | t }}
+            <ul>
+              {%- for field in form.errors -%}
+                <li>{{ form.errors.translated_fields[field] | capitalize }} {{ form.errors.messages[field] }}</li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+        <div class="gg-contact__row">
+          <div class="gg-field">
+            <label class="gg-field__label" for="gg-contact-name">{{ section.settings.label_name }}</label>
+            <input id="gg-contact-name" class="gg-field__input" type="text" name="contact[name]" value="{{ form.name }}" placeholder="{{ section.settings.placeholder_name }}" autocomplete="name">
+          </div>
+          <div class="gg-field">
+            <label class="gg-field__label" for="gg-contact-email">{{ section.settings.label_email }}</label>
+            <input id="gg-contact-email" class="gg-field__input" type="email" name="contact[email]" value="{{ form.email }}" placeholder="{{ section.settings.placeholder_email }}" autocomplete="email" required>
+          </div>
+        </div>
+        <div class="gg-field">
+          <label class="gg-field__label" for="gg-contact-order">{{ section.settings.label_order }}</label>
+          <input id="gg-contact-order" class="gg-field__input" type="text" name="contact[{{ section.settings.label_order | escape }}]" placeholder="{{ section.settings.placeholder_order }}">
+          {%- if section.settings.hint_order != blank -%}<span class="gg-field__hint">{{ section.settings.hint_order }}</span>{%- endif -%}
+        </div>
+        <div class="gg-field">
+          <label class="gg-field__label" for="gg-contact-body">{{ section.settings.label_message }}</label>
+          <textarea id="gg-contact-body" class="gg-field__textarea" name="contact[body]" rows="6" placeholder="{{ section.settings.placeholder_message }}" required>{{ form.body }}</textarea>
+        </div>
+        <div>
+          <button type="submit" class="gg-btn gg-btn--lg">{{ section.settings.button_label }}{% render 'gg-icon', icon: 'arrow-right' %}</button>
+        </div>
+        {%- if section.settings.privacy_note != blank -%}<span class="gg-small">{{ section.settings.privacy_note }}</span>{%- endif -%}
+      {%- endform -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "GG Contact",
+  "tag": "div",
+  "max_blocks": 5,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Contact" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Write to us" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "A real person reads every message. If it is about an order, add the order number and we can answer in one reply instead of three." },
+    { "type": "header", "content": "Form" },
+    { "type": "text", "id": "form_heading", "label": "Form heading", "default": "Send a message" },
+    { "type": "text", "id": "form_note", "label": "Form note", "default": "Expect a reply within one working day." },
+    { "type": "text", "id": "label_name", "label": "Name label", "default": "Name" },
+    { "type": "text", "id": "placeholder_name", "label": "Name placeholder", "default": "Your name" },
+    { "type": "text", "id": "label_email", "label": "Email label", "default": "Email" },
+    { "type": "text", "id": "placeholder_email", "label": "Email placeholder", "default": "you@example.com" },
+    { "type": "text", "id": "label_order", "label": "Order number label", "default": "Order number" },
+    { "type": "text", "id": "placeholder_order", "label": "Order number placeholder", "default": "GG-10428" },
+    { "type": "text", "id": "hint_order", "label": "Order number hint", "default": "Optional — it speeds things up." },
+    { "type": "text", "id": "label_message", "label": "Message label", "default": "Message" },
+    { "type": "text", "id": "placeholder_message", "label": "Message placeholder", "default": "What can we help with?" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Send message" },
+    { "type": "text", "id": "privacy_note", "label": "Privacy note", "default": "We use your details only to answer this message. See the privacy policy." }
+  ],
+  "blocks": [
+    {
+      "type": "channel",
+      "name": "Contact channel",
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Icon", "default": "mail", "options": [ { "value": "mail", "label": "Mail" }, { "value": "phone", "label": "Phone" }, { "value": "map-pin", "label": "Map pin" }, { "value": "clock", "label": "Clock" }, { "value": "user", "label": "Person" } ] },
+        { "type": "text", "id": "title", "label": "Title", "default": "Email" },
+        { "type": "text", "id": "value", "label": "Value", "default": "contact.grainandgold@gmail.com" },
+        { "type": "text", "id": "note", "label": "Note", "default": "The fastest route." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "GG Contact",
+      "blocks": [
+        { "type": "channel", "settings": { "icon": "mail", "title": "Email", "value": "contact.grainandgold@gmail.com", "note": "The fastest route." } },
+        { "type": "channel", "settings": { "icon": "phone", "title": "Phone", "value": "+31 614493964", "note": "Weekdays 09:00–17:00 CET." } },
+        { "type": "channel", "settings": { "icon": "map-pin", "title": "Address", "value": "Kristiansandstraat 8, 2548 JT Den Haag, Netherlands", "note": "Registered business address." } },
+        { "type": "channel", "settings": { "icon": "clock", "title": "Support hours", "value": "Monday to Friday, 09:00–17:00 CET", "note": "Closed on Dutch public holidays. Messages sent at the weekend are answered on Monday." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

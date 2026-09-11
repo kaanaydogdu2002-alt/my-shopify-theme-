@@ -1,0 +1,35 @@
+<section class="gg-newsletter gg-section gg-section--page gg-section--rule-top">
+  <div class="gg-container gg-container--tight gg-section__inner gg-newsletter__inner">
+    {%- if section.settings.heading != blank -%}<h2 class="gg-h2">{{ section.settings.heading }}</h2>{%- endif -%}
+    {%- if section.settings.text != blank -%}<p class="gg-body" style="max-width:52ch">{{ section.settings.text }}</p>{%- endif -%}
+    {%- form 'customer', id: 'gg-newsletter-form', class: 'gg-newsletter__form' -%}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      {%- if form.posted_successfully? -%}
+        <span class="gg-newsletter__success">{{ 'newsletter.success' | t }}</span>
+      {%- else -%}
+        <div class="gg-field">
+          <label class="gg-visually-hidden" for="gg-newsletter-email">{{ 'newsletter.label' | t }}</label>
+          <input id="gg-newsletter-email" class="gg-field__input" type="email" name="contact[email]" value="{{ form.email }}" placeholder="{{ section.settings.placeholder }}" required autocomplete="email">
+          {%- if form.errors -%}<span class="gg-field__error">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</span>{%- endif -%}
+        </div>
+        <button type="submit" class="gg-btn gg-btn--gold">{{ section.settings.button_label }}</button>
+      {%- endif -%}
+    {%- endform -%}
+    {%- if section.settings.note != blank -%}<span class="gg-small">{{ section.settings.note }}</span>{%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "GG Newsletter",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "One letter a month" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "New pieces, restocks, and what we learned about the makers. No more than twelve emails a year, and you can leave in one click." },
+    { "type": "text", "id": "placeholder", "label": "Placeholder", "default": "you@example.com" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Subscribe" },
+    { "type": "text", "id": "note", "label": "Note", "default": "We never share your address." }
+  ],
+  "presets": [ { "name": "GG Newsletter" } ]
+}
+{% endschema %}

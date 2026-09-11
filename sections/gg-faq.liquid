@@ -1,0 +1,58 @@
+<section class="gg-section gg-section--page gg-section--rule-top">
+  <div class="gg-container gg-container--narrow gg-section__inner" style="display:flex;flex-direction:column;gap:20px">
+    {%- render 'gg-heading', eyebrow: section.settings.eyebrow, title: section.settings.heading, lead: section.settings.lead -%}
+    <div class="gg-accordion">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign content = block.settings.content
+          if block.settings.use_product_metafield and product.metafields.custom.materials.value != blank
+            assign content = product.metafields.custom.materials.value
+          endif
+        -%}
+        <details class="gg-accordion__item"{% if forloop.first and section.settings.open_first %} open{% endif %} {{ block.shopify_attributes }}>
+          <summary class="gg-accordion__summary">
+            <span>{{ block.settings.title }}</span>
+            {%- render 'gg-icon', icon: 'plus', class: 'gg-icon--plus' -%}
+            {%- render 'gg-icon', icon: 'minus', class: 'gg-icon--minus' -%}
+          </summary>
+          <div class="gg-accordion__body gg-rte">{{ content }}</div>
+        </details>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "GG FAQ",
+  "tag": "div",
+  "max_blocks": 10,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Good to know" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Questions we get most" },
+    { "type": "text", "id": "lead", "label": "Lead" },
+    { "type": "checkbox", "id": "open_first", "label": "Open the first question by default", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Question", "default": "How long does shipping take?" },
+        { "type": "richtext", "id": "content", "label": "Answer", "default": "<p>Most orders arrive within 5–20 business days depending on your location. Every order is tracked, and you'll receive the tracking link by email the moment it ships.</p>" },
+        { "type": "checkbox", "id": "use_product_metafield", "label": "On product pages, use the product's 'custom.materials' metafield as the answer when it is filled in", "default": false }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "GG FAQ",
+      "blocks": [
+        { "type": "question", "settings": { "title": "How long does shipping take?", "content": "<p>Most orders arrive within 5–20 business days depending on your location — the estimate for this product is shown above the Add to bag button. Every order is tracked, and you'll receive the tracking link by email the moment it ships.</p>" } },
+        { "type": "question", "settings": { "title": "What if I change my mind?", "content": "<p>You have 30 days after delivery to return an unused item in its original packaging. Email us with your order number and we'll send you the return address in the Netherlands. Return shipping is at your own cost, unless the item is defective or we sent the wrong one — then we cover it. Refunds go back to your original payment method within 14 days.</p>" } },
+        { "type": "question", "settings": { "title": "What is it made of?", "content": "<p>Materials and care instructions are listed per product. Fill in the product's 'Materials' field in Shopify and it will appear here.</p>", "use_product_metafield": true } }
+      ]
+    }
+  ]
+}
+{% endschema %}

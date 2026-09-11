@@ -1,0 +1,14 @@
+{% comment %}
+  Section heading: eyebrow + title + lead (design-system SectionHeading).
+  Usage: {% render 'gg-heading', eyebrow: 'The range', title: 'Six things', lead: '...', align: 'center', tag: 'h2' %}
+{% endcomment %}
+{%- liquid
+  assign tag = tag | default: 'h2'
+-%}
+{%- if eyebrow != blank or title != blank or lead != blank -%}
+<header class="gg-heading{% if align == 'center' %} gg-heading--center{% endif %}">
+  {%- if eyebrow != blank -%}<span class="gg-eyebrow">{{ eyebrow }}</span>{%- endif -%}
+  {%- if title != blank -%}<{{ tag }} class="gg-heading__title">{{ title }}</{{ tag }}>{%- endif -%}
+  {%- if lead != blank -%}<p class="gg-heading__lead">{{ lead }}</p>{%- endif -%}
+</header>
+{%- endif -%}

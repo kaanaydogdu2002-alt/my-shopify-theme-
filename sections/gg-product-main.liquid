@@ -1,0 +1,202 @@
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign form_id = 'gg-product-form-' | append: section.id
+  assign summary = product.metafields.custom.summary.value
+  assign rating = product.metafields.reviews.rating.value
+  assign rating_count = product.metafields.reviews.rating_count.value
+  assign shop_link = section.settings.shop_link | default: '/#shop'
+  assign has_real_options = false
+  if product.has_only_default_variant == false
+    assign has_real_options = true
+  endif
+  assign main_alt = product.featured_media.alt | default: product.title | escape
+-%}
+
+<section class="gg-product gg-section gg-section--page" data-gg-product data-section-id="{{ section.id }}">
+  <div class="gg-container gg-product__crumbs">
+    <nav class="gg-crumbs" aria-label="Breadcrumb">
+      <a href="{{ routes.root_url }}">Home</a>
+      {%- render 'gg-icon', icon: 'chevron-right' -%}
+      <a href="{{ shop_link }}">{{ section.settings.shop_label }}</a>
+      {%- render 'gg-icon', icon: 'chevron-right' -%}
+      <span class="gg-crumbs__current">{{ product.title }}</span>
+    </nav>
+  </div>
+
+  <div class="gg-container gg-product__layout">
+    {%- comment -%} Gallery {%- endcomment -%}
+    <div class="gg-gallery">
+      <div class="gg-gallery__main" data-gg-gallery-main>
+        {%- if product.featured_media != blank -%}
+          {{ product.featured_media | image_url: width: 1400 | image_tag: loading: 'eager', sizes: '(min-width: 990px) 640px, 100vw', widths: '400, 600, 800, 1000, 1400', alt: main_alt }}
+        {%- else -%}
+          <span class="gg-media__placeholder">
+            {%- render 'gg-icon', icon: 'photo' -%}
+            <span>{{ section.settings.image_note }}</span>
+          </span>
+        {%- endif -%}
+      </div>
+      {%- if product.media.size > 1 or product.media.size == 0 -%}
+        <div class="gg-gallery__thumbs">
+          {%- if product.media.size > 1 -%}
+            {%- for media in product.media limit: 8 -%}
+              {%- assign thumb_alt = media.alt | default: product.title | escape -%}
+              <button type="button" class="gg-gallery__thumb{% if forloop.first %} is-active{% endif %}" data-gg-thumb data-gg-media-id="{{ media.id }}" data-gg-src="{{ media | image_url: width: 1400 }}" data-gg-srcset="{{ media | image_url: width: 600 }} 600w, {{ media | image_url: width: 1000 }} 1000w, {{ media | image_url: width: 1400 }} 1400w" data-gg-alt="{{ thumb_alt }}" aria-label="{{ 'products.product.media.image_available' | t: index: forloop.index }}">
+                {{ media | image_url: width: 300 | image_tag: loading: 'lazy', alt: thumb_alt }}
+              </button>
+            {%- endfor -%}
+          {%- else -%}
+            {%- assign notes = section.settings.thumb_notes | split: ',' -%}
+            {%- for note in notes limit: 4 -%}
+              <div class="gg-gallery__thumb" aria-hidden="true">{{ note | strip }}</div>
+            {%- endfor -%}
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} Info {%- endcomment -%}
+    <div class="gg-product__info">
+      <h1 class="gg-product__title">{{ product.title }}</h1>
+
+      {%- if rating != blank -%}
+        {%- render 'gg-rating', value: rating.rating, count: rating_count, size: 16, show_value: true -%}
+      {%- elsif section.settings.fallback_rating > 0 -%}
+        {%- render 'gg-rating', value: section.settings.fallback_rating, count: section.settings.fallback_rating_count, size: 16, show_value: true -%}
+      {%- endif -%}
+
+      {%- if summary != blank -%}
+        <p class="gg-product__summary">{{ summary }}</p>
+      {%- elsif product.description != blank -%}
+        <div class="gg-product__summary gg-rte">{{ product.description }}</div>
+      {%- endif -%}
+
+      <div class="gg-product__pricing">
+        <span class="gg-price gg-price--lg">
+          <span class="gg-price__amount" data-gg-price>{{ current_variant.price | money }}</span>
+          <span class="gg-price__compare" data-gg-compare{% unless current_variant.compare_at_price > current_variant.price %} hidden{% endunless %}>{{ current_variant.compare_at_price | money }}</span>
+        </span>
+        <div class="gg-product__notes">
+          {%- if section.settings.price_note_1 != blank -%}<span>{{ section.settings.price_note_1 | replace: '[currency]', cart.currency.iso_code }}</span>{%- endif -%}
+          {%- if section.settings.price_note_2 != blank -%}<span>{{ section.settings.price_note_2 }}</span>{%- endif -%}
+        </div>
+      </div>
+
+      <hr class="gg-rule">
+
+      {%- form 'product', product, id: form_id, class: 'gg-product__options', data-gg-product-form: 'true' -%}
+        <input type="hidden" name="id" value="{{ current_variant.id }}">
+
+        {%- if has_real_options -%}
+          {%- for option in product.options_with_values -%}
+            {%- assign option_index = forloop.index0 -%}
+            <fieldset class="gg-option">
+              <legend class="gg-option__label">{{ option.name }}</legend>
+              <div class="gg-option__values">
+                {%- for value in option.values -%}
+                  {%- assign is_selected = false -%}
+                  {%- if option.selected_value == value -%}{%- assign is_selected = true -%}{%- endif -%}
+                  <label class="gg-option__value{% if is_selected %} is-selected{% endif %}">
+                    <input type="radio" name="{{ option.name | escape }}" value="{{ value | escape }}" data-gg-option="{{ option_index }}"{% if is_selected %} checked{% endif %}>
+                    <span>{{ value }}</span>
+                  </label>
+                {%- endfor -%}
+              </div>
+            </fieldset>
+          {%- endfor -%}
+        {%- endif -%}
+
+        <div class="gg-product__buy" data-gg-buy-anchor>
+          <div class="gg-qty" data-gg-qty>
+            <button type="button" class="gg-qty__btn" data-gg-qty-minus aria-label="{{ 'products.product.quantity.decrease' | t: product: product.title | escape }}">{% render 'gg-icon', icon: 'minus' %}</button>
+            <label class="gg-visually-hidden" for="gg-qty-{{ section.id }}">{{ 'products.product.quantity.label' | t }}</label>
+            <input id="gg-qty-{{ section.id }}" class="gg-qty__input" type="number" name="quantity" value="1" min="1" max="99" inputmode="numeric">
+            <button type="button" class="gg-qty__btn" data-gg-qty-plus aria-label="{{ 'products.product.quantity.increase' | t: product: product.title | escape }}">{% render 'gg-icon', icon: 'plus' %}</button>
+          </div>
+          <button type="submit" name="add" class="gg-btn gg-btn--lg" data-gg-add data-gg-add-label="{{ section.settings.add_label | escape }}" data-gg-sold-out="{{ 'products.product.sold_out' | t }}" data-gg-unavailable="{{ 'products.product.unavailable' | t }}"{% unless current_variant.available %} disabled{% endunless %}>
+            {%- render 'gg-icon', icon: 'shopping-bag' -%}
+            <span data-gg-add-text>
+              {%- if current_variant.available -%}
+                {{ section.settings.add_label }} · {{ current_variant.price | money }}
+              {%- else -%}
+                {{ 'products.product.sold_out' | t }}
+              {%- endif -%}
+            </span>
+          </button>
+        </div>
+      {%- endform -%}
+
+      {%- if section.settings.trust_1 != blank or section.settings.trust_2 != blank or section.settings.trust_3 != blank -%}
+        <div class="gg-product__trust">
+          {%- if section.settings.trust_1 != blank -%}<span>{% render 'gg-icon', icon: 'lock' %}{{ section.settings.trust_1 }}</span>{%- endif -%}
+          {%- if section.settings.trust_2 != blank -%}<span>{% render 'gg-icon', icon: 'truck' %}{{ section.settings.trust_2 }}</span>{%- endif -%}
+          {%- if section.settings.trust_3 != blank -%}<span>{% render 'gg-icon', icon: 'rotate' %}{{ section.settings.trust_3 }}</span>{%- endif -%}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.show_payments -%}
+        {%- render 'gg-payments' -%}
+      {%- endif -%}
+
+      <div class="gg-product__facts">
+        {%- if section.settings.fact_stock != blank -%}
+          <span data-gg-availability{% unless current_variant.available %} hidden{% endunless %}>{% render 'gg-icon', icon: 'check' %}{{ section.settings.fact_stock }}</span>
+        {%- endif -%}
+        {%- if section.settings.fact_delivery != blank -%}<span>{% render 'gg-icon', icon: 'truck' %}{{ section.settings.fact_delivery }}</span>{%- endif -%}
+        {%- if section.settings.fact_returns != blank -%}<span>{% render 'gg-icon', icon: 'rotate' %}{{ section.settings.fact_returns }}</span>{%- endif -%}
+      </div>
+    </div>
+  </div>
+
+  {%- if section.settings.sticky_mobile -%}
+    <div class="gg-sticky-buy" data-gg-sticky aria-hidden="true">
+      <div class="gg-sticky-buy__price">
+        <span class="gg-sticky-buy__title">{{ product.title }}</span>
+        <span class="gg-price gg-price--sm"><span class="gg-price__amount" data-gg-price>{{ current_variant.price | money }}</span></span>
+      </div>
+      <button type="button" class="gg-btn" data-gg-sticky-submit data-gg-add data-gg-add-label="{{ section.settings.add_label | escape }}" data-gg-sold-out="{{ 'products.product.sold_out' | t }}" data-gg-unavailable="{{ 'products.product.unavailable' | t }}">
+        {%- render 'gg-icon', icon: 'shopping-bag' -%}
+        <span data-gg-add-text>{{ section.settings.add_label }} · {{ current_variant.price | money }}</span>
+      </button>
+    </div>
+  {%- endif -%}
+
+  <script type="application/json" data-gg-variants>
+    [{%- for variant in product.variants -%}
+      {"id":{{ variant.id }},"available":{{ variant.available }},"price":{{ variant.price }},"compare_at_price":{{ variant.compare_at_price | default: 'null' }},"options":{{ variant.options | json }},"featured_media_id":{{ variant.featured_media.id | default: 'null' }}}{% unless forloop.last %},{% endunless %}
+    {%- endfor -%}]
+  </script>
+</section>
+
+{% schema %}
+{
+  "name": "GG Product",
+  "tag": "div",
+  "settings": [
+    { "type": "header", "content": "Breadcrumb" },
+    { "type": "text", "id": "shop_label", "label": "Shop crumb label", "default": "Shop" },
+    { "type": "url", "id": "shop_link", "label": "Shop crumb link", "info": "Leave empty to link to the homepage product grid." },
+    { "type": "header", "content": "Price notes" },
+    { "type": "text", "id": "price_note_1", "label": "Note 1", "default": "Shown in [currency] · converted at checkout", "info": "[currency] is replaced with the active currency." },
+    { "type": "text", "id": "price_note_2", "label": "Note 2", "default": "Shipping from €4,95 · exact cost shown at checkout for your country" },
+    { "type": "header", "content": "Buy button" },
+    { "type": "text", "id": "add_label", "label": "Add to bag label", "default": "Add to bag" },
+    { "type": "checkbox", "id": "sticky_mobile", "label": "Sticky add-to-bag bar on phones", "default": true },
+    { "type": "checkbox", "id": "show_payments", "label": "Show payment methods", "default": true },
+    { "type": "header", "content": "Trust row" },
+    { "type": "text", "id": "trust_1", "label": "Lock", "default": "Secure checkout" },
+    { "type": "text", "id": "trust_2", "label": "Truck", "default": "Tracked worldwide shipping" },
+    { "type": "text", "id": "trust_3", "label": "Returns", "default": "30-day returns" },
+    { "type": "header", "content": "Facts under the button" },
+    { "type": "text", "id": "fact_stock", "label": "In stock line (hidden when sold out)", "default": "In stock · dispatched within 1–2 working days" },
+    { "type": "text", "id": "fact_delivery", "label": "Delivery line", "default": "Estimated delivery: 7–14 business days · tracked" },
+    { "type": "text", "id": "fact_returns", "label": "Returns line", "default": "Fourteen days to withdraw under EU law, and thirty with us." },
+    { "type": "header", "content": "Rating (until a reviews app fills the product's rating metafield)" },
+    { "type": "range", "id": "fallback_rating", "label": "Rating shown when no real rating exists", "min": 0, "max": 5, "step": 0.1, "default": 0, "info": "0 hides it. The design used 4,8 (126 reviews) as a placeholder." },
+    { "type": "number", "id": "fallback_rating_count", "label": "Review count for that placeholder" },
+    { "type": "header", "content": "Placeholders (before photos are uploaded)" },
+    { "type": "text", "id": "image_note", "label": "Main image note", "default": "Product image 1 — set on a counter, mid-pour, natural daylight" },
+    { "type": "text", "id": "thumb_notes", "label": "Thumbnail notes (comma separated)", "default": "Detail — glaze, Scale — in hand, Set — both pieces, In use — table" }
+  ]
+}
+{% endschema %}

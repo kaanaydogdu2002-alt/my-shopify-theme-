@@ -1,0 +1,44 @@
+{%- liquid
+  assign collection = section.settings.collection
+  if collection != blank
+    assign products = collection.products
+  else
+    assign products = collections.all.products
+  endif
+  assign limit = section.settings.limit
+-%}
+<section class="gg-products gg-section gg-section--page gg-section--rule-top" id="shop">
+  <div class="gg-container gg-section__inner gg-products__inner">
+    {%- render 'gg-heading', eyebrow: section.settings.eyebrow, title: section.settings.heading, lead: section.settings.lead -%}
+    <div class="gg-products__grid">
+      {%- for product in products limit: limit -%}
+        {%- render 'gg-product-card', product: product -%}
+      {%- else -%}
+        <div class="gg-products__empty" style="grid-column: 1 / -1">No products yet. Add products in Shopify and they will appear here.</div>
+      {%- endfor -%}
+    </div>
+    {%- if section.settings.show_payments -%}
+      <div class="gg-products__checkout">
+        <span class="gg-products__checkout-label">{{ section.settings.payments_label }}</span>
+        {%- render 'gg-payments', center: true -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "GG Product grid",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The range" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Six things we stand behind" },
+    { "type": "text", "id": "lead", "label": "Lead", "default": "Small batches, named materials, and a repair or refund if one of them lets you down." },
+    { "type": "collection", "id": "collection", "label": "Collection", "info": "Leave empty to show all products." },
+    { "type": "range", "id": "limit", "label": "Products to show", "min": 2, "max": 12, "step": 1, "default": 6 },
+    { "type": "checkbox", "id": "show_payments", "label": "Show payment methods", "default": true },
+    { "type": "text", "id": "payments_label", "label": "Payment label", "default": "Secure checkout with" }
+  ],
+  "presets": [ { "name": "GG Product grid" } ]
+}
+{% endschema %}

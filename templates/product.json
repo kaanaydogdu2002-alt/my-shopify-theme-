@@ -1,1 +1,269 @@
-{"sections":{"main":{"type":"main-product","blocks":{"vendor":{"type":"text","settings":{"text":"{{ product.vendor }}","text_style":"uppercase"}},"title":{"type":"title","settings":{}},"price":{"type":"price","settings":{}},"variant_picker":{"type":"variant_picker","settings":{"picker_type":"button","swatch_shape":"circle"}},"quantity_selector":{"type":"quantity_selector","settings":{}},"buy_buttons":{"type":"buy_buttons","settings":{"show_dynamic_checkout":true,"show_gift_card_recipient":true}},"description":{"type":"description","settings":{}},"share":{"type":"share","settings":{"share_label":"Share"}}},"block_order":["vendor","title","price","variant_picker","quantity_selector","buy_buttons","description","share"],"settings":{"enable_sticky_info":true,"color_scheme":"scheme-1","media_size":"large","constrain_to_viewport":true,"media_fit":"contain","gallery_layout":"stacked","mobile_thumbnails":"hide","media_position":"left","image_zoom":"lightbox","hide_variants":true,"enable_video_looping":false,"padding_top":36,"padding_bottom":12}},"disclosures":{"type":"disclosures","settings":{"padding_top":36,"padding_bottom":0}},"related-products":{"type":"related-products","settings":{"heading":"You may also like","heading_size":"h2","products_to_show":4,"columns_desktop":4,"columns_mobile":"2","color_scheme":"scheme-1","image_ratio":"square","image_shape":"default","show_secondary_image":true,"show_vendor":false,"show_rating":false,"padding_top":36,"padding_bottom":28}}},"order":["main","disclosures","related-products"]}
+{
+  "sections": {
+    "trust": {
+      "type": "gg-trust-bar",
+      "blocks": {
+        "reviews": {
+          "type": "item",
+          "settings": {
+            "icon": "star-filled",
+            "icon_class": "gg-icon--gold",
+            "text": "4,7 from 312 reviews",
+            "text_mobile": "4,7 · 312 reviews"
+          }
+        },
+        "secure": {
+          "type": "item",
+          "settings": {
+            "icon": "lock",
+            "icon_class": "",
+            "text": "Secure checkout",
+            "text_mobile": ""
+          }
+        },
+        "shipping": {
+          "type": "item",
+          "settings": {
+            "icon": "truck",
+            "icon_class": "",
+            "text": "Tracked worldwide shipping",
+            "text_mobile": "Tracked worldwide"
+          }
+        },
+        "returns": {
+          "type": "item",
+          "settings": {
+            "icon": "rotate",
+            "icon_class": "",
+            "text": "30-day returns",
+            "text_mobile": ""
+          }
+        }
+      },
+      "block_order": [
+        "reviews",
+        "secure",
+        "shipping",
+        "returns"
+      ],
+      "settings": {}
+    },
+    "main": {
+      "type": "gg-product-main",
+      "settings": {
+        "shop_label": "Shop",
+        "shop_link": "",
+        "price_note_1": "Shown in [currency] · converted at checkout",
+        "price_note_2": "Shipping from €4,95 · exact cost shown at checkout for your country",
+        "add_label": "Add to bag",
+        "sticky_mobile": true,
+        "show_payments": true,
+        "trust_1": "Secure checkout",
+        "trust_2": "Tracked worldwide shipping",
+        "trust_3": "30-day returns",
+        "fact_stock": "In stock · dispatched within 1–2 working days",
+        "fact_delivery": "Estimated delivery: 7–14 business days · tracked",
+        "fact_returns": "Fourteen days to withdraw under EU law, and thirty with us.",
+        "fallback_rating": 0,
+        "image_note": "Product image — add photos to this product in Shopify",
+        "thumb_notes": "Detail, Scale, Set, In use"
+      }
+    },
+    "benefits": {
+      "type": "gg-icon-cards",
+      "blocks": {
+        "b1": {
+          "type": "card",
+          "settings": {
+            "icon": "leaf",
+            "title": "No paper, no aftertaste",
+            "body": "The fine stoneware filter holds the grounds, so nothing but coffee reaches the carafe."
+          }
+        },
+        "b2": {
+          "type": "card",
+          "settings": {
+            "icon": "temperature",
+            "title": "Holds heat to the last cup",
+            "body": "Thick walls keep a full 600 ml carafe above 60°C for around forty minutes."
+          }
+        },
+        "b3": {
+          "type": "card",
+          "settings": {
+            "icon": "rotate",
+            "title": "Dishwasher safe, both parts",
+            "body": "Fired at 1240°C, so the glaze does not craze or stain after repeated cycles."
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3"
+      ],
+      "settings": {
+        "eyebrow": "Why this one",
+        "heading": "Three reasons it stays on the counter",
+        "lead": "",
+        "align": "center",
+        "background": "card"
+      }
+    },
+    "included": {
+      "type": "gg-steps-image",
+      "blocks": {
+        "s1": {
+          "type": "step",
+          "settings": {
+            "title": "Stoneware cone",
+            "body": "reusable filter, no paper needed."
+          }
+        },
+        "s2": {
+          "type": "step",
+          "settings": {
+            "title": "600 ml carafe",
+            "body": "two large cups, marked at 300 and 600 ml."
+          }
+        },
+        "s3": {
+          "type": "step",
+          "settings": {
+            "title": "Rinse and fill",
+            "body": "22 g of medium grind, then pour in three passes."
+          }
+        },
+        "s4": {
+          "type": "step",
+          "settings": {
+            "title": "Four minutes",
+            "body": "lift the cone off, serve straight from the carafe."
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+      ],
+      "settings": {
+        "eyebrow": "What is included",
+        "heading": "Two pieces, one method, four minutes",
+        "image_note": "In-use image — cone seated on the carafe, kettle mid-pour"
+      }
+    },
+    "reviews": {
+      "type": "gg-reviews",
+      "blocks": {
+        "r1": {
+          "type": "review",
+          "settings": {
+            "stars": 5,
+            "body": "Third month of daily use and the glaze still looks new. It replaced two things on my counter, which was the point.",
+            "who": "",
+            "verified": false,
+            "note": "Marijke D. · Verified purchase · Utrecht"
+          }
+        },
+        "r2": {
+          "type": "review",
+          "settings": {
+            "stars": 4,
+            "body": "Brews beautifully. The carafe is a little heavy when full, so I pour with two hands. Would still buy it again.",
+            "who": "",
+            "verified": false,
+            "note": "Tom R. · Verified purchase · Berlin"
+          }
+        },
+        "r3": {
+          "type": "review",
+          "settings": {
+            "stars": 5,
+            "body": "Heavier than I expected, in a good way. The glaze looks exactly like the photos and it pours cleanly.",
+            "who": "",
+            "verified": false,
+            "note": "Aoife M. · Verified purchase · Cork"
+          }
+        }
+      },
+      "block_order": [
+        "r1",
+        "r2",
+        "r3"
+      ],
+      "settings": {
+        "eyebrow": "From customers",
+        "heading": "What people say after a month",
+        "lead": "Reviews are collected after delivery and published unedited.",
+        "use_section_heading": true,
+        "background": "card"
+      }
+    },
+    "faq": {
+      "type": "gg-faq",
+      "blocks": {
+        "q1": {
+          "type": "question",
+          "settings": {
+            "title": "How long does shipping take?",
+            "content": "<p>Most orders arrive within 5–20 business days depending on your location — the estimate for this product is shown above the Add to bag button. Every order is tracked, and you'll receive the tracking link by email the moment it ships.</p>",
+            "use_product_metafield": false
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "title": "What if I change my mind?",
+            "content": "<p>You have 30 days after delivery to return an unused item in its original packaging. Email us with your order number and we'll send you the return address in the Netherlands. Return shipping is at your own cost, unless the item is defective or we sent the wrong one — then we cover it. Refunds go back to your original payment method within 14 days.</p>",
+            "use_product_metafield": false
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "title": "What is it made of?",
+            "content": "<p>Materials and care instructions are listed per product. Fill in the product's 'Materials' field in Shopify and it will appear here.</p>",
+            "use_product_metafield": true
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3"
+      ],
+      "settings": {
+        "eyebrow": "Good to know",
+        "heading": "Questions we get most",
+        "lead": "",
+        "open_first": true
+      }
+    },
+    "cta": {
+      "type": "gg-cta",
+      "settings": {
+        "heading": "",
+        "use_product_title": true,
+        "text": "in stock · dispatched within 1–2 working days · tracked worldwide shipping",
+        "prefix_price": true,
+        "button_label": "Add to bag",
+        "button_link": "",
+        "button_adds_to_bag": true,
+        "button2_label": "",
+        "button2_link": "",
+        "background": "inverse"
+      }
+    }
+  },
+  "order": [
+    "trust",
+    "main",
+    "benefits",
+    "included",
+    "reviews",
+    "faq",
+    "cta"
+  ]
+}
