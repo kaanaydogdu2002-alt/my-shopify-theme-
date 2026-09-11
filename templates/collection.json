@@ -11,7 +11,10 @@
         "filters": "Kitchen:kitchen, Living:living, Desk:desk",
         "show_benefits": true,
         "per_page": 12,
-        "empty_text": "Nothing here yet. Try another filter, or write to us."
+        "empty_text": "Nothing here yet. Try another filter, or write to us.",
+        "show_rating": true,
+        "placeholder_rating": 4.8,
+        "placeholder_count": 126
       }
     },
     "before": {
@@ -21,8 +24,8 @@
           "type": "card",
           "settings": {
             "icon": "truck",
-            "title": "Ships within one working day",
-            "body": "From our shelf in Den Haag, tracked, to most of the world. The exact cost shows at checkout before you pay."
+            "title": "Dispatched within 1–2 working days",
+            "body": "Tracked shipping worldwide. Delivery usually takes 5–20 business days depending on the item and your location. The exact shipping cost shows at checkout before you pay."
           }
         },
         "c2": {
@@ -38,7 +41,7 @@
           "settings": {
             "icon": "shield-check",
             "title": "Two-year warranty",
-            "body": "If a piece chips, frays or fails in normal use, we repair or replace it. No forms, no ticket numbers, just a reply from a person."
+            "body": "If a piece chips, frays or fails in normal use, we replace it or refund you. No forms, no ticket numbers, just a reply from a person."
           }
         }
       },
@@ -62,7 +65,7 @@
           "type": "question",
           "settings": {
             "title": "What does shipping cost?",
-            "content": "<p>Netherlands and Belgium €4,95, free on orders over €40. Rest of Europe €9,95. Rest of the world €14,95. The exact amount is shown at checkout before you pay.</p>",
+            "content": "<p>Shipping cost depends on your country and is calculated at checkout, before you pay. You'll always see the exact amount before confirming your order.</p>",
             "use_product_metafield": false
           }
         },
@@ -78,15 +81,7 @@
           "type": "question",
           "settings": {
             "title": "Are the prices including VAT?",
-            "content": "<p>Yes. All prices include Dutch VAT. If you order from outside the EU, VAT is removed at checkout automatically.</p>",
-            "use_product_metafield": false
-          }
-        },
-        "q4": {
-          "type": "question",
-          "settings": {
-            "title": "Can I order several pieces in one parcel?",
-            "content": "<p>Yes, orders ship together. If one piece is a few weeks from restock, we tell you before you pay so you can decide whether to wait or split the order.</p>",
+            "content": "<p>Prices are shown including any applicable tax. The exact amount for your country is calculated at checkout.</p>",
             "use_product_metafield": false
           }
         }
@@ -94,8 +89,7 @@
       "block_order": [
         "q1",
         "q2",
-        "q3",
-        "q4"
+        "q3"
       ],
       "settings": {
         "eyebrow": "Ordering",
