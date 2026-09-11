@@ -34,6 +34,52 @@
     ]
   },
   {
+    "name": "Grain and Gold",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Payment icons"
+      },
+      {
+        "type": "select",
+        "id": "gg_payment_source",
+        "label": "Which payment methods to show",
+        "default": "manual",
+        "options": [
+          {
+            "value": "manual",
+            "label": "The list below"
+          },
+          {
+            "value": "store",
+            "label": "Only methods enabled at checkout"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "gg_payment_icons",
+        "label": "Payment methods (comma separated)",
+        "default": "ideal, visa, master, paypal, apple_pay, google_pay",
+        "info": "Use Shopify names: ideal, visa, master, american_express, maestro, paypal, apple_pay, google_pay, shopify_pay, klarna, bancontact, sofort."
+      },
+      {
+        "type": "header",
+        "content": "Brand size"
+      },
+      {
+        "type": "range",
+        "id": "gg_brand_scale",
+        "label": "Logo and wordmark size",
+        "min": 80,
+        "max": 140,
+        "step": 5,
+        "unit": "%",
+        "default": 115
+      }
+    ]
+  },
+  {
     "name": "t:settings_schema.colors.name",
     "settings": [
       {

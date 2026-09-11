@@ -190,7 +190,10 @@
             "color_scheme": "scheme-1"
           }
         }
-      }
+      },
+      "gg_payment_source": "manual",
+      "gg_payment_icons": "ideal, visa, master, paypal, apple_pay, google_pay",
+      "gg_brand_scale": 115
     }
   }
 }

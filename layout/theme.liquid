@@ -285,6 +285,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap">
     {{ 'gg.css' | asset_url | stylesheet_tag }}
+    <style>:root { --gg-brand-scale: {{ settings.gg_brand_scale | default: 100 | divided_by: 100.0 }}; }</style>
     <script>window.ggMoneyFormat = {{ shop.money_format | json }};</script>
     <script src="{{ 'gg.js' | asset_url }}" defer="defer"></script>
     <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">

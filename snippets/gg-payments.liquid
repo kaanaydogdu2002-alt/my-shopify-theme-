@@ -1,21 +1,22 @@
 {% comment %}
-  Payment method chips. Uses the store's enabled payment types.
+  Payment method icons (official Shopify SVGs via payment_type_svg_tag).
+  Source is a theme setting: a manual list (default, matches the design) or the
+  methods actually enabled at checkout.
   Usage: {% render 'gg-payments', center: true %}
 {% endcomment %}
 {%- liquid
-  assign labels = 'ideal:iDEAL,visa:Visa,master:Mastercard,paypal:PayPal,apple_pay:Apple Pay,google_pay:Google Pay,shopify_pay:Shop Pay,american_express:American Express,maestro:Maestro,bancontact:Bancontact,klarna:Klarna,sofort:SOFORT,diners_club:Diners Club,discover:Discover,unionpay:UnionPay,jcb:JCB,eps:EPS,giropay:Giropay' | split: ','
+  if settings.gg_payment_source == 'store'
+    assign types = shop.enabled_payment_types
+  else
+    assign raw = settings.gg_payment_icons | default: 'ideal, visa, master, paypal, apple_pay, google_pay'
+    assign types = raw | replace: ' ', '' | split: ','
+  endif
 -%}
-<div class="gg-payments{% if center %} gg-payments--center{% endif %}">
-  {%- for type in shop.enabled_payment_types -%}
-    {%- liquid
-      assign label = type | replace: '_', ' ' | capitalize
-      for pair in labels
-        assign parts = pair | split: ':'
-        if parts[0] == type
-          assign label = parts[1]
-        endif
-      endfor
-    -%}
-    <span class="gg-payments__chip">{{ label }}</span>
+<div class="gg-payments{% if center %} gg-payments--center{% endif %}" role="list" aria-label="Payment methods">
+  {%- for type in types -%}
+    {%- if type != blank -%}
+      {%- assign label = type | replace: '_', ' ' | capitalize -%}
+      <span class="gg-payments__icon" role="listitem" title="{{ label }}">{{ type | payment_type_svg_tag: class: 'gg-payments__svg' }}</span>
+    {%- endif -%}
   {%- endfor -%}
 </div>
