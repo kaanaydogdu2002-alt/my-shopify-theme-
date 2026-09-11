@@ -118,6 +118,12 @@
                   {{ 'sections.cart.checkout' | t }}
                 </button>
               </div>
+              {%- if section.settings.gg_show_trust -%}
+                <div class="gg-cart-trust">
+                  {%- render 'gg-payments', center: true, muted: true -%}
+                  {%- if section.settings.gg_reassurance != blank -%}<p class="gg-cart-trust__line">{{ section.settings.gg_reassurance }}</p>{%- endif -%}
+                </div>
+              {%- endif -%}
 
               {%- if additional_checkout_buttons -%}
                 <div class="cart__dynamic-checkout-buttons additional-checkout-buttons">
@@ -139,6 +145,18 @@
   "class": "cart__footer-wrapper",
   "settings": [
     {
+      "type": "checkbox",
+      "id": "gg_show_trust",
+      "label": "Show payment icons and reassurance line",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "gg_reassurance",
+      "label": "Reassurance line",
+      "default": "30 days to change your mind · Secure encrypted checkout · Tracked worldwide shipping"
+    },
+    {
       "type": "color_scheme",
       "id": "color_scheme",
       "label": "t:sections.all.colors.label",
@@ -147,7 +165,7 @@
     {
       "type": "header",
       "content": "t:sections.all.padding.section_padding_heading"
-    },    
+    },
     {
       "type": "range",
       "id": "padding_top",

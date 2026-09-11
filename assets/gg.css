@@ -724,3 +724,19 @@ body.gg-has-sticky-buy { padding-bottom: 76px; }
 @media screen and (min-width: 990px) { .gg-prose__inner--tall { padding-top: 128px; padding-bottom: 144px; } }
 .gg-cta__actions--start { justify-content: flex-start; }
 .gg-prose__inner .gg-cta__actions { padding-top: 6px; }
+
+/* --------------------------------------------------------------------------
+   Cart page: progress steps, muted payment icons, reassurance line
+   -------------------------------------------------------------------------- */
+.gg-progress { list-style: none; margin: 0; padding: 24px 0 4px; display: flex; flex-wrap: wrap; align-items: center; gap: 0; font-family: var(--gg-sans); font-size: 12px; letter-spacing: 0.04em; color: var(--gg-text-quiet); }
+.gg-progress__step { display: inline-flex; align-items: center; }
+.gg-progress__step + .gg-progress__step::before { content: ""; display: inline-block; width: 24px; height: 1px; background: var(--gg-border-strong); margin: 0 12px; }
+.gg-progress__step.is-current { color: var(--gg-ink-800); font-weight: 500; }
+.gg-progress__step.is-done { color: var(--gg-text-muted); }
+@media screen and (min-width: 990px) { .gg-progress { padding-top: 32px; font-size: 13px; } .gg-progress__step + .gg-progress__step::before { width: 32px; margin: 0 14px; } }
+.gg-payments--muted .gg-payments__icon { border-color: var(--gg-border); background: var(--gg-surface-card); }
+.gg-payments--muted .gg-payments__svg, .gg-payments--muted .gg-payments__icon svg { filter: grayscale(1); opacity: 0.6; }
+.gg-cart-trust { display: flex; flex-direction: column; align-items: center; gap: 10px; margin-top: 16px; }
+.gg-cart-trust__line { margin: 0; font-family: var(--gg-sans); font-size: 12px; line-height: 1.6; color: var(--gg-text-muted); text-align: center; }
+/* Dawn cart pieces in the brand fonts */
+.cart__checkout-button { font-family: var(--gg-sans); }

@@ -12,7 +12,7 @@
     assign types = raw | replace: ' ', '' | split: ','
   endif
 -%}
-<div class="gg-payments{% if center %} gg-payments--center{% endif %}" role="list" aria-label="Payment methods">
+<div class="gg-payments{% if center %} gg-payments--center{% endif %}{% if muted %} gg-payments--muted{% endif %}" role="list" aria-label="Payment methods">
   {%- for type in types -%}
     {%- if type != blank -%}
       {%- assign label = type | replace: '_', ' ' | capitalize -%}

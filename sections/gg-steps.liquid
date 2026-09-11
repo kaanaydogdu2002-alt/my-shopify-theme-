@@ -1,0 +1,25 @@
+{%- liquid
+  assign labels = section.settings.steps | split: ','
+  assign current = section.settings.current
+-%}
+<div class="gg-section gg-section--page">
+  <div class="gg-container">
+    <ol class="gg-progress" aria-label="Checkout progress">
+      {%- for label in labels -%}
+        <li class="gg-progress__step{% if forloop.index == current %} is-current{% elsif forloop.index < current %} is-done{% endif %}"{% if forloop.index == current %} aria-current="step"{% endif %}>{{ label | strip }}</li>
+      {%- endfor -%}
+    </ol>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "GG Checkout steps",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "steps", "label": "Steps (comma separated)", "default": "Cart, Information, Payment" },
+    { "type": "range", "id": "current", "label": "Current step", "min": 1, "max": 5, "step": 1, "default": 1 }
+  ],
+  "presets": [ { "name": "GG Checkout steps" } ]
+}
+{% endschema %}
