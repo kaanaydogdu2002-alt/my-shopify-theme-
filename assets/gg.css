@@ -352,11 +352,20 @@ h1, h2, h3, .h0, .h1, .h2, .h3 {
 .gg-section--inverse .gg-locale { border-color: var(--gg-inverse-border-strong); color: var(--gg-sand-200); }
 .gg-section--inverse .gg-locale .gg-icon--globe, .gg-section--inverse .gg-locale .gg-icon--chevron { color: var(--gg-sand-200); }
 
-/* Search bar (expands below the header) */
-.gg-search { display: none; border-bottom: 1px solid var(--gg-border); background: var(--gg-surface-card); }
-.gg-search.is-open { display: block; }
-.gg-search__form { display: flex; gap: 10px; align-items: center; padding: 12px 0; }
-.gg-search__form .gg-field { flex: 1; }
+/* Search popover (small panel under the header) */
+.gg-header { position: relative; }
+.gg-search { position: absolute; left: 50%; top: calc(100% + 10px); transform: translateX(-50%); width: min(420px, calc(100vw - 32px)); z-index: 45; background: var(--gg-sand-200); border: 1px solid var(--gg-border); border-radius: var(--gg-radius-md); box-shadow: 0 8px 24px rgba(43, 33, 26, 0.10); padding: 8px; }
+.gg-search[hidden] { display: none; }
+.gg-search__form { position: relative; display: flex; align-items: center; margin: 0; }
+.gg-search__icon { position: absolute; left: 12px; display: inline-flex; color: var(--gg-text-quiet); pointer-events: none; }
+.gg-search__icon .gg-icon { font-size: 17px; }
+.gg-search__input { width: 100%; min-height: 44px; margin: 0; padding: 0 44px 0 38px; font-family: var(--gg-sans); font-size: 15px; color: var(--gg-text-heading); background: var(--gg-sand-050); border: 1px solid var(--gg-sand-500); border-radius: var(--gg-radius-sm); outline: none; -webkit-appearance: none; appearance: none; box-shadow: none; }
+.gg-search__input::placeholder { color: var(--gg-ink-300); }
+.gg-search__input:focus { border-color: var(--gg-gold-500); box-shadow: var(--gg-focus); }
+.gg-search__input::-webkit-search-cancel-button { -webkit-appearance: none; appearance: none; }
+.gg-search__close { position: absolute; right: 6px; width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; background: transparent; border: 0; border-radius: var(--gg-radius-sm); color: var(--gg-text-muted); cursor: pointer; padding: 0; }
+.gg-search__close:hover { color: var(--gg-ink-800); background: var(--gg-surface-sunken); }
+.gg-search__close .gg-icon { font-size: 16px; }
 
 /* Mobile drawer */
 .gg-drawer { position: fixed; inset: 0; z-index: 60; display: none; }

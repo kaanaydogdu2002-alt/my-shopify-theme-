@@ -36,23 +36,25 @@
     });
   }
 
-  /* ---------------- Header search ---------------- */
+  /* ---------------- Header search popover ---------------- */
   function initSearch() {
-    var bar = qs('[data-gg-search]');
-    if (!bar) return;
-    qsa('[data-gg-search-toggle]').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var isOpen = bar.classList.toggle('is-open');
-        btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-        if (isOpen) { var input = qs('input[type="search"]', bar); if (input) input.focus(); }
-      });
+    var pop = qs('[data-gg-search]');
+    if (!pop || pop.dataset.ggInit) return;
+    pop.dataset.ggInit = '1';
+    var toggles = qsa('[data-gg-search-toggle]');
+    var input = qs('input[type="search"]', pop);
+    function setOpen(open) {
+      pop.hidden = !open;
+      toggles.forEach(function (b) { b.setAttribute('aria-expanded', open ? 'true' : 'false'); });
+      if (open && input) { input.focus(); input.select(); }
+    }
+    toggles.forEach(function (btn) {
+      btn.addEventListener('click', function (e) { e.stopPropagation(); setOpen(pop.hidden); });
     });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && bar.classList.contains('is-open')) {
-        bar.classList.remove('is-open');
-        qsa('[data-gg-search-toggle]').forEach(function (b) { b.setAttribute('aria-expanded', 'false'); });
-      }
-    });
+    qsa('[data-gg-search-close]', pop).forEach(function (b) { b.addEventListener('click', function () { setOpen(false); }); });
+    pop.addEventListener('click', function (e) { e.stopPropagation(); });
+    document.addEventListener('click', function () { if (!pop.hidden) setOpen(false); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !pop.hidden) setOpen(false); });
   }
 
   /* ---------------- Quantity stepper ---------------- */
