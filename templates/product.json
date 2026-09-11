@@ -66,7 +66,10 @@
         "fact_returns": "Fourteen days to withdraw under EU law, and thirty with us.",
         "fallback_rating": 0,
         "image_note": "Product image — add photos to this product in Shopify",
-        "thumb_notes": "Detail, Scale, Set, In use"
+        "thumb_notes": "Detail, Scale, Set, In use",
+        "show_benefits": true,
+        "show_review_slider": true,
+        "slider_interval": 6
       }
     },
     "benefits": {

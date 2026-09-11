@@ -647,3 +647,29 @@ body.gg-has-sticky-buy { padding-bottom: 76px; }
 /* Form element resets used by product options */
 .gg-option { border: 0; padding: 0; margin: 0; min-width: 0; }
 .gg-option__label { padding: 0; float: none; }
+
+/* --------------------------------------------------------------------------
+   Product: benefit bullets + review slider (buy box)
+   -------------------------------------------------------------------------- */
+.gg-benefits { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; width: 100%; }
+.gg-benefits__item { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; line-height: 1.5; color: var(--gg-text-heading); }
+.gg-benefits__check { flex: none; width: 20px; height: 20px; margin-top: 1px; border-radius: 50%; background: var(--gg-ink-800); color: var(--gg-sand-100); display: inline-flex; align-items: center; justify-content: center; }
+.gg-benefits__check .gg-icon { font-size: 12px; stroke-width: 2.5; }
+@media screen and (min-width: 990px) { .gg-benefits__item { font-size: 15px; } }
+
+.gg-rslider { width: 100%; background: var(--gg-surface-card); border: 1px solid var(--gg-border); border-radius: var(--gg-radius-md); padding: 14px 16px 10px; }
+.gg-rslider__track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -ms-overflow-style: none; gap: 16px; }
+.gg-rslider__track::-webkit-scrollbar { display: none; }
+.gg-rslider__item { flex: 0 0 100%; scroll-snap-align: start; margin: 0; display: flex; flex-direction: column; gap: 6px; }
+.gg-rslider__head { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.gg-rslider__name { font-size: 13px; font-weight: 500; color: var(--gg-text-heading); display: inline-flex; align-items: center; gap: 6px; }
+.gg-rslider__name::after { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--gg-gold-500); }
+.gg-rslider__body { margin: 0; font-size: 14px; line-height: 1.55; color: var(--gg-text-body); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.gg-rslider__meta { font-size: 11px; color: var(--gg-text-quiet); }
+.gg-rslider__nav { display: flex; align-items: center; justify-content: space-between; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--gg-border); }
+.gg-rslider__btn { width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; background: transparent; border: 0; border-radius: var(--gg-radius-sm); color: var(--gg-text-muted); cursor: pointer; padding: 0; }
+.gg-rslider__btn:hover { color: var(--gg-ink-800); background: var(--gg-surface-sunken); }
+.gg-rslider__btn .gg-icon { font-size: 16px; }
+.gg-rslider__dots { display: flex; gap: 6px; }
+.gg-rslider__dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gg-sand-600); border: 0; padding: 0; cursor: pointer; transition: background var(--gg-transition), transform var(--gg-transition); }
+.gg-rslider__dot.is-active { background: var(--gg-gold-500); transform: scale(1.3); }

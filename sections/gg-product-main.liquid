@@ -10,6 +10,8 @@
     assign has_real_options = true
   endif
   assign main_alt = product.featured_media.alt | default: product.title | escape
+  assign benefits = product.metafields.custom.benefits.value
+  assign slider_reviews = product.metafields.custom.reviews.value
 -%}
 
 <section class="gg-product gg-section gg-section--page" data-gg-product data-section-id="{{ section.id }}">
@@ -81,6 +83,38 @@
           {%- if section.settings.price_note_2 != blank -%}<span>{{ section.settings.price_note_2 }}</span>{%- endif -%}
         </div>
       </div>
+
+      {%- if section.settings.show_benefits and benefits != blank -%}
+        <ul class="gg-benefits" aria-label="Benefits">
+          {%- for line in benefits limit: 4 -%}
+            <li class="gg-benefits__item"><span class="gg-benefits__check">{% render 'gg-icon', icon: 'check' %}</span><span>{{ line }}</span></li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+
+      {%- if section.settings.show_review_slider and slider_reviews != blank and slider_reviews.size > 0 -%}
+        <div class="gg-rslider" data-gg-rslider data-gg-interval="{{ section.settings.slider_interval | times: 1000 }}">
+          <div class="gg-rslider__track" data-gg-rslider-track>
+            {%- for r in slider_reviews -%}
+              <figure class="gg-rslider__item" data-gg-rslider-item>
+                <div class="gg-rslider__head">
+                  <span class="gg-rslider__name">{{ r.name }}</span>
+                  {%- render 'gg-rating', value: r.stars, size: 13 -%}
+                </div>
+                <blockquote class="gg-rslider__body">{{ r.body }}</blockquote>
+                {%- if r.meta != blank -%}<figcaption class="gg-rslider__meta">{{ r.meta }}</figcaption>{%- endif -%}
+              </figure>
+            {%- endfor -%}
+          </div>
+          {%- if slider_reviews.size > 1 -%}
+            <div class="gg-rslider__nav">
+              <button type="button" class="gg-rslider__btn" data-gg-rslider-prev aria-label="Previous review">{% render 'gg-icon', icon: 'chevron-left' %}</button>
+              <div class="gg-rslider__dots" data-gg-rslider-dots></div>
+              <button type="button" class="gg-rslider__btn" data-gg-rslider-next aria-label="Next review">{% render 'gg-icon', icon: 'chevron-right' %}</button>
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
 
       <hr class="gg-rule">
 
@@ -179,6 +213,10 @@
     { "type": "header", "content": "Price notes" },
     { "type": "text", "id": "price_note_1", "label": "Note 1", "default": "Shown in [currency] · converted at checkout", "info": "[currency] is replaced with the active currency." },
     { "type": "text", "id": "price_note_2", "label": "Note 2", "default": "Shipping from €4,95 · exact cost shown at checkout for your country" },
+    { "type": "header", "content": "Benefits and reviews" },
+    { "type": "checkbox", "id": "show_benefits", "label": "Show benefit bullets (product metafield custom.benefits)", "default": true },
+    { "type": "checkbox", "id": "show_review_slider", "label": "Show review slider (product metafield custom.reviews)", "default": true },
+    { "type": "range", "id": "slider_interval", "label": "Auto-rotate every", "min": 0, "max": 15, "step": 1, "unit": "s", "default": 6, "info": "0 = no auto-rotate." },
     { "type": "header", "content": "Buy button" },
     { "type": "text", "id": "add_label", "label": "Add to bag label", "default": "Add to bag" },
     { "type": "checkbox", "id": "sticky_mobile", "label": "Sticky add-to-bag bar on phones", "default": true },

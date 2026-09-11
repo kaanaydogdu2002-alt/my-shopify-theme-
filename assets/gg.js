@@ -218,6 +218,56 @@
     });
   }
 
+
+  /* ---------------- Review slider (buy box) ---------------- */
+  function initReviewSlider() {
+    qsa('[data-gg-rslider]').forEach(function (root) {
+      if (root.dataset.ggInit) return;
+      root.dataset.ggInit = '1';
+      var track = qs('[data-gg-rslider-track]', root);
+      var items = qsa('[data-gg-rslider-item]', root);
+      var dotsWrap = qs('[data-gg-rslider-dots]', root);
+      var prev = qs('[data-gg-rslider-prev]', root);
+      var next = qs('[data-gg-rslider-next]', root);
+      var interval = parseInt(root.dataset.ggInterval || '0', 10);
+      if (!track || items.length < 2) return;
+      var index = 0, timer = null, dots = [];
+      if (dotsWrap) {
+        items.forEach(function (_, i) {
+          var d = document.createElement('button');
+          d.type = 'button'; d.className = 'gg-rslider__dot' + (i === 0 ? ' is-active' : '');
+          d.setAttribute('aria-label', 'Review ' + (i + 1));
+          d.addEventListener('click', function () { go(i, true); });
+          dotsWrap.appendChild(d); dots.push(d);
+        });
+      }
+      function go(i, user) {
+        index = (i + items.length) % items.length;
+        track.scrollTo({ left: items[index].offsetLeft - track.offsetLeft, behavior: 'smooth' });
+        dots.forEach(function (d, k) { d.classList.toggle('is-active', k === index); });
+        if (user) restart();
+      }
+      function restart() {
+        if (timer) clearInterval(timer);
+        if (interval > 0) timer = setInterval(function () { go(index + 1); }, interval);
+      }
+      if (prev) prev.addEventListener('click', function () { go(index - 1, true); });
+      if (next) next.addEventListener('click', function () { go(index + 1, true); });
+      var scrollT = null;
+      track.addEventListener('scroll', function () {
+        clearTimeout(scrollT);
+        scrollT = setTimeout(function () {
+          var w = items[0].offsetWidth + 16;
+          var i = Math.round(track.scrollLeft / w);
+          if (i !== index) { index = Math.max(0, Math.min(items.length - 1, i)); dots.forEach(function (d, k) { d.classList.toggle('is-active', k === index); }); }
+        }, 80);
+      }, { passive: true });
+      root.addEventListener('mouseenter', function () { if (timer) clearInterval(timer); });
+      root.addEventListener('mouseleave', restart);
+      restart();
+    });
+  }
+
   /* ---------------- Mark the current page in the nav ---------------- */
   function initNavState() {
     var path = window.location.pathname.replace(/\/$/, '');
@@ -234,11 +284,12 @@
     initSearch();
     initQty();
     initProduct();
+    initReviewSlider();
     initNavState();
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();
 
   /* Re-run for sections re-rendered inside the theme editor */
-  document.addEventListener('shopify:section:load', function () { initQty(); initProduct(); initDrawer(); initSearch(); });
+  document.addEventListener('shopify:section:load', function () { initQty(); initProduct(); initReviewSlider(); initDrawer(); initSearch(); });
 })();
