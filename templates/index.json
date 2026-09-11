@@ -70,7 +70,8 @@
         "show_payments": true,
         "payments_label": "Secure checkout with",
         "show_rating": true,
-        "placeholder_rating": 0
+        "placeholder_rating": 4.8,
+        "placeholder_count": 126
       }
     },
     "reviews": {
@@ -100,7 +101,7 @@
           "type": "review",
           "settings": {
             "stars": 5,
-            "body": "Wrote on a Sunday about a delayed parcel and had a real answer on Monday morning. The lamp itself is heavier and better made than the photos suggest.",
+            "body": "Had a question about a parcel and got a real answer from a person within a working day. The lamp itself is heavier and better made than the photos suggest.",
             "who": "Aoife, Ireland",
             "verified": true,
             "note": ""

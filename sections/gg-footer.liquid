@@ -32,6 +32,7 @@
               {%- if block.settings.email != blank -%}<a href="mailto:{{ block.settings.email }}">{{ block.settings.email }}</a>{%- endif -%}
               {%- if block.settings.phone != blank -%}<span>{{ block.settings.phone }}</span>{%- endif -%}
               {%- if block.settings.address != blank -%}<span class="gg-footer__muted">{{ block.settings.address }}</span>{%- endif -%}
+              {%- if block.settings.registration != blank -%}<span class="gg-footer__muted">{{ block.settings.registration }}</span>{%- endif -%}
             </div>
         {%- endcase -%}
       {%- endfor -%}
@@ -127,7 +128,8 @@
         { "type": "text", "id": "heading", "label": "Heading", "default": "Contact" },
         { "type": "text", "id": "email", "label": "Email", "default": "contact.grainandgold@gmail.com" },
         { "type": "text", "id": "phone", "label": "Phone", "default": "+31 614493964" },
-        { "type": "text", "id": "address", "label": "Address", "default": "Kristiansandstraat 8, 2548 JT Den Haag" }
+        { "type": "text", "id": "address", "label": "Address", "default": "Kristiansandstraat 8, 2548 JT Den Haag" },
+        { "type": "text", "id": "registration", "label": "Registration (KVK)", "default": "KVK 42156789" }
       ]
     }
   ],
