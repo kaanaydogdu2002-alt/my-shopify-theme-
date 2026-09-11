@@ -53,20 +53,11 @@
             "title": "Makers we have met",
             "body": "Every workshop is named on its product page. We visit before the first order and pay in full within fourteen days."
           }
-        },
-        "v3": {
-          "type": "card",
-          "settings": {
-            "icon": "shield-check",
-            "title": "We answer for it",
-            "body": "Two-year warranty, thirty days to return, and a reply from a person within one working day. No ticket numbers."
-          }
         }
       },
       "block_order": [
         "v1",
-        "v2",
-        "v3"
+        "v2"
       ],
       "settings": {
         "eyebrow": "Why Grain and Gold",
