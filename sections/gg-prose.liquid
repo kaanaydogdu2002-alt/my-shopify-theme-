@@ -11,12 +11,19 @@
   endif
 -%}
 <section class="gg-prose gg-section {{ bg_class }}{% if section.settings.rule_top %} gg-section--rule-top{% endif %}">
-  <div class="gg-container {% if section.settings.narrow %}gg-container--narrow{% endif %} gg-section__inner gg-prose__inner{% if section.settings.align == 'center' %} gg-prose__inner--center{% endif %}">
+  <div class="gg-container {% if section.settings.narrow %}gg-container--narrow{% endif %} gg-section__inner gg-prose__inner{% if section.settings.align == 'center' %} gg-prose__inner--center{% endif %}{% if section.settings.tall %} gg-prose__inner--tall{% endif %}">
     {%- if section.settings.eyebrow != blank -%}<span class="gg-eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
     {%- if section.settings.heading != blank -%}<{{ heading_tag }} class="{{ heading_class }}" style="max-width:{{ section.settings.heading_measure }}ch">{{ section.settings.heading }}</{{ heading_tag }}>{%- endif -%}
     {%- if section.settings.text != blank -%}<div class="gg-rte gg-body{% unless section.settings.narrow %} gg-measure{% endunless %}">{{ section.settings.text }}</div>{%- endif -%}
-    {%- if section.settings.button_label != blank -%}
-      <a href="{{ section.settings.button_link }}" class="gg-btn">{{ section.settings.button_label }}</a>
+    {%- if section.settings.button_label != blank or section.settings.button2_label != blank -%}
+      <div class="gg-cta__actions{% if section.settings.align != 'center' %} gg-cta__actions--start{% endif %}">
+        {%- if section.settings.button_label != blank -%}
+          <a href="{{ section.settings.button_link }}" class="gg-btn gg-btn--lg">{{ section.settings.button_label }}{% if section.settings.button_arrow %}{% render 'gg-icon', icon: 'arrow-right' %}{% endif %}</a>
+        {%- endif -%}
+        {%- if section.settings.button2_label != blank -%}
+          <a href="{{ section.settings.button2_link }}" class="gg-btn gg-btn--lg gg-btn--secondary">{{ section.settings.button2_label }}</a>
+        {%- endif -%}
+      </div>
     {%- endif -%}
   </div>
 </section>
@@ -33,6 +40,10 @@
     { "type": "richtext", "id": "text", "label": "Text", "default": "<p>We keep the range at six. Adding a seventh means one has to go, and that rule has saved us from a lot of mediocre products.</p>" },
     { "type": "text", "id": "button_label", "label": "Button label" },
     { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "checkbox", "id": "button_arrow", "label": "Arrow on the first button", "default": false },
+    { "type": "text", "id": "button2_label", "label": "Second button label (outlined)" },
+    { "type": "url", "id": "button2_link", "label": "Second button link" },
+    { "type": "checkbox", "id": "tall", "label": "Extra vertical space", "default": false },
     { "type": "checkbox", "id": "narrow", "label": "Narrow column (760px)", "default": true },
     { "type": "select", "id": "align", "label": "Alignment", "default": "left", "options": [ { "value": "left", "label": "Left" }, { "value": "center", "label": "Center" } ] },
     { "type": "select", "id": "background", "label": "Background", "default": "page", "options": [ { "value": "page", "label": "Cream" }, { "value": "card", "label": "White" } ] },

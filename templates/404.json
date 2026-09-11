@@ -1,1 +1,76 @@
-{"sections":{"main":{"type":"main-404","settings":{}}},"order":["main"]}
+{
+  "sections": {
+    "trust": {
+      "type": "gg-trust-bar",
+      "blocks": {
+        "reviews": {
+          "type": "item",
+          "settings": {
+            "icon": "star-filled",
+            "icon_class": "gg-icon--gold",
+            "text": "4,7 from 312 reviews",
+            "text_mobile": "4,7 · 312 reviews"
+          }
+        },
+        "secure": {
+          "type": "item",
+          "settings": {
+            "icon": "lock",
+            "icon_class": "",
+            "text": "Secure checkout",
+            "text_mobile": ""
+          }
+        },
+        "shipping": {
+          "type": "item",
+          "settings": {
+            "icon": "truck",
+            "icon_class": "",
+            "text": "Tracked worldwide shipping",
+            "text_mobile": "Tracked worldwide"
+          }
+        },
+        "returns": {
+          "type": "item",
+          "settings": {
+            "icon": "rotate",
+            "icon_class": "",
+            "text": "30-day returns",
+            "text_mobile": ""
+          }
+        }
+      },
+      "block_order": [
+        "reviews",
+        "secure",
+        "shipping",
+        "returns"
+      ],
+      "settings": {}
+    },
+    "main": {
+      "type": "gg-prose",
+      "settings": {
+        "eyebrow": "404",
+        "heading": "This page has wandered off",
+        "heading_level": "h1",
+        "heading_measure": 18,
+        "text": "<p>The page you're looking for doesn't exist, or the link has changed. Everything we sell is on one page, so you're never far from it.</p>",
+        "button_label": "Shop the range",
+        "button_link": "/collections/all",
+        "button_arrow": true,
+        "button2_label": "Contact us",
+        "button2_link": "/pages/contact",
+        "tall": true,
+        "narrow": true,
+        "align": "center",
+        "background": "page",
+        "rule_top": false
+      }
+    }
+  },
+  "order": [
+    "trust",
+    "main"
+  ]
+}
