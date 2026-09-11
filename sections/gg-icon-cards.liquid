@@ -1,4 +1,12 @@
 {%- liquid
+  assign items = blank
+  if section.settings.product_source and product != blank
+    assign items = product.metafields.custom.reasons.value
+  endif
+  assign hide = false
+  if section.settings.product_source and items == blank
+    assign hide = true
+  endif
   assign bg_class = 'gg-section--card'
   assign card_class = ' gg-card--page'
   if section.settings.background == 'page'
@@ -6,20 +14,34 @@
     assign card_class = ''
   endif
 -%}
+{%- unless hide -%}
 <section class="gg-section {{ bg_class }} gg-section--rule-top">
   <div class="gg-container gg-section__inner" style="display:flex;flex-direction:column;gap:{% if section.settings.align == 'center' %}32px{% else %}28px{% endif %}">
     {%- render 'gg-heading', eyebrow: section.settings.eyebrow, title: section.settings.heading, lead: section.settings.lead, align: section.settings.align -%}
-    <div class="gg-grid gg-grid--3{% if section.blocks.size == 2 %} gg-grid--two{% endif %}">
-      {%- for block in section.blocks -%}
-        <div class="gg-card{{ card_class }}" {{ block.shopify_attributes }}>
-          {%- if block.settings.icon != 'none' -%}<span class="gg-card__icon">{% render 'gg-icon', icon: block.settings.icon %}</span>{%- endif -%}
-          <h3 class="gg-card__title">{{ block.settings.title }}</h3>
-          <p class="gg-card__body">{{ block.settings.body }}</p>
-        </div>
-      {%- endfor -%}
-    </div>
+    {%- if items != blank -%}
+      <div class="gg-grid gg-grid--3{% if items.size == 2 %} gg-grid--two{% endif %}">
+        {%- for item in items limit: 6 -%}
+          <div class="gg-card{{ card_class }}">
+            {%- if item.icon != blank and item.icon != 'none' -%}<span class="gg-card__icon">{% render 'gg-icon', icon: item.icon %}</span>{%- endif -%}
+            <h3 class="gg-card__title">{{ item.title }}</h3>
+            <p class="gg-card__body">{{ item.body }}</p>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- else -%}
+      <div class="gg-grid gg-grid--3{% if section.blocks.size == 2 %} gg-grid--two{% endif %}">
+        {%- for block in section.blocks -%}
+          <div class="gg-card{{ card_class }}" {{ block.shopify_attributes }}>
+            {%- if block.settings.icon != 'none' -%}<span class="gg-card__icon">{% render 'gg-icon', icon: block.settings.icon %}</span>{%- endif -%}
+            <h3 class="gg-card__title">{{ block.settings.title }}</h3>
+            <p class="gg-card__body">{{ block.settings.body }}</p>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
   </div>
 </section>
+{%- endunless -%}
 
 {% schema %}
 {
@@ -31,7 +53,8 @@
     { "type": "text", "id": "heading", "label": "Heading", "default": "Three reasons it stays on the counter" },
     { "type": "text", "id": "lead", "label": "Lead" },
     { "type": "select", "id": "align", "label": "Heading alignment", "default": "center", "options": [ { "value": "left", "label": "Left" }, { "value": "center", "label": "Center" } ] },
-    { "type": "select", "id": "background", "label": "Background", "default": "card", "options": [ { "value": "card", "label": "White" }, { "value": "page", "label": "Cream" } ] }
+    { "type": "select", "id": "background", "label": "Background", "default": "card", "options": [ { "value": "card", "label": "White" }, { "value": "page", "label": "Cream" } ] },
+    { "type": "checkbox", "id": "product_source", "label": "On product pages, use the product's reasons metafield", "default": false, "info": "Reads custom.reasons and hides the section when it is empty; the blocks below are ignored." }
   ],
   "blocks": [
     {

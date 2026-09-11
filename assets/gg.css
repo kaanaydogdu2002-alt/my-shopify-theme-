@@ -711,3 +711,10 @@ body.gg-has-sticky-buy { padding-bottom: 76px; }
 
 /* Icon cards: two cards share the row evenly */
 @media screen and (min-width: 750px) { .gg-grid--3.gg-grid--two { grid-template-columns: repeat(2, 1fr); } }
+
+/* Solid light button for dark (inverse) sections */
+.gg-btn--light { background: var(--gg-sand-100); color: var(--gg-ink-800); border-color: var(--gg-sand-100); }
+.gg-btn--light:hover { background: var(--gg-sand-050); color: var(--gg-ink-900); }
+.gg-product__rating-link { display: inline-flex; text-decoration: none; color: inherit; border-radius: var(--gg-radius-xs); }
+.gg-product__rating-link:hover .gg-rating { color: var(--gg-ink-800); }
+.gg-product__rating-link:focus-visible { outline: none; box-shadow: var(--gg-focus); }

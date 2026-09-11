@@ -1,24 +1,55 @@
+{%- liquid
+  assign data = blank
+  if section.settings.product_source and product != blank
+    assign data = product.metafields.custom.included.value
+  endif
+  assign hide = false
+  if section.settings.product_source
+    if data == blank or data.items == blank
+      assign hide = true
+    endif
+  endif
+  assign eyebrow = section.settings.eyebrow
+  assign heading = section.settings.heading
+  assign image_note = section.settings.image_note
+  if data != blank
+    assign eyebrow = data.eyebrow | default: section.settings.eyebrow
+    assign heading = data.heading | default: section.settings.heading
+    assign image_note = data.image_note | default: section.settings.image_note
+  endif
+-%}
+{%- unless hide -%}
 <section class="gg-section gg-section--page gg-section--rule-top">
   <div class="gg-container gg-section__inner">
     <div class="gg-split">
       <div class="gg-split__text">
-        {%- if section.settings.eyebrow != blank -%}<span class="gg-eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
-        {%- if section.settings.heading != blank -%}<h2 class="gg-h2" style="max-width:16ch">{{ section.settings.heading }}</h2>{%- endif -%}
+        {%- if eyebrow != blank -%}<span class="gg-eyebrow">{{ eyebrow }}</span>{%- endif -%}
+        {%- if heading != blank -%}<h2 class="gg-h2" style="max-width:16ch">{{ heading }}</h2>{%- endif -%}
         <div class="gg-steps">
-          {%- for block in section.blocks -%}
-            <div class="gg-step" {{ block.shopify_attributes }}>
-              <span class="gg-step__n">{{ forloop.index }}</span>
-              <span class="gg-step__text"><strong>{{ block.settings.title }}</strong>{% if block.settings.body != blank %} — {{ block.settings.body }}{% endif %}</span>
-            </div>
-          {%- endfor -%}
+          {%- if data != blank -%}
+            {%- for item in data.items limit: 8 -%}
+              <div class="gg-step">
+                <span class="gg-step__n">{{ forloop.index }}</span>
+                <span class="gg-step__text"><strong>{{ item.title }}</strong>{% if item.body != blank %} — {{ item.body }}{% endif %}</span>
+              </div>
+            {%- endfor -%}
+          {%- else -%}
+            {%- for block in section.blocks -%}
+              <div class="gg-step" {{ block.shopify_attributes }}>
+                <span class="gg-step__n">{{ forloop.index }}</span>
+                <span class="gg-step__text"><strong>{{ block.settings.title }}</strong>{% if block.settings.body != blank %} — {{ block.settings.body }}{% endif %}</span>
+              </div>
+            {%- endfor -%}
+          {%- endif -%}
         </div>
       </div>
       <div class="gg-split__media">
-        {%- render 'gg-media', image: section.settings.image, ratio: '4x5', placeholder: section.settings.image_note, sizes: '(min-width: 990px) 560px, 100vw' -%}
+        {%- render 'gg-media', image: section.settings.image, ratio: '4x5', placeholder: image_note, sizes: '(min-width: 990px) 560px, 100vw' -%}
       </div>
     </div>
   </div>
 </section>
+{%- endunless -%}
 
 {% schema %}
 {
@@ -29,7 +60,8 @@
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "What is included" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Two pieces, one method, four minutes" },
     { "type": "image_picker", "id": "image", "label": "Image" },
-    { "type": "text", "id": "image_note", "label": "Placeholder note", "default": "In-use image — cone seated on the carafe, kettle mid-pour" }
+    { "type": "text", "id": "image_note", "label": "Placeholder note", "default": "In-use image — cone seated on the carafe, kettle mid-pour" },
+    { "type": "checkbox", "id": "product_source", "label": "On product pages, use the product's included metafield", "default": false, "info": "Reads custom.included and hides the section when it is empty; the blocks below are ignored." }
   ],
   "blocks": [
     {

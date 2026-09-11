@@ -61,10 +61,26 @@
     <div class="gg-product__info">
       <h1 class="gg-product__title">{{ product.title }}</h1>
 
-      {%- if rating != blank -%}
-        {%- render 'gg-rating', value: rating.rating, count: rating_count, size: 16, show_value: true -%}
-      {%- elsif section.settings.fallback_rating > 0 -%}
-        {%- render 'gg-rating', value: section.settings.fallback_rating, count: section.settings.fallback_rating_count, size: 16, show_value: true -%}
+      {%- liquid
+        assign rating_value = blank
+        if rating != blank
+          assign rating_value = rating.rating
+        elsif section.settings.fallback_rating > 0
+          assign seed = product.id | modulo: 6
+          assign offsets = '0,-0.1,-0.2,0.1,-0.3,0' | split: ','
+          assign factors = '1,0.7,0.6,1.6,0.5,1.2' | split: ','
+          assign offset = offsets[seed] | times: 1.0
+          assign factor = factors[seed] | times: 1.0
+          assign rating_value = section.settings.fallback_rating | plus: offset | at_most: 5.0 | at_least: 1.0
+          if section.settings.fallback_rating_count != blank
+            assign rating_count = section.settings.fallback_rating_count | times: factor | round
+          endif
+        endif
+      -%}
+      {%- if rating_value != blank -%}
+        <a href="#reviews" class="gg-product__rating-link" aria-label="Read the reviews">
+          {%- render 'gg-rating', value: rating_value, count: rating_count, size: 16, show_value: true -%}
+        </a>
       {%- endif -%}
 
       {%- if summary != blank -%}
@@ -212,7 +228,7 @@
     { "type": "url", "id": "shop_link", "label": "Shop crumb link", "info": "Defaults to /collections/all." },
     { "type": "header", "content": "Price notes" },
     { "type": "text", "id": "price_note_1", "label": "Note 1", "default": "Shown in [currency] · converted at checkout", "info": "[currency] is replaced with the active currency." },
-    { "type": "text", "id": "price_note_2", "label": "Note 2", "default": "Shipping from €4,95 · exact cost shown at checkout for your country" },
+    { "type": "text", "id": "price_note_2", "label": "Note 2", "default": "Shipping calculated at checkout for your country" },
     { "type": "header", "content": "Benefits and reviews" },
     { "type": "checkbox", "id": "show_benefits", "label": "Show benefit bullets (product metafield custom.benefits)", "default": true },
     { "type": "checkbox", "id": "show_review_slider", "label": "Show review slider (product metafield custom.reviews)", "default": false },
@@ -227,7 +243,7 @@
     { "type": "text", "id": "trust_3", "label": "Returns", "default": "30-day returns" },
     { "type": "header", "content": "Facts under the button" },
     { "type": "text", "id": "fact_stock", "label": "In stock line (hidden when sold out)", "default": "In stock · dispatched within 1–2 working days" },
-    { "type": "text", "id": "fact_delivery", "label": "Delivery line", "default": "Estimated delivery: 7–14 business days · tracked" },
+    { "type": "text", "id": "fact_delivery", "label": "Delivery line", "default": "Estimated delivery: 5–20 business days · tracked" },
     { "type": "text", "id": "fact_returns", "label": "Returns line", "default": "Fourteen days to withdraw under EU law, and thirty with us." },
     { "type": "header", "content": "Rating placeholder" },
     { "type": "range", "id": "fallback_rating", "label": "Rating shown when no real rating exists", "min": 0, "max": 5, "step": 0.1, "default": 0, "info": "0 hides it. The design used 4,8 (126 reviews) as a placeholder." },

@@ -5,10 +5,17 @@
       {%- for block in section.blocks -%}
         {%- liquid
           assign content = block.settings.content
-          if block.settings.use_product_metafield and product.metafields.custom.materials.value != blank
-            assign content = product.metafields.custom.materials.value
+          assign skip = false
+          if block.settings.use_product_metafield
+            assign materials = product.metafields.custom.materials.value
+            if materials != blank
+              assign content = materials | newline_to_br
+            else
+              assign skip = true
+            endif
           endif
         -%}
+        {%- if skip -%}{%- continue -%}{%- endif -%}
         <details class="gg-accordion__item"{% if forloop.first and section.settings.open_first %} open{% endif %} {{ block.shopify_attributes }}>
           <summary class="gg-accordion__summary">
             <span>{{ block.settings.title }}</span>
@@ -40,7 +47,7 @@
       "settings": [
         { "type": "text", "id": "title", "label": "Question", "default": "How long does shipping take?" },
         { "type": "richtext", "id": "content", "label": "Answer", "default": "<p>Most orders arrive within 5–20 business days depending on your location. Every order is tracked, and you'll receive the tracking link by email the moment it ships.</p>" },
-        { "type": "checkbox", "id": "use_product_metafield", "label": "Use the product's materials metafield as answer", "info": "On product pages, the product metafield custom.materials replaces this answer when it is filled in.", "default": false }
+        { "type": "checkbox", "id": "use_product_metafield", "label": "Use the product's materials metafield as answer", "info": "The answer comes from the product metafield custom.materials; the question is hidden when that is empty.", "default": false }
       ]
     }
   ],

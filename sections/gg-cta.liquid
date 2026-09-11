@@ -20,12 +20,12 @@
     <div class="gg-cta__actions">
       {%- if section.settings.button_label != blank -%}
         {%- if section.settings.button_adds_to_bag and product != blank -%}
-          <button type="button" class="gg-btn gg-btn--lg gg-btn--gold" data-gg-submit-product-form>
+          <button type="button" class="gg-btn gg-btn--lg{% if inverse %} gg-btn--light{% else %} gg-btn--gold{% endif %}" data-gg-submit-product-form>
             {%- render 'gg-icon', icon: 'shopping-bag' -%}
             <span>{{ section.settings.button_label }} · <span data-gg-price>{{ product.selected_or_first_available_variant.price | money }}</span></span>
           </button>
         {%- else -%}
-          <a href="{{ section.settings.button_link }}" class="gg-btn gg-btn--lg{% if inverse %} gg-btn--gold{% endif %}">{{ section.settings.button_label }}{% unless inverse %}{% render 'gg-icon', icon: 'arrow-right' %}{% endunless %}</a>
+          <a href="{{ section.settings.button_link }}" class="gg-btn gg-btn--lg{% if inverse %} gg-btn--light{% endif %}">{{ section.settings.button_label }}{% unless inverse %}{% render 'gg-icon', icon: 'arrow-right' %}{% endunless %}</a>
         {%- endif -%}
       {%- endif -%}
       {%- if section.settings.button2_label != blank -%}

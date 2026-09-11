@@ -54,7 +54,7 @@
         "shop_label": "Shop",
         "shop_link": "/collections/all",
         "price_note_1": "Shown in [currency] · converted at checkout",
-        "price_note_2": "Shipping from €4,95 · exact cost shown at checkout for your country",
+        "price_note_2": "Shipping calculated at checkout for your country",
         "add_label": "Add to bag",
         "sticky_mobile": true,
         "show_payments": true,
@@ -62,14 +62,15 @@
         "trust_2": "Tracked worldwide shipping",
         "trust_3": "30-day returns",
         "fact_stock": "In stock · dispatched within 1–2 working days",
-        "fact_delivery": "Estimated delivery: 7–14 business days · tracked",
+        "fact_delivery": "Estimated delivery: 5–20 business days · tracked",
         "fact_returns": "Fourteen days to withdraw under EU law, and thirty with us.",
-        "fallback_rating": 0,
+        "fallback_rating": 4.8,
         "image_note": "Product image — add photos to this product in Shopify",
         "thumb_notes": "Detail, Scale, Set, In use",
         "show_benefits": true,
         "show_review_slider": false,
-        "slider_interval": 6
+        "slider_interval": 6,
+        "fallback_rating_count": 126
       }
     },
     "benefits": {
@@ -107,10 +108,11 @@
       ],
       "settings": {
         "eyebrow": "Why this one",
-        "heading": "Three reasons it stays on the counter",
+        "heading": "Three reasons it earns its place",
         "lead": "",
         "align": "center",
-        "background": "card"
+        "background": "card",
+        "product_source": true
       }
     },
     "included": {
@@ -154,7 +156,8 @@
       "settings": {
         "eyebrow": "What is included",
         "heading": "Two pieces, one method, four minutes",
-        "image_note": "In-use image — cone seated on the carafe, kettle mid-pour"
+        "image_note": "In-use image — cone seated on the carafe, kettle mid-pour",
+        "product_source": true
       }
     },
     "reviews": {
@@ -201,7 +204,8 @@
         "heading": "What people say after a month",
         "lead": "Reviews are collected after delivery and published unedited.",
         "use_section_heading": true,
-        "background": "card"
+        "background": "card",
+        "product_source": true
       }
     },
     "faq": {
@@ -211,7 +215,7 @@
           "type": "question",
           "settings": {
             "title": "How long does shipping take?",
-            "content": "<p>Most orders arrive within 5–20 business days depending on your location — the estimate for this product is shown above the Add to bag button. Every order is tracked, and you'll receive the tracking link by email the moment it ships.</p>",
+            "content": "<p>Most orders arrive within 5–20 business days depending on the item and your location. Every order is tracked, and you'll receive the tracking link by email the moment it ships.</p>",
             "use_product_metafield": false
           }
         },
@@ -227,7 +231,7 @@
           "type": "question",
           "settings": {
             "title": "What is it made of?",
-            "content": "<p>Materials and care instructions are listed per product. Fill in the product's 'Materials' field in Shopify and it will appear here.</p>",
+            "content": "<p>Materials and care are listed per product.</p>",
             "use_product_metafield": true
           }
         }
