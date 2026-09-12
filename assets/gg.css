@@ -757,9 +757,11 @@ body.gg-has-sticky-buy { padding-bottom: 76px; }
   .gg-header__inner { gap: 8px; }
   .gg-header__side { gap: 4px; flex: none; min-width: 72px; }
   .gg-header__icon { width: 34px; }
-  .gg-header__brand.gg-hide-desktop { flex: 1 1 auto; min-width: 0; justify-content: center; overflow: hidden; }
+  .gg-header__brand.gg-hide-desktop { flex: 1 1 0; min-width: 0; justify-content: center; container-type: inline-size; }
   .gg-header__brand.gg-hide-desktop .gg-header__wordmark { font-size: clamp(15px, 4.8vw, calc(20px * var(--gg-brand-scale, 1))); }
-  .gg-header__brand.gg-hide-desktop img, .gg-header__brand.gg-hide-desktop svg { width: clamp(24px, 7.5vw, calc(28px * var(--gg-brand-scale, 1))); height: clamp(24px, 7.5vw, calc(28px * var(--gg-brand-scale, 1))); }
+  /* Size the wordmark from the space actually left between the icons, so it is never clipped */
+  .gg-header__brand.gg-hide-desktop .gg-header__wordmark { font-size: clamp(12px, calc((100cqw - 42px) / 7.6), calc(20px * var(--gg-brand-scale, 1))); }
+  .gg-header__brand.gg-hide-desktop img, .gg-header__brand.gg-hide-desktop svg { width: clamp(22px, 7.5vw, calc(28px * var(--gg-brand-scale, 1))); height: clamp(22px, 7.5vw, calc(28px * var(--gg-brand-scale, 1))); }
 
   /* Product cards: rating stays inside the card, review count on its own line */
   .gg-pcard .gg-rating { flex-wrap: wrap; column-gap: 6px; row-gap: 2px; }
@@ -778,7 +780,5 @@ body.gg-has-sticky-buy { padding-bottom: 76px; }
   .gg-header__side { min-width: 62px; }
   .gg-header__icon { width: 30px; }
   .gg-header__brand.gg-hide-desktop { gap: 6px; }
-  .gg-header__brand.gg-hide-desktop .gg-header__wordmark { font-size: 15px; letter-spacing: 0.04em; }
-  .gg-header__brand.gg-hide-desktop img, .gg-header__brand.gg-hide-desktop svg { width: 22px; height: 22px; }
   .gg-channel__value { font-size: 13px; }
 }

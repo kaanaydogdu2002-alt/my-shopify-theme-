@@ -51,7 +51,7 @@
         "heading": "Write to us",
         "text": "A real person reads every message. If it is about an order, add the order number and we can answer in one reply instead of three.",
         "form_heading": "Send a message",
-        "form_note": "Expect a reply within one working day.",
+        "form_note": "",
         "label_name": "Name",
         "placeholder_name": "Your name",
         "label_email": "Email",
