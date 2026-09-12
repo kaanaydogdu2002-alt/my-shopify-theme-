@@ -41,7 +41,7 @@
         "tagline": "A small, curated home and lifestyle shop. We reply within one working day.",
         "legal": "KVK 42156789",
         "show_payments": false,
-        "show_policy_links": true,
+        "show_policy_links": false,
         "show_locale": true
       }
     }

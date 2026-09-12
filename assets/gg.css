@@ -385,7 +385,7 @@ body.gg-drawer-open { overflow: hidden; }
    Trust bar
    -------------------------------------------------------------------------- */
 .gg-trust { background: var(--gg-surface-card); border-bottom: 1px solid var(--gg-border); }
-.gg-trust__inner { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px; padding: 10px 0; font-size: 11px; color: var(--gg-text-body); }
+.gg-trust__inner { display: grid; grid-template-columns: repeat(2, auto); justify-content: center; gap: 8px 28px; padding: 10px 0; font-size: 11px; color: var(--gg-text-body); }
 .gg-trust__item { display: flex; align-items: center; gap: 6px; }
 .gg-trust__item .gg-icon { font-size: 13px; color: var(--gg-ink-800); }
 .gg-trust__item .gg-icon--gold { color: var(--gg-gold-500); }
@@ -748,3 +748,37 @@ body.gg-has-sticky-buy { padding-bottom: 76px; }
 .gg-cart-placeholder { width: 100px; aspect-ratio: 1 / 1; display: flex; align-items: center; justify-content: center; background: var(--gg-surface-sunken); border: 1px solid var(--gg-border); border-radius: var(--gg-radius-md); color: var(--gg-text-quiet); }
 .gg-cart-placeholder .gg-icon { font-size: 22px; }
 @media screen and (min-width: 750px) { .gg-cart-placeholder { width: 150px; } }
+
+/* --------------------------------------------------------------------------
+   Mobile polish (phones and small tablets, < 990px)
+   -------------------------------------------------------------------------- */
+@media screen and (max-width: 989px) {
+  /* Header: brand fits between the icons and never runs under the bag icon */
+  .gg-header__inner { gap: 8px; }
+  .gg-header__side { gap: 4px; flex: none; min-width: 72px; }
+  .gg-header__icon { width: 34px; }
+  .gg-header__brand.gg-hide-desktop { flex: 1 1 auto; min-width: 0; justify-content: center; overflow: hidden; }
+  .gg-header__brand.gg-hide-desktop .gg-header__wordmark { font-size: clamp(15px, 4.8vw, calc(20px * var(--gg-brand-scale, 1))); }
+  .gg-header__brand.gg-hide-desktop img, .gg-header__brand.gg-hide-desktop svg { width: clamp(24px, 7.5vw, calc(28px * var(--gg-brand-scale, 1))); height: clamp(24px, 7.5vw, calc(28px * var(--gg-brand-scale, 1))); }
+
+  /* Product cards: rating stays inside the card, review count on its own line */
+  .gg-pcard .gg-rating { flex-wrap: wrap; column-gap: 6px; row-gap: 2px; }
+
+  /* Product page: nothing wider than the screen */
+  .gg-product__layout > * { min-width: 0; }
+  .gg-product__buy { flex-wrap: wrap; }
+  .gg-product__buy .gg-btn { flex: 1 1 100%; min-width: 0; }
+  .gg-sticky-buy .gg-btn { min-width: 0; padding-left: 16px; padding-right: 16px; }
+
+  /* Contact cards: the email address on one line */
+  .gg-channel { padding: 18px 16px; }
+  .gg-channel__value { font-size: 14px; }
+}
+@media screen and (max-width: 359px) {
+  .gg-header__side { min-width: 62px; }
+  .gg-header__icon { width: 30px; }
+  .gg-header__brand.gg-hide-desktop { gap: 6px; }
+  .gg-header__brand.gg-hide-desktop .gg-header__wordmark { font-size: 15px; letter-spacing: 0.04em; }
+  .gg-header__brand.gg-hide-desktop img, .gg-header__brand.gg-hide-desktop svg { width: 22px; height: 22px; }
+  .gg-channel__value { font-size: 13px; }
+}
