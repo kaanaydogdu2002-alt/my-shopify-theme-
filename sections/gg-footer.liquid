@@ -1,6 +1,10 @@
 {%- liquid
   assign country_label = localization.country.name | default: shop.address.country
   assign currency_label = localization.country.currency.iso_code | default: cart.currency.iso_code
+  assign brand_name = settings.gg_brand_name | strip
+  if brand_name == blank
+    assign brand_name = shop.name
+  endif
 -%}
 <footer class="gg-footer gg-section gg-section--inverse" role="contentinfo">
   <div class="gg-container gg-footer__top">
@@ -8,7 +12,7 @@
       <div class="gg-footer__col gg-footer__col--brand">
         <div class="gg-footer__brand">
           {%- render 'gg-logo-mark', inverse: true, size: 26 -%}
-          <span class="gg-footer__wordmark">{{ shop.name }}</span>
+          <span class="gg-footer__wordmark">{% render 'gg-wordmark' %}</span>
         </div>
         {%- if section.settings.tagline != blank -%}
           <p class="gg-footer__tagline">{{ section.settings.tagline }}</p>
@@ -45,7 +49,7 @@
     {%- endif -%}
 
     <div class="gg-footer__legal">
-      <span>{{ shop.name }}{% if section.settings.legal != blank %} · {{ section.settings.legal }}{% endif %} · © {{ 'now' | date: '%Y' }}</span>
+      <span>{{ brand_name }}{% if section.settings.legal != blank %} · {{ section.settings.legal }}{% endif %} · © {{ 'now' | date: '%Y' }}</span>
       {%- if section.settings.show_policy_links -%}
         <span class="gg-hide-desktop">
           {%- for policy in shop.policies -%}

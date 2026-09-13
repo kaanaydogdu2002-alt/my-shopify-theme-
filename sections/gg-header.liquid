@@ -16,13 +16,13 @@
         </button>
         <a href="{{ routes.root_url }}" class="gg-header__brand gg-hide-mobile">
           {%- render 'gg-logo-mark', size: 34 -%}
-          <span class="gg-header__wordmark">{{ shop.name }}</span>
+          <span class="gg-header__wordmark">{% render 'gg-wordmark' %}</span>
         </a>
       </div>
 
       <a href="{{ routes.root_url }}" class="gg-header__brand gg-hide-desktop">
         {%- render 'gg-logo-mark', size: 28 -%}
-        <span class="gg-header__wordmark">{{ shop.name }}</span>
+        <span class="gg-header__wordmark">{% render 'gg-wordmark' %}</span>
       </a>
 
       {%- if menu != blank -%}
@@ -82,7 +82,7 @@
     <div class="gg-drawer__head">
       <a href="{{ routes.root_url }}" class="gg-header__brand">
         {%- render 'gg-logo-mark', size: 28 -%}
-        <span class="gg-header__wordmark">{{ shop.name }}</span>
+        <span class="gg-header__wordmark">{% render 'gg-wordmark' %}</span>
       </a>
       <button type="button" class="gg-header__icon" aria-label="{{ 'accessibility.close' | t }}" data-gg-drawer-close>
         {%- render 'gg-icon', icon: 'x' -%}

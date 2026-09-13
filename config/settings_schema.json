@@ -38,6 +38,17 @@
     "settings": [
       {
         "type": "header",
+        "content": "Brand"
+      },
+      {
+        "type": "text",
+        "id": "gg_brand_name",
+        "label": "Brand name (wordmark)",
+        "default": "Mantel and Moss",
+        "info": "Shown in the header, menu and footer. The word \"and\" is set smaller, as in the wordmark. Leave empty to use the store name."
+      },
+      {
+        "type": "header",
         "content": "Payment icons"
       },
       {

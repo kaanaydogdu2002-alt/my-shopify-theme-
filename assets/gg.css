@@ -321,7 +321,7 @@ h1, h2, h3, .h0, .h1, .h2, .h3 {
 .gg-header__side--end { justify-content: flex-end; }
 .gg-header__brand { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--gg-ink-800); min-width: 0; }
 .gg-header__brand img, .gg-header__brand svg { width: calc(28px * var(--gg-brand-scale, 1)); height: calc(28px * var(--gg-brand-scale, 1)); display: block; flex: none; }
-.gg-header__wordmark { font-family: var(--gg-serif); font-size: calc(20px * var(--gg-brand-scale, 1)); letter-spacing: 0.08em; color: var(--gg-ink-800); white-space: nowrap; line-height: 1; }
+.gg-header__wordmark { font-family: var(--gg-serif); font-size: calc(20px * var(--gg-brand-scale, 1)); letter-spacing: 0.12em; color: var(--gg-ink-800); white-space: nowrap; line-height: 1; }
 .gg-header__nav { display: none; }
 .gg-header__icon { position: relative; display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; padding: 0; margin: 0; background: transparent; border: 0; color: var(--gg-ink-800); cursor: pointer; text-decoration: none; }
 .gg-header__icon .gg-icon { font-size: 21px; }
@@ -489,7 +489,7 @@ body.gg-drawer-open { overflow: hidden; }
 .gg-footer__top { padding-top: 32px; padding-bottom: 0; }
 .gg-footer__brand { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
 .gg-footer__brand img, .gg-footer__brand svg { width: calc(22px * var(--gg-brand-scale, 1)); height: calc(22px * var(--gg-brand-scale, 1)); display: block; }
-.gg-footer__wordmark { font-family: var(--gg-serif); font-size: calc(17px * var(--gg-brand-scale, 1)); letter-spacing: 0.08em; color: var(--gg-sand-100); }
+.gg-footer__wordmark { font-family: var(--gg-serif); font-size: calc(17px * var(--gg-brand-scale, 1)); letter-spacing: 0.12em; color: var(--gg-sand-100); }
 .gg-footer__tagline { margin: 0; font-size: 13px; line-height: 1.65; color: var(--gg-sand-300); max-width: 34ch; }
 .gg-footer__cols { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; font-size: 13px; }
 .gg-footer__col { display: flex; flex-direction: column; gap: 9px; }
@@ -760,7 +760,7 @@ body.gg-has-sticky-buy { padding-bottom: 76px; }
   .gg-header__brand.gg-hide-desktop { flex: 1 1 0; min-width: 0; justify-content: center; container-type: inline-size; }
   .gg-header__brand.gg-hide-desktop .gg-header__wordmark { font-size: clamp(15px, 4.8vw, calc(20px * var(--gg-brand-scale, 1))); }
   /* Size the wordmark from the space actually left between the icons, so it is never clipped */
-  .gg-header__brand.gg-hide-desktop .gg-header__wordmark { font-size: clamp(13px, calc((100cqw - 40px) / 7.3), calc(20px * var(--gg-brand-scale, 1))); }
+  .gg-header__brand.gg-hide-desktop .gg-header__wordmark { font-size: clamp(13px, calc((100cqw - 40px) / 7.9), calc(20px * var(--gg-brand-scale, 1))); }
   .gg-header__brand.gg-hide-desktop img, .gg-header__brand.gg-hide-desktop svg { width: clamp(24px, 8vw, calc(28px * var(--gg-brand-scale, 1))); height: clamp(24px, 8vw, calc(28px * var(--gg-brand-scale, 1))); }
 
   /* Product cards: rating stays inside the card, review count on its own line */
@@ -782,3 +782,11 @@ body.gg-has-sticky-buy { padding-bottom: 76px; }
   .gg-header__brand.gg-hide-desktop { gap: 6px; }
   .gg-channel__value { font-size: 13px; }
 }
+
+/* --------------------------------------------------------------------------
+   Wordmark "3a": wide-tracked serif, "and" smaller in a muted moss tone
+   -------------------------------------------------------------------------- */
+:root { --gg-wordmark-and: #685840; --gg-wordmark-and-inverse: #B9AB8C; }
+.gg-wordmark { font-family: var(--gg-serif); font-weight: 500; letter-spacing: 0.12em; white-space: nowrap; }
+.gg-wordmark__and { font-size: 0.6em; letter-spacing: 0.1em; color: var(--gg-wordmark-and); }
+.gg-section--inverse .gg-wordmark__and, .gg-footer .gg-wordmark__and { color: var(--gg-wordmark-and-inverse); }
