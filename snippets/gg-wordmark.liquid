@@ -1,6 +1,6 @@
 {% comment %}
   Brand wordmark (Mantel and Moss, style "3a"): the name in the serif with wide tracking,
-  the word "and" smaller and in a muted moss tone. Takes the name from the theme setting
+  the word "and" smaller and in a muted moss tone. Word gaps come from CSS margins, not spaces. Takes the name from the theme setting
   "Brand name" and falls back to the store name.
   Usage: {% render 'gg-wordmark' %}
 {% endcomment %}
@@ -19,6 +19,5 @@
     {%- else -%}
       <span class="gg-wordmark__word">{{ word }}</span>
     {%- endif -%}
-    {%- unless forloop.last %} {% endunless -%}
   {%- endfor -%}
 </span>

@@ -760,7 +760,7 @@ body.gg-has-sticky-buy { padding-bottom: 76px; }
   .gg-header__brand.gg-hide-desktop { flex: 1 1 0; min-width: 0; justify-content: center; container-type: inline-size; }
   .gg-header__brand.gg-hide-desktop .gg-header__wordmark { font-size: clamp(15px, 4.8vw, calc(20px * var(--gg-brand-scale, 1))); }
   /* Size the wordmark from the space actually left between the icons, so it is never clipped */
-  .gg-header__brand.gg-hide-desktop .gg-header__wordmark { font-size: clamp(13px, calc((100cqw - 40px) / 7.9), calc(20px * var(--gg-brand-scale, 1))); }
+  .gg-header__brand.gg-hide-desktop .gg-header__wordmark { font-size: clamp(13px, calc((100cqw - 40px) / 8.6), calc(20px * var(--gg-brand-scale, 1))); }
   .gg-header__brand.gg-hide-desktop img, .gg-header__brand.gg-hide-desktop svg { width: clamp(24px, 8vw, calc(28px * var(--gg-brand-scale, 1))); height: clamp(24px, 8vw, calc(28px * var(--gg-brand-scale, 1))); }
 
   /* Product cards: rating stays inside the card, review count on its own line */
@@ -788,5 +788,7 @@ body.gg-has-sticky-buy { padding-bottom: 76px; }
    -------------------------------------------------------------------------- */
 :root { --gg-wordmark-and: #685840; --gg-wordmark-and-inverse: #B9AB8C; }
 .gg-wordmark { font-family: var(--gg-serif); font-weight: 500; letter-spacing: 0.12em; white-space: nowrap; }
-.gg-wordmark__and { font-size: 0.6em; letter-spacing: 0.1em; color: var(--gg-wordmark-and); }
+.gg-wordmark__word, .gg-wordmark__and { display: inline-block; }
+.gg-wordmark__word + .gg-wordmark__word { margin-left: 0.4em; }
+.gg-wordmark__and { font-size: 0.6em; letter-spacing: 0.1em; color: var(--gg-wordmark-and); margin: 0 0.7em; }
 .gg-section--inverse .gg-wordmark__and, .gg-footer .gg-wordmark__and { color: var(--gg-wordmark-and-inverse); }
