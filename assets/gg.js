@@ -1,4 +1,4 @@
-/* Grain and Gold — small, dependency-free behaviours. */
+/* Mantel and Moss — small, dependency-free behaviours. */
 (function () {
   'use strict';
 
