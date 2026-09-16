@@ -28,7 +28,8 @@
             "email": "contact@mantelandmoss.com",
             "phone": "+31 614493964",
             "address": "Kristiansandstraat 8, 2548 JT Den Haag",
-            "registration": "KVK 42156789"
+            "registration": "KVK 42156789",
+            "vat": "VAT NL005545467B86"
           }
         }
       },
@@ -40,6 +41,7 @@
       "settings": {
         "tagline": "A small, curated home and lifestyle shop.",
         "legal": "KVK 42156789",
+        "vat": "VAT NL005545467B86",
         "show_payments": false,
         "show_policy_links": false,
         "show_locale": true

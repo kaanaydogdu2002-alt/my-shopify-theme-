@@ -498,6 +498,7 @@ body.gg-drawer-open { overflow: hidden; }
 .gg-footer__heading { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gg-gold-400); }
 .gg-footer__col span { color: var(--gg-sand-200); }
 .gg-footer__col span.gg-footer__muted { color: var(--gg-sand-300); }
+.gg-footer__reg { display: flex; flex-direction: column; gap: 3px; }
 .gg-footer__payments { margin-top: 20px; }
 .gg-footer__legal { margin-top: 16px; padding-top: 16px; padding-bottom: 28px; border-top: 1px solid var(--gg-inverse-border); font-size: 10px; line-height: 1.6; color: var(--gg-sand-400); display: flex; flex-direction: column; gap: 12px; }
 .gg-footer__legal a { color: var(--gg-sand-300); }
@@ -513,7 +514,7 @@ body.gg-drawer-open { overflow: hidden; }
   .gg-footer__col--hide-mobile { display: flex; }
   .gg-footer__heading { font-size: 11px; }
   .gg-footer__payments { margin-top: 40px; padding-bottom: 20px; }
-  .gg-footer__legal { margin-top: 0; padding-top: 20px; padding-bottom: 40px; flex-direction: row; justify-content: space-between; gap: 24px; font-size: 11px; }
+  .gg-footer__legal { margin-top: 24px; padding-top: 20px; padding-bottom: 40px; flex-direction: row; justify-content: space-between; gap: 24px; font-size: 11px; }
   .gg-footer__locale { display: none; }
 }
 

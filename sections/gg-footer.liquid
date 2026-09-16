@@ -36,7 +36,12 @@
               {%- if block.settings.email != blank -%}<a href="mailto:{{ block.settings.email }}">{{ block.settings.email }}</a>{%- endif -%}
               {%- if block.settings.phone != blank -%}<span>{{ block.settings.phone }}</span>{%- endif -%}
               {%- if block.settings.address != blank -%}<span class="gg-footer__muted">{{ block.settings.address }}</span>{%- endif -%}
-              {%- if block.settings.registration != blank -%}<span class="gg-footer__muted">{{ block.settings.registration }}</span>{%- endif -%}
+              {%- if block.settings.registration != blank or block.settings.vat != blank -%}
+                <span class="gg-footer__reg">
+                  {%- if block.settings.registration != blank -%}<span class="gg-footer__muted">{{ block.settings.registration }}</span>{%- endif -%}
+                  {%- if block.settings.vat != blank -%}<span class="gg-footer__muted">{{ block.settings.vat }}</span>{%- endif -%}
+                </span>
+              {%- endif -%}
             </div>
         {%- endcase -%}
       {%- endfor -%}
@@ -49,7 +54,7 @@
     {%- endif -%}
 
     <div class="gg-footer__legal">
-      <span>{{ brand_name }}{% if section.settings.legal != blank %} · {{ section.settings.legal }}{% endif %} · © {{ 'now' | date: '%Y' }}</span>
+      <span>{{ brand_name }}{% if section.settings.legal != blank %} · {{ section.settings.legal }}{% endif %}{% if section.settings.vat != blank %} · {{ section.settings.vat }}{% endif %} · © {{ 'now' | date: '%Y' }}</span>
       {%- if section.settings.show_policy_links -%}
         <span class="gg-hide-desktop">
           {%- for policy in shop.policies -%}
@@ -95,6 +100,13 @@
       "info": "Placeholder from the design — replace with your real registration numbers."
     },
     {
+      "type": "text",
+      "id": "vat",
+      "label": "VAT number",
+      "default": "VAT NL005545467B86",
+      "info": "Shown next to the registration number on the bottom line."
+    },
+    {
       "type": "checkbox",
       "id": "show_payments",
       "label": "Show payment methods",
@@ -134,7 +146,8 @@
         { "type": "text", "id": "email", "label": "Email", "default": "contact@mantelandmoss.com" },
         { "type": "text", "id": "phone", "label": "Phone", "default": "+31 614493964" },
         { "type": "text", "id": "address", "label": "Address", "default": "Kristiansandstraat 8, 2548 JT Den Haag" },
-        { "type": "text", "id": "registration", "label": "Registration (KVK)", "default": "KVK 42156789" }
+        { "type": "text", "id": "registration", "label": "Registration (KVK)", "default": "KVK 42156789" },
+        { "type": "text", "id": "vat", "label": "VAT number", "default": "VAT NL005545467B86" }
       ]
     }
   ],
