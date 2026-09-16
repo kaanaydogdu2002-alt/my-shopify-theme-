@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "trust": {
@@ -56,6 +65,7 @@
         "text": "We keep the range to six pieces. Each one solves a small daily problem, and keeps doing it after a year of use.",
         "button_label": "Shop the range",
         "button_link": "/collections/all",
+        "image": "shopify://shop_images/e0faa18d15d5467be3e3d866539e9715_1_1789569233_5533.png",
         "image_note": "Hero lifestyle image — pour-over set on a kitchen counter, natural daylight"
       }
     },
@@ -67,11 +77,11 @@
         "lead": "Small batches, named materials, and a repair or refund if one of them lets you down.",
         "collection": "",
         "limit": 6,
-        "show_payments": true,
-        "payments_label": "Secure checkout with",
         "show_rating": true,
         "placeholder_rating": 4.8,
-        "placeholder_count": 126
+        "placeholder_count": 126,
+        "show_payments": true,
+        "payments_label": "Secure checkout with"
       }
     },
     "reviews": {
@@ -118,6 +128,7 @@
         "heading": "4,7 from 312 reviews",
         "lead": "",
         "use_section_heading": false,
+        "product_source": false,
         "background": "warm"
       }
     },
