@@ -1,20 +1,29 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
       "type": "gg-collection",
       "settings": {
         "eyebrow": "Shop",
-        "all_title": "The full range, six pieces",
+        "all_title": "The full range",
         "lead": "Everything we sell, on one page. Each piece earned its place by solving one small daily problem, and by still doing it a year later. Filter by where it lives in your home, or read the three facts under each one.",
         "show_filters": true,
         "all_label": "All",
         "filters": "Kitchen:kitchen, Living:living, Desk:desk",
         "show_benefits": true,
-        "per_page": 12,
-        "empty_text": "Nothing here yet. Try another filter, or write to us.",
         "show_rating": true,
         "placeholder_rating": 4.8,
-        "placeholder_count": 126
+        "placeholder_count": 126,
+        "per_page": 12,
+        "empty_text": "Nothing here yet. Try another filter, or write to us."
       }
     },
     "before": {
@@ -46,7 +55,8 @@
         "heading": "Three things to know",
         "lead": "",
         "align": "left",
-        "background": "card"
+        "background": "card",
+        "product_source": false
       }
     },
     "faq": {
