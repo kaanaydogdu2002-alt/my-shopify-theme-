@@ -107,11 +107,14 @@
         "b3"
       ],
       "settings": {
-        "eyebrow": "Why this one",
-        "heading": "Three reasons it earns its place",
+        "eyebrow": "What you get",
+        "heading": "What's in the box",
         "lead": "",
         "align": "center",
         "background": "card",
+        "intro_from_description": true,
+        "show_image": true,
+        "image_note": "Product image \u2014 the boards side by side on a counter",
         "product_source": true
       }
     },

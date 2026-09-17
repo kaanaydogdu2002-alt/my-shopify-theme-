@@ -1,7 +1,6 @@
 {%- liquid
   assign current_variant = product.selected_or_first_available_variant
   assign form_id = 'gg-product-form-' | append: section.id
-  assign summary = product.metafields.custom.summary.value
   assign rating = product.metafields.reviews.rating.value
   assign rating_count = product.metafields.reviews.rating_count.value
   assign shop_link = section.settings.shop_link | default: '/collections/all'
@@ -81,12 +80,6 @@
         <a href="#reviews" class="gg-product__rating-link" aria-label="Read the reviews">
           {%- render 'gg-rating', value: rating_value, count: rating_count, size: 16, show_value: true -%}
         </a>
-      {%- endif -%}
-
-      {%- if summary != blank -%}
-        <p class="gg-product__summary">{{ summary }}</p>
-      {%- elsif product.description != blank -%}
-        <div class="gg-product__summary gg-rte">{{ product.description }}</div>
       {%- endif -%}
 
       <div class="gg-product__pricing">

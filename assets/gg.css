@@ -793,3 +793,12 @@ body.gg-has-sticky-buy { padding-bottom: 76px; }
 .gg-wordmark__word + .gg-wordmark__word { margin-left: 0.4em; }
 .gg-wordmark__and { font-size: 0.6em; letter-spacing: 0.1em; color: var(--gg-wordmark-and); margin: 0 0.7em; }
 .gg-section--inverse .gg-wordmark__and, .gg-footer .gg-wordmark__and { color: var(--gg-wordmark-and-inverse); }
+
+/* --------------------------------------------------------------------------
+   Icon cards: product description as intro text, with an optional image
+   -------------------------------------------------------------------------- */
+.gg-intro { max-width: 640px; margin: 0 auto; font-size: 15px; line-height: 1.65; color: var(--gg-text-body); text-align: center; }
+.gg-intro p { margin: 0 0 1em; }
+.gg-intro p:last-child { margin-bottom: 0; }
+.gg-intro-media { width: 100%; max-width: 860px; margin: 0 auto; }
+@media screen and (min-width: 990px) { .gg-intro { font-size: 16px; } }

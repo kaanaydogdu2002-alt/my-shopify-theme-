@@ -3,8 +3,12 @@
   if section.settings.product_source and product != blank
     assign items = product.metafields.custom.reasons.value
   endif
+  assign intro = blank
+  if section.settings.intro_from_description and product != blank
+    assign intro = product.description
+  endif
   assign hide = false
-  if section.settings.product_source and items == blank
+  if section.settings.product_source and items == blank and intro == blank
     assign hide = true
   endif
   assign bg_class = 'gg-section--card'
@@ -18,6 +22,14 @@
 <section class="gg-section {{ bg_class }} gg-section--rule-top">
   <div class="gg-container gg-section__inner" style="display:flex;flex-direction:column;gap:{% if section.settings.align == 'center' %}32px{% else %}28px{% endif %}">
     {%- render 'gg-heading', eyebrow: section.settings.eyebrow, title: section.settings.heading, lead: section.settings.lead, align: section.settings.align -%}
+    {%- if intro != blank -%}
+      <div class="gg-intro gg-rte">{{ intro }}</div>
+    {%- endif -%}
+    {%- if section.settings.show_image -%}
+      <div class="gg-intro-media">
+        {%- render 'gg-media', image: section.settings.image, ratio: '4x3', placeholder: section.settings.image_note, alt: section.settings.heading, sizes: '(min-width: 990px) 860px, 100vw' -%}
+      </div>
+    {%- endif -%}
     {%- if items != blank -%}
       <div class="gg-grid gg-grid--3{% if items.size == 2 %} gg-grid--two{% endif %}">
         {%- for item in items limit: 6 -%}
@@ -54,6 +66,10 @@
     { "type": "text", "id": "lead", "label": "Lead" },
     { "type": "select", "id": "align", "label": "Heading alignment", "default": "center", "options": [ { "value": "left", "label": "Left" }, { "value": "center", "label": "Center" } ] },
     { "type": "select", "id": "background", "label": "Background", "default": "card", "options": [ { "value": "card", "label": "White" }, { "value": "page", "label": "Cream" } ] },
+    { "type": "checkbox", "id": "intro_from_description", "label": "Use the product description as intro text", "default": false, "info": "On product pages, shows the product's own description under the heading." },
+    { "type": "checkbox", "id": "show_image", "label": "Show an image under the intro text", "default": false },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "image_note", "label": "Placeholder note", "default": "Product image — the boards side by side on a counter" },
     { "type": "checkbox", "id": "product_source", "label": "On product pages, use the product's reasons metafield", "default": false, "info": "Reads custom.reasons and hides the section when it is empty; the blocks below are ignored." }
   ],
   "blocks": [
