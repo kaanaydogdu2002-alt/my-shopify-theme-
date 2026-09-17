@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "trust": {
@@ -53,9 +62,10 @@
       "settings": {
         "eyebrow": "Everyday objects",
         "heading": "Everyday things, chosen to last",
-        "text": "We keep the range to six pieces. Each one solves a small daily problem, and keeps doing it after a year of use.",
+        "text": "We keep the range small on purpose. Every piece has to solve something\nyou deal with daily, and still be worth having a year from now.",
         "button_label": "Shop the range",
         "button_link": "/collections/all",
+        "image": "shopify://shop_images/e0faa18d15d5467be3e3d866539e9715_1_1789569233_5533.png",
         "image_note": "Hero lifestyle image — pour-over set on a kitchen counter, natural daylight"
       }
     },
@@ -67,11 +77,11 @@
         "lead": "Small batches, named materials, and a repair or refund if one of them lets you down.",
         "collection": "",
         "limit": 6,
-        "show_payments": true,
-        "payments_label": "Secure checkout with",
         "show_rating": true,
         "placeholder_rating": 4.8,
-        "placeholder_count": 126
+        "placeholder_count": 126,
+        "show_payments": true,
+        "payments_label": "Secure checkout with"
       }
     },
     "reviews": {
@@ -118,6 +128,7 @@
         "heading": "4,7 from 312 reviews",
         "lead": "",
         "use_section_heading": false,
+        "product_source": false,
         "background": "warm"
       }
     },
@@ -128,10 +139,11 @@
         "heading": "Why we keep the range small",
         "heading_level": "h2",
         "heading_measure": 16,
-        "text": "<p>Most online shops sell thousands of things. We sell six. That is not modesty; it is the whole idea. Every piece here had to earn its place. It has to solve something small you deal with every day, and still be worth having a year from now. Most things we look at do not make the cut. We are a small business, not a warehouse. If something we sell does not hold up, we want to hear about it, and we will make it right.</p>",
+        "text": "<p>Most online shops sell thousands of things. We sell a handful. That is not modesty; it is the whole idea. Every piece here had to earn its place. It has to solve something small you deal with every day, and still be worth having a year from now. Most things we look at do not make the cut. We are a small business, not a warehouse. If something we sell does not hold up, we want to hear </p>",
         "large_text": false,
         "button_label": "",
         "button_link": "",
+        "image": "shopify://shop_images/startup-desk.jpg",
         "image_note": "Still life — linen, ceramic and wood on a wooden table, natural light",
         "ratio": "1x1",
         "image_position": "left",

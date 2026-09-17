@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "intro": {
@@ -26,9 +35,13 @@
         "heading": "How we choose what to sell",
         "heading_level": "h2",
         "heading_measure": 30,
-        "text": "<p>We keep the range at six. Adding a seventh means one has to go, and that rule has saved us from a lot of mediocre products. Every piece comes from a workshop we can reach by train or a short flight, and we have met the people who make each one.</p><p>Before anything is listed we use it at home for three months — through daily washing, spills, and the kind of handling a shop photo never shows. If it chips, fades, or simply annoys us, it does not get listed. That is also why restocks sometimes take a few weeks: we would rather be out of stock than substitute a supplier quietly.</p>",
+        "text": "<p><br/>The range stays small by design. Adding something new usually means taking<br/>something else away, and that rule has saved us from a lot of mediocre<br/>products. We look for things that are made from one honest material, that<br/>do not need replacing, and that do one job properly.<br/><br/>Nothing gets listed before we have had it in our hands. We buy it, use it,<br/>and look for the things a product photo never shows: how it feels after a<br/>week, whether it stains, whether it is annoying to clean. If it disappoints<br/>us, it does not go on the site. That is also why restocks sometimes take a<br/>few weeks: we would rather be out of stock than quietly swap in something<br/>else.<br/><br/></p>",
         "button_label": "",
         "button_link": "",
+        "button_arrow": false,
+        "button2_label": "",
+        "button2_link": "",
+        "tall": false,
         "narrow": true,
         "align": "left",
         "background": "page",
@@ -43,7 +56,7 @@
           "settings": {
             "icon": "leaf",
             "title": "Fewer, better",
-            "body": "Six products, no seasonal drops, no clearance rails. If we cannot explain why a thing exists in one sentence, we do not stock it."
+            "body": "Fewer, better\nA short range, no seasonal drops, no clearance rails. If we cannot explain\nwhy a thing exists in one sentence, we do not stock it.\n\nHonest about the trade-offs\nEvery product page says what the thing is not good at, too. Shipping takes\ntime because we order from the maker rather than holding stock."
           }
         },
         "v2": {
@@ -64,13 +77,14 @@
         "heading": "Three things we hold to",
         "lead": "Not a mission statement. Just the rules we actually run the shop by.",
         "align": "left",
-        "background": "page"
+        "background": "page",
+        "product_source": false
       }
     },
     "cta": {
       "type": "gg-cta",
       "settings": {
-        "heading": "Have a look at the six",
+        "heading": "Have a look at the range",
         "use_product_title": false,
         "text": "Or write to us first.",
         "prefix_price": false,
