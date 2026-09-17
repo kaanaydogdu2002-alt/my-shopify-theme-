@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "trust": {
@@ -55,6 +64,9 @@
         "shop_link": "/collections/all",
         "price_note_1": "Shown in [currency] · converted at checkout",
         "price_note_2": "Shipping calculated at checkout for your country",
+        "show_benefits": true,
+        "show_review_slider": false,
+        "slider_interval": 6,
         "add_label": "Add to bag",
         "sticky_mobile": true,
         "show_payments": true,
@@ -65,12 +77,9 @@
         "fact_delivery": "Estimated delivery: 5–20 business days · tracked",
         "fact_returns": "Fourteen days to withdraw under EU law, and thirty with us.",
         "fallback_rating": 4.8,
+        "fallback_rating_count": 126,
         "image_note": "Product image — add photos to this product in Shopify",
-        "thumb_notes": "Detail, Scale, Set, In use",
-        "show_benefits": true,
-        "show_review_slider": false,
-        "slider_interval": 6,
-        "fallback_rating_count": 126
+        "thumb_notes": "Detail, Scale, Set, In use"
       }
     },
     "benefits": {
@@ -107,14 +116,15 @@
         "b3"
       ],
       "settings": {
-        "eyebrow": "What you get",
+        "eyebrow": "",
         "heading": "What's in the box",
         "lead": "",
         "align": "center",
         "background": "card",
         "intro_from_description": true,
         "show_image": true,
-        "image_note": "Product image \u2014 the boards side by side on a counter",
+        "image": "shopify://shop_images/Gemini_Generated_Image_a5kxlxa5kxlxa5kx.jpg",
+        "image_note": "Product image — the boards side by side on a counter",
         "product_source": true
       }
     },
@@ -207,8 +217,8 @@
         "heading": "What people say after a month",
         "lead": "Reviews are collected after delivery and published unedited.",
         "use_section_heading": true,
-        "background": "card",
-        "product_source": true
+        "product_source": true,
+        "background": "card"
       }
     },
     "faq": {
