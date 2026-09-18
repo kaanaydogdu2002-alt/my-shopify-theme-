@@ -1,4 +1,10 @@
 {%- liquid
+  assign gg_page = template.name
+  if template.suffix != blank
+    assign gg_page = gg_page | append: '_' | append: template.suffix
+  endif
+-%}
+{%- liquid
   assign bg_class = 'gg-section--card'
   if section.settings.background == 'page'
     assign bg_class = 'gg-section--page'
@@ -21,15 +27,15 @@
   <div class="gg-container gg-section__inner">
     <div class="gg-split{{ split_class }}">
       <div class="gg-split__text">
-        {%- if section.settings.eyebrow != blank -%}<span class="gg-eyebrow">{% render 'gg-t', sid: section.id, field: 'eyebrow', value: section.settings.eyebrow %}</span>{%- endif -%}
-        {%- if section.settings.heading != blank -%}<{{ heading_tag }} class="{{ heading_class }}" style="max-width: {{ section.settings.heading_measure }}ch">{% render 'gg-t', sid: section.id, field: 'heading', value: section.settings.heading %}</{{ heading_tag }}>{%- endif -%}
-        {%- if section.settings.text != blank -%}<div class="gg-rte {% if section.settings.large_text %}gg-lead{% else %}gg-body{% endif %} gg-measure">{% render 'gg-t', sid: section.id, field: 'text', value: section.settings.text, html: true %}</div>{%- endif -%}
+        {%- if section.settings.eyebrow != blank -%}<span class="gg-eyebrow">{% render 'gg-t', page: gg_page, sid: section.id, field: 'eyebrow', value: section.settings.eyebrow %}</span>{%- endif -%}
+        {%- if section.settings.heading != blank -%}<{{ heading_tag }} class="{{ heading_class }}" style="max-width: {{ section.settings.heading_measure }}ch">{% render 'gg-t', page: gg_page, sid: section.id, field: 'heading', value: section.settings.heading %}</{{ heading_tag }}>{%- endif -%}
+        {%- if section.settings.text != blank -%}<div class="gg-rte {% if section.settings.large_text %}gg-lead{% else %}gg-body{% endif %} gg-measure">{% render 'gg-t', page: gg_page, sid: section.id, field: 'text', value: section.settings.text, html: true %}</div>{%- endif -%}
         {%- if section.settings.button_label != blank -%}
-          <a href="{{ section.settings.button_link }}" class="gg-btn">{% render 'gg-t', sid: section.id, field: 'button_label', value: section.settings.button_label %}</a>
+          <a href="{{ section.settings.button_link }}" class="gg-btn">{% render 'gg-t', page: gg_page, sid: section.id, field: 'button_label', value: section.settings.button_label %}</a>
         {%- endif -%}
       </div>
       <div class="gg-split__media">
-        {%- capture image_note -%}{% render 'gg-t', sid: section.id, field: 'image_note', value: section.settings.image_note %}{%- endcapture -%}
+        {%- capture image_note -%}{% render 'gg-t', page: gg_page, sid: section.id, field: 'image_note', value: section.settings.image_note %}{%- endcapture -%}
         {%- render 'gg-media', image: section.settings.image, ratio: section.settings.ratio, placeholder: image_note, sizes: '(min-width: 990px) 560px, 100vw' -%}
       </div>
     </div>

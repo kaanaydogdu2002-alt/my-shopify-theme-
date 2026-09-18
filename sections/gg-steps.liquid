@@ -1,6 +1,12 @@
 {%- liquid
+  assign gg_page = template.name
+  if template.suffix != blank
+    assign gg_page = gg_page | append: '_' | append: template.suffix
+  endif
+-%}
+{%- liquid
   capture steps_text
-    render 'gg-t', sid: section.id, field: 'steps', value: section.settings.steps
+    render 'gg-t', page: gg_page, sid: section.id, field: 'steps', value: section.settings.steps
   endcapture
   assign labels = steps_text | split: ','
   assign current = section.settings.current

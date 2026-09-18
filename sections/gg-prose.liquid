@@ -1,4 +1,10 @@
 {%- liquid
+  assign gg_page = template.name
+  if template.suffix != blank
+    assign gg_page = gg_page | append: '_' | append: template.suffix
+  endif
+-%}
+{%- liquid
   assign bg_class = 'gg-section--page'
   if section.settings.background == 'card'
     assign bg_class = 'gg-section--card'
@@ -12,16 +18,16 @@
 -%}
 <section class="gg-prose gg-section {{ bg_class }}{% if section.settings.rule_top %} gg-section--rule-top{% endif %}">
   <div class="gg-container {% if section.settings.narrow %}gg-container--narrow{% endif %} gg-section__inner gg-prose__inner{% if section.settings.align == 'center' %} gg-prose__inner--center{% endif %}{% if section.settings.tall %} gg-prose__inner--tall{% endif %}">
-    {%- if section.settings.eyebrow != blank -%}<span class="gg-eyebrow">{% render 'gg-t', sid: section.id, field: 'eyebrow', value: section.settings.eyebrow %}</span>{%- endif -%}
-    {%- if section.settings.heading != blank -%}<{{ heading_tag }} class="{{ heading_class }}" style="max-width:{{ section.settings.heading_measure }}ch">{% render 'gg-t', sid: section.id, field: 'heading', value: section.settings.heading %}</{{ heading_tag }}>{%- endif -%}
-    {%- if section.settings.text != blank -%}<div class="gg-rte gg-body{% unless section.settings.narrow %} gg-measure{% endunless %}">{% render 'gg-t', sid: section.id, field: 'text', value: section.settings.text, html: true %}</div>{%- endif -%}
+    {%- if section.settings.eyebrow != blank -%}<span class="gg-eyebrow">{% render 'gg-t', page: gg_page, sid: section.id, field: 'eyebrow', value: section.settings.eyebrow %}</span>{%- endif -%}
+    {%- if section.settings.heading != blank -%}<{{ heading_tag }} class="{{ heading_class }}" style="max-width:{{ section.settings.heading_measure }}ch">{% render 'gg-t', page: gg_page, sid: section.id, field: 'heading', value: section.settings.heading %}</{{ heading_tag }}>{%- endif -%}
+    {%- if section.settings.text != blank -%}<div class="gg-rte gg-body{% unless section.settings.narrow %} gg-measure{% endunless %}">{% render 'gg-t', page: gg_page, sid: section.id, field: 'text', value: section.settings.text, html: true %}</div>{%- endif -%}
     {%- if section.settings.button_label != blank or section.settings.button2_label != blank -%}
       <div class="gg-cta__actions{% if section.settings.align != 'center' %} gg-cta__actions--start{% endif %}">
         {%- if section.settings.button_label != blank -%}
-          <a href="{{ section.settings.button_link }}" class="gg-btn gg-btn--lg">{% render 'gg-t', sid: section.id, field: 'button_label', value: section.settings.button_label %}{% if section.settings.button_arrow %}{% render 'gg-icon', icon: 'arrow-right' %}{% endif %}</a>
+          <a href="{{ section.settings.button_link }}" class="gg-btn gg-btn--lg">{% render 'gg-t', page: gg_page, sid: section.id, field: 'button_label', value: section.settings.button_label %}{% if section.settings.button_arrow %}{% render 'gg-icon', icon: 'arrow-right' %}{% endif %}</a>
         {%- endif -%}
         {%- if section.settings.button2_label != blank -%}
-          <a href="{{ section.settings.button2_link }}" class="gg-btn gg-btn--lg gg-btn--secondary">{% render 'gg-t', sid: section.id, field: 'button2_label', value: section.settings.button2_label %}</a>
+          <a href="{{ section.settings.button2_link }}" class="gg-btn gg-btn--lg gg-btn--secondary">{% render 'gg-t', page: gg_page, sid: section.id, field: 'button2_label', value: section.settings.button2_label %}</a>
         {%- endif -%}
       </div>
     {%- endif -%}

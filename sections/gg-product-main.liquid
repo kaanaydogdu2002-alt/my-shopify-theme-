@@ -1,4 +1,10 @@
 {%- liquid
+  assign gg_page = template.name
+  if template.suffix != blank
+    assign gg_page = gg_page | append: '_' | append: template.suffix
+  endif
+-%}
+{%- liquid
   assign current_variant = product.selected_or_first_available_variant
   assign form_id = 'gg-product-form-' | append: section.id
   assign rating = product.metafields.reviews.rating.value
@@ -14,10 +20,10 @@
     assign benefits = product.metafields.custom.benefits_de.value
   endif
   capture add_label
-    render 'gg-t', sid: section.id, field: 'add_label', value: section.settings.add_label
+    render 'gg-t', page: gg_page, sid: section.id, field: 'add_label', value: section.settings.add_label
   endcapture
   capture thumb_notes
-    render 'gg-t', sid: section.id, field: 'thumb_notes', value: section.settings.thumb_notes
+    render 'gg-t', page: gg_page, sid: section.id, field: 'thumb_notes', value: section.settings.thumb_notes
   endcapture
   assign slider_reviews = product.metafields.custom.reviews.value
 -%}
@@ -27,7 +33,7 @@
     <nav class="gg-crumbs" aria-label="{{ 'gg.product.breadcrumb_label' | t }}">
       <a href="{{ routes.root_url }}">{{ 'gg.general.home' | t }}</a>
       {%- render 'gg-icon', icon: 'chevron-right' -%}
-      <a href="{{ shop_link }}">{% render 'gg-t', sid: section.id, field: 'shop_label', value: section.settings.shop_label %}</a>
+      <a href="{{ shop_link }}">{% render 'gg-t', page: gg_page, sid: section.id, field: 'shop_label', value: section.settings.shop_label %}</a>
       {%- render 'gg-icon', icon: 'chevron-right' -%}
       <span class="gg-crumbs__current">{{ product.title }}</span>
     </nav>
@@ -42,7 +48,7 @@
         {%- else -%}
           <span class="gg-media__placeholder">
             {%- render 'gg-icon', icon: 'photo' -%}
-            <span>{% render 'gg-t', sid: section.id, field: 'image_note', value: section.settings.image_note %}</span>
+            <span>{% render 'gg-t', page: gg_page, sid: section.id, field: 'image_note', value: section.settings.image_note %}</span>
           </span>
         {%- endif -%}
       </div>
@@ -97,8 +103,8 @@
           <span class="gg-price__compare" data-gg-compare{% unless current_variant.compare_at_price > current_variant.price %} hidden{% endunless %}>{{ current_variant.compare_at_price | money }}</span>
         </span>
         <div class="gg-product__notes">
-          {%- if section.settings.price_note_1 != blank -%}{%- capture price_note_1 -%}{% render 'gg-t', sid: section.id, field: 'price_note_1', value: section.settings.price_note_1 %}{%- endcapture -%}<span>{{ price_note_1 | replace: '[currency]', cart.currency.iso_code }}</span>{%- endif -%}
-          {%- if section.settings.price_note_2 != blank -%}<span>{% render 'gg-t', sid: section.id, field: 'price_note_2', value: section.settings.price_note_2 %}</span>{%- endif -%}
+          {%- if section.settings.price_note_1 != blank -%}{%- capture price_note_1 -%}{% render 'gg-t', page: gg_page, sid: section.id, field: 'price_note_1', value: section.settings.price_note_1 %}{%- endcapture -%}<span>{{ price_note_1 | replace: '[currency]', cart.currency.iso_code }}</span>{%- endif -%}
+          {%- if section.settings.price_note_2 != blank -%}<span>{% render 'gg-t', page: gg_page, sid: section.id, field: 'price_note_2', value: section.settings.price_note_2 %}</span>{%- endif -%}
         </div>
       </div>
 
@@ -180,9 +186,9 @@
 
       {%- if section.settings.trust_1 != blank or section.settings.trust_2 != blank or section.settings.trust_3 != blank -%}
         <div class="gg-product__trust">
-          {%- if section.settings.trust_1 != blank -%}<span>{% render 'gg-icon', icon: 'lock' %}{% render 'gg-t', sid: section.id, field: 'trust_1', value: section.settings.trust_1 %}</span>{%- endif -%}
-          {%- if section.settings.trust_2 != blank -%}<span>{% render 'gg-icon', icon: 'truck' %}{% render 'gg-t', sid: section.id, field: 'trust_2', value: section.settings.trust_2 %}</span>{%- endif -%}
-          {%- if section.settings.trust_3 != blank -%}<span>{% render 'gg-icon', icon: 'rotate' %}{% render 'gg-t', sid: section.id, field: 'trust_3', value: section.settings.trust_3 %}</span>{%- endif -%}
+          {%- if section.settings.trust_1 != blank -%}<span>{% render 'gg-icon', icon: 'lock' %}{% render 'gg-t', page: gg_page, sid: section.id, field: 'trust_1', value: section.settings.trust_1 %}</span>{%- endif -%}
+          {%- if section.settings.trust_2 != blank -%}<span>{% render 'gg-icon', icon: 'truck' %}{% render 'gg-t', page: gg_page, sid: section.id, field: 'trust_2', value: section.settings.trust_2 %}</span>{%- endif -%}
+          {%- if section.settings.trust_3 != blank -%}<span>{% render 'gg-icon', icon: 'rotate' %}{% render 'gg-t', page: gg_page, sid: section.id, field: 'trust_3', value: section.settings.trust_3 %}</span>{%- endif -%}
         </div>
       {%- endif -%}
 
@@ -192,10 +198,10 @@
 
       <div class="gg-product__facts">
         {%- if section.settings.fact_stock != blank -%}
-          <span data-gg-availability{% unless current_variant.available %} hidden{% endunless %}>{% render 'gg-icon', icon: 'check' %}{% render 'gg-t', sid: section.id, field: 'fact_stock', value: section.settings.fact_stock %}</span>
+          <span data-gg-availability{% unless current_variant.available %} hidden{% endunless %}>{% render 'gg-icon', icon: 'check' %}{% render 'gg-t', page: gg_page, sid: section.id, field: 'fact_stock', value: section.settings.fact_stock %}</span>
         {%- endif -%}
-        {%- if section.settings.fact_delivery != blank -%}<span>{% render 'gg-icon', icon: 'truck' %}{% render 'gg-t', sid: section.id, field: 'fact_delivery', value: section.settings.fact_delivery %}</span>{%- endif -%}
-        {%- if section.settings.fact_returns != blank -%}<span>{% render 'gg-icon', icon: 'rotate' %}{% render 'gg-t', sid: section.id, field: 'fact_returns', value: section.settings.fact_returns %}</span>{%- endif -%}
+        {%- if section.settings.fact_delivery != blank -%}<span>{% render 'gg-icon', icon: 'truck' %}{% render 'gg-t', page: gg_page, sid: section.id, field: 'fact_delivery', value: section.settings.fact_delivery %}</span>{%- endif -%}
+        {%- if section.settings.fact_returns != blank -%}<span>{% render 'gg-icon', icon: 'rotate' %}{% render 'gg-t', page: gg_page, sid: section.id, field: 'fact_returns', value: section.settings.fact_returns %}</span>{%- endif -%}
       </div>
     </div>
   </div>

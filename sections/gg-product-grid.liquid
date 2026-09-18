@@ -1,4 +1,10 @@
 {%- liquid
+  assign gg_page = template.name
+  if template.suffix != blank
+    assign gg_page = gg_page | append: '_' | append: template.suffix
+  endif
+-%}
+{%- liquid
   assign collection = section.settings.collection
   if collection != blank
     assign products = collection.products
@@ -9,9 +15,9 @@
 -%}
 <section class="gg-products gg-section gg-section--page gg-section--rule-top" id="shop">
   <div class="gg-container gg-section__inner gg-products__inner">
-    {%- capture h_eyebrow -%}{% render 'gg-t', sid: section.id, field: 'eyebrow', value: section.settings.eyebrow %}{%- endcapture -%}
-    {%- capture h_title -%}{% render 'gg-t', sid: section.id, field: 'heading', value: section.settings.heading %}{%- endcapture -%}
-    {%- capture h_lead -%}{% render 'gg-t', sid: section.id, field: 'lead', value: section.settings.lead %}{%- endcapture -%}
+    {%- capture h_eyebrow -%}{% render 'gg-t', page: gg_page, sid: section.id, field: 'eyebrow', value: section.settings.eyebrow %}{%- endcapture -%}
+    {%- capture h_title -%}{% render 'gg-t', page: gg_page, sid: section.id, field: 'heading', value: section.settings.heading %}{%- endcapture -%}
+    {%- capture h_lead -%}{% render 'gg-t', page: gg_page, sid: section.id, field: 'lead', value: section.settings.lead %}{%- endcapture -%}
     {%- render 'gg-heading', eyebrow: h_eyebrow, title: h_title, lead: h_lead -%}
     <div class="gg-products__grid">
       {%- for product in products limit: limit -%}
@@ -22,7 +28,7 @@
     </div>
     {%- if section.settings.show_payments -%}
       <div class="gg-products__checkout">
-        <span class="gg-products__checkout-label">{% render 'gg-t', sid: section.id, field: 'payments_label', value: section.settings.payments_label %}</span>
+        <span class="gg-products__checkout-label">{% render 'gg-t', page: gg_page, sid: section.id, field: 'payments_label', value: section.settings.payments_label %}</span>
         {%- render 'gg-payments', center: true -%}
       </div>
     {%- endif -%}

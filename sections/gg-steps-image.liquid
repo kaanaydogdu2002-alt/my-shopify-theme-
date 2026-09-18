@@ -1,4 +1,10 @@
 {%- liquid
+  assign gg_page = template.name
+  if template.suffix != blank
+    assign gg_page = gg_page | append: '_' | append: template.suffix
+  endif
+-%}
+{%- liquid
   assign data = blank
   if section.settings.product_source and product != blank
     assign data = product.metafields.custom.included.value
@@ -10,13 +16,13 @@
     endif
   endif
   capture eyebrow
-    render 'gg-t', sid: section.id, field: 'eyebrow', value: section.settings.eyebrow
+    render 'gg-t', page: gg_page, sid: section.id, field: 'eyebrow', value: section.settings.eyebrow
   endcapture
   capture heading
-    render 'gg-t', sid: section.id, field: 'heading', value: section.settings.heading
+    render 'gg-t', page: gg_page, sid: section.id, field: 'heading', value: section.settings.heading
   endcapture
   capture image_note
-    render 'gg-t', sid: section.id, field: 'image_note', value: section.settings.image_note
+    render 'gg-t', page: gg_page, sid: section.id, field: 'image_note', value: section.settings.image_note
   endcapture
   if data != blank
     assign eyebrow = data.eyebrow | default: eyebrow
@@ -43,7 +49,7 @@
             {%- for block in section.blocks -%}
               <div class="gg-step" {{ block.shopify_attributes }}>
                 <span class="gg-step__n">{{ forloop.index }}</span>
-                <span class="gg-step__text"><strong>{% render 'gg-t', sid: section.id, bid: block.id, field: 'title', value: block.settings.title %}</strong>{% if block.settings.body != blank %} — {% render 'gg-t', sid: section.id, bid: block.id, field: 'body', value: block.settings.body %}{% endif %}</span>
+                <span class="gg-step__text"><strong>{% render 'gg-t', page: gg_page, sid: section.id, bid: block.id, field: 'title', value: block.settings.title %}</strong>{% if block.settings.body != blank %} — {% render 'gg-t', page: gg_page, sid: section.id, bid: block.id, field: 'body', value: block.settings.body %}{% endif %}</span>
               </div>
             {%- endfor -%}
           {%- endif -%}

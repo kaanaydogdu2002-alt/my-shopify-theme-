@@ -1,8 +1,14 @@
+{%- liquid
+  assign gg_page = template.name
+  if template.suffix != blank
+    assign gg_page = gg_page | append: '_' | append: template.suffix
+  endif
+-%}
 <section class="gg-contact gg-section gg-section--page">
   <div class="gg-container gg-contact__intro">
-    {%- if section.settings.eyebrow != blank -%}<span class="gg-eyebrow">{% render 'gg-t', sid: section.id, field: 'eyebrow', value: section.settings.eyebrow %}</span>{%- endif -%}
-    {%- if section.settings.heading != blank -%}<h1 class="gg-h1">{% render 'gg-t', sid: section.id, field: 'heading', value: section.settings.heading %}</h1>{%- endif -%}
-    {%- if section.settings.text != blank -%}<p class="gg-lead">{% render 'gg-t', sid: section.id, field: 'text', value: section.settings.text %}</p>{%- endif -%}
+    {%- if section.settings.eyebrow != blank -%}<span class="gg-eyebrow">{% render 'gg-t', page: gg_page, sid: section.id, field: 'eyebrow', value: section.settings.eyebrow %}</span>{%- endif -%}
+    {%- if section.settings.heading != blank -%}<h1 class="gg-h1">{% render 'gg-t', page: gg_page, sid: section.id, field: 'heading', value: section.settings.heading %}</h1>{%- endif -%}
+    {%- if section.settings.text != blank -%}<p class="gg-lead">{% render 'gg-t', page: gg_page, sid: section.id, field: 'text', value: section.settings.text %}</p>{%- endif -%}
   </div>
 
   <div class="gg-container gg-contact__layout">
@@ -11,17 +17,17 @@
         <div class="gg-channel" {{ block.shopify_attributes }}>
           {%- render 'gg-icon', icon: block.settings.icon -%}
           <div class="gg-channel__text">
-            <span class="gg-channel__title">{% render 'gg-t', sid: section.id, bid: block.id, field: 'title', value: block.settings.title %}</span>
+            <span class="gg-channel__title">{% render 'gg-t', page: gg_page, sid: section.id, bid: block.id, field: 'title', value: block.settings.title %}</span>
             <span class="gg-channel__value">
               {%- if block.settings.icon == 'mail' and block.settings.value contains '@' -%}
                 <a href="mailto:{{ block.settings.value }}">{{ block.settings.value }}</a>
               {%- elsif block.settings.icon == 'phone' -%}
                 <a href="tel:{{ block.settings.value | remove: ' ' }}">{{ block.settings.value }}</a>
               {%- else -%}
-                {% render 'gg-t', sid: section.id, bid: block.id, field: 'value', value: block.settings.value %}
+                {% render 'gg-t', page: gg_page, sid: section.id, bid: block.id, field: 'value', value: block.settings.value %}
               {%- endif -%}
             </span>
-            {%- if block.settings.note != blank -%}<span class="gg-channel__note">{% render 'gg-t', sid: section.id, bid: block.id, field: 'note', value: block.settings.note %}</span>{%- endif -%}
+            {%- if block.settings.note != blank -%}<span class="gg-channel__note">{% render 'gg-t', page: gg_page, sid: section.id, bid: block.id, field: 'note', value: block.settings.note %}</span>{%- endif -%}
           </div>
         </div>
       {%- endfor -%}
@@ -29,8 +35,8 @@
 
     <div class="gg-contact__form">
       <div class="gg-contact__form-head">
-        <h2 class="gg-contact__form-title">{% render 'gg-t', sid: section.id, field: 'form_heading', value: section.settings.form_heading %}</h2>
-        {%- if section.settings.form_note != blank -%}<span class="gg-small">{% render 'gg-t', sid: section.id, field: 'form_note', value: section.settings.form_note %}</span>{%- endif -%}
+        <h2 class="gg-contact__form-title">{% render 'gg-t', page: gg_page, sid: section.id, field: 'form_heading', value: section.settings.form_heading %}</h2>
+        {%- if section.settings.form_note != blank -%}<span class="gg-small">{% render 'gg-t', page: gg_page, sid: section.id, field: 'form_note', value: section.settings.form_note %}</span>{%- endif -%}
       </div>
       {%- form 'contact', id: 'gg-contact-form', class: 'gg-contact__fields', style: 'display:flex;flex-direction:column;gap:16px' -%}
         {%- if form.posted_successfully? -%}
@@ -47,27 +53,27 @@
         {%- endif -%}
         <div class="gg-contact__row">
           <div class="gg-field">
-            <label class="gg-field__label" for="gg-contact-name">{% render 'gg-t', sid: section.id, field: 'label_name', value: section.settings.label_name %}</label>
-            <input id="gg-contact-name" class="gg-field__input" type="text" name="contact[name]" value="{{ form.name }}" placeholder="{% render 'gg-t', sid: section.id, field: 'placeholder_name', value: section.settings.placeholder_name %}" autocomplete="name">
+            <label class="gg-field__label" for="gg-contact-name">{% render 'gg-t', page: gg_page, sid: section.id, field: 'label_name', value: section.settings.label_name %}</label>
+            <input id="gg-contact-name" class="gg-field__input" type="text" name="contact[name]" value="{{ form.name }}" placeholder="{% render 'gg-t', page: gg_page, sid: section.id, field: 'placeholder_name', value: section.settings.placeholder_name %}" autocomplete="name">
           </div>
           <div class="gg-field">
-            <label class="gg-field__label" for="gg-contact-email">{% render 'gg-t', sid: section.id, field: 'label_email', value: section.settings.label_email %}</label>
-            <input id="gg-contact-email" class="gg-field__input" type="email" name="contact[email]" value="{{ form.email }}" placeholder="{% render 'gg-t', sid: section.id, field: 'placeholder_email', value: section.settings.placeholder_email %}" autocomplete="email" required>
+            <label class="gg-field__label" for="gg-contact-email">{% render 'gg-t', page: gg_page, sid: section.id, field: 'label_email', value: section.settings.label_email %}</label>
+            <input id="gg-contact-email" class="gg-field__input" type="email" name="contact[email]" value="{{ form.email }}" placeholder="{% render 'gg-t', page: gg_page, sid: section.id, field: 'placeholder_email', value: section.settings.placeholder_email %}" autocomplete="email" required>
           </div>
         </div>
         <div class="gg-field">
-          <label class="gg-field__label" for="gg-contact-order">{% render 'gg-t', sid: section.id, field: 'label_order', value: section.settings.label_order %}</label>
-          <input id="gg-contact-order" class="gg-field__input" type="text" name="contact[{{ section.settings.label_order | escape }}]" placeholder="{% render 'gg-t', sid: section.id, field: 'placeholder_order', value: section.settings.placeholder_order %}">
-          {%- if section.settings.hint_order != blank -%}<span class="gg-field__hint">{% render 'gg-t', sid: section.id, field: 'hint_order', value: section.settings.hint_order %}</span>{%- endif -%}
+          <label class="gg-field__label" for="gg-contact-order">{% render 'gg-t', page: gg_page, sid: section.id, field: 'label_order', value: section.settings.label_order %}</label>
+          <input id="gg-contact-order" class="gg-field__input" type="text" name="contact[{{ section.settings.label_order | escape }}]" placeholder="{% render 'gg-t', page: gg_page, sid: section.id, field: 'placeholder_order', value: section.settings.placeholder_order %}">
+          {%- if section.settings.hint_order != blank -%}<span class="gg-field__hint">{% render 'gg-t', page: gg_page, sid: section.id, field: 'hint_order', value: section.settings.hint_order %}</span>{%- endif -%}
         </div>
         <div class="gg-field">
-          <label class="gg-field__label" for="gg-contact-body">{% render 'gg-t', sid: section.id, field: 'label_message', value: section.settings.label_message %}</label>
-          <textarea id="gg-contact-body" class="gg-field__textarea" name="contact[body]" rows="6" placeholder="{% render 'gg-t', sid: section.id, field: 'placeholder_message', value: section.settings.placeholder_message %}" required>{{ form.body }}</textarea>
+          <label class="gg-field__label" for="gg-contact-body">{% render 'gg-t', page: gg_page, sid: section.id, field: 'label_message', value: section.settings.label_message %}</label>
+          <textarea id="gg-contact-body" class="gg-field__textarea" name="contact[body]" rows="6" placeholder="{% render 'gg-t', page: gg_page, sid: section.id, field: 'placeholder_message', value: section.settings.placeholder_message %}" required>{{ form.body }}</textarea>
         </div>
         <div>
-          <button type="submit" class="gg-btn gg-btn--lg">{% render 'gg-t', sid: section.id, field: 'button_label', value: section.settings.button_label %}{% render 'gg-icon', icon: 'arrow-right' %}</button>
+          <button type="submit" class="gg-btn gg-btn--lg">{% render 'gg-t', page: gg_page, sid: section.id, field: 'button_label', value: section.settings.button_label %}{% render 'gg-icon', icon: 'arrow-right' %}</button>
         </div>
-        {%- if section.settings.privacy_note != blank -%}<span class="gg-small">{% render 'gg-t', sid: section.id, field: 'privacy_note', value: section.settings.privacy_note %}</span>{%- endif -%}
+        {%- if section.settings.privacy_note != blank -%}<span class="gg-small">{% render 'gg-t', page: gg_page, sid: section.id, field: 'privacy_note', value: section.settings.privacy_note %}</span>{%- endif -%}
       {%- endform -%}
     </div>
   </div>

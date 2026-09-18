@@ -1,14 +1,20 @@
+{%- liquid
+  assign gg_page = template.name
+  if template.suffix != blank
+    assign gg_page = gg_page | append: '_' | append: template.suffix
+  endif
+-%}
 <section class="gg-section gg-section--page gg-section--rule-top">
   <div class="gg-container gg-container--narrow gg-section__inner" style="display:flex;flex-direction:column;gap:20px">
-    {%- capture h_eyebrow -%}{% render 'gg-t', sid: section.id, field: 'eyebrow', value: section.settings.eyebrow %}{%- endcapture -%}
-    {%- capture h_title -%}{% render 'gg-t', sid: section.id, field: 'heading', value: section.settings.heading %}{%- endcapture -%}
-    {%- capture h_lead -%}{% render 'gg-t', sid: section.id, field: 'lead', value: section.settings.lead %}{%- endcapture -%}
+    {%- capture h_eyebrow -%}{% render 'gg-t', page: gg_page, sid: section.id, field: 'eyebrow', value: section.settings.eyebrow %}{%- endcapture -%}
+    {%- capture h_title -%}{% render 'gg-t', page: gg_page, sid: section.id, field: 'heading', value: section.settings.heading %}{%- endcapture -%}
+    {%- capture h_lead -%}{% render 'gg-t', page: gg_page, sid: section.id, field: 'lead', value: section.settings.lead %}{%- endcapture -%}
     {%- render 'gg-heading', eyebrow: h_eyebrow, title: h_title, lead: h_lead -%}
     <div class="gg-accordion">
       {%- for block in section.blocks -%}
         {%- liquid
           capture content
-            render 'gg-t', sid: section.id, bid: block.id, field: 'content', value: block.settings.content, html: true
+            render 'gg-t', page: gg_page, sid: section.id, bid: block.id, field: 'content', value: block.settings.content, html: true
           endcapture
           assign skip = false
           if block.settings.use_product_metafield
@@ -26,7 +32,7 @@
         {%- if skip -%}{%- continue -%}{%- endif -%}
         <details class="gg-accordion__item"{% if forloop.first and section.settings.open_first %} open{% endif %} {{ block.shopify_attributes }}>
           <summary class="gg-accordion__summary">
-            <span>{% render 'gg-t', sid: section.id, bid: block.id, field: 'title', value: block.settings.title %}</span>
+            <span>{% render 'gg-t', page: gg_page, sid: section.id, bid: block.id, field: 'title', value: block.settings.title %}</span>
             {%- render 'gg-icon', icon: 'plus', class: 'gg-icon--plus' -%}
             {%- render 'gg-icon', icon: 'minus', class: 'gg-icon--minus' -%}
           </summary>

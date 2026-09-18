@@ -1,18 +1,24 @@
 {%- liquid
+  assign gg_page = template.name
+  if template.suffix != blank
+    assign gg_page = gg_page | append: '_' | append: template.suffix
+  endif
+-%}
+{%- liquid
   assign title = collection.title
   if collection.handle == 'all' and section.settings.all_title != blank
     capture title
-      render 'gg-t', sid: section.id, field: 'all_title', value: section.settings.all_title
+      render 'gg-t', page: gg_page, sid: section.id, field: 'all_title', value: section.settings.all_title
     endcapture
   endif
   capture lead
-    render 'gg-t', sid: section.id, field: 'lead', value: section.settings.lead
+    render 'gg-t', page: gg_page, sid: section.id, field: 'lead', value: section.settings.lead
   endcapture
   if collection.handle != 'all' and collection.description != blank
     assign lead = collection.description | strip_html
   endif
   capture filters_text
-    render 'gg-t', sid: section.id, field: 'filters', value: section.settings.filters
+    render 'gg-t', page: gg_page, sid: section.id, field: 'filters', value: section.settings.filters
   endcapture
   assign filters = filters_text | split: ','
   assign base_url = collection.url
@@ -23,13 +29,13 @@
 -%}
 <section class="gg-collection gg-section gg-section--page">
   <div class="gg-container gg-collection__intro">
-    {%- if section.settings.eyebrow != blank -%}<span class="gg-eyebrow">{% render 'gg-t', sid: section.id, field: 'eyebrow', value: section.settings.eyebrow %}</span>{%- endif -%}
+    {%- if section.settings.eyebrow != blank -%}<span class="gg-eyebrow">{% render 'gg-t', page: gg_page, sid: section.id, field: 'eyebrow', value: section.settings.eyebrow %}</span>{%- endif -%}
     <h1 class="gg-h1" style="max-width:16ch">{{ title }}</h1>
     {%- if lead != blank -%}<p class="gg-lead gg-measure">{{ lead }}</p>{%- endif -%}
 
     {%- if section.settings.show_filters and filters.size > 0 -%}
       <nav class="gg-chips" aria-label="{{ 'gg.collection.filter_label' | t }}">
-        <a href="{{ base_url }}" class="gg-chip{% unless active_tag %} is-active{% endunless %}">{% render 'gg-t', sid: section.id, field: 'all_label', value: section.settings.all_label %}</a>
+        <a href="{{ base_url }}" class="gg-chip{% unless active_tag %} is-active{% endunless %}">{% render 'gg-t', page: gg_page, sid: section.id, field: 'all_label', value: section.settings.all_label %}</a>
         {%- for f in filters -%}
           {%- assign parts = f | split: ':' -%}
           {%- assign label = parts[0] | strip -%}
@@ -46,7 +52,7 @@
         {%- for product in collection.products -%}
           {%- render 'gg-product-card', product: product, show_benefits: section.settings.show_benefits, show_rating: section.settings.show_rating, placeholder_rating: section.settings.placeholder_rating, placeholder_count: section.settings.placeholder_count -%}
         {%- else -%}
-          <div class="gg-products__empty" style="grid-column: 1 / -1">{% render 'gg-t', sid: section.id, field: 'empty_text', value: section.settings.empty_text %}</div>
+          <div class="gg-products__empty" style="grid-column: 1 / -1">{% render 'gg-t', page: gg_page, sid: section.id, field: 'empty_text', value: section.settings.empty_text %}</div>
         {%- endfor -%}
       </div>
       {%- if paginate.pages > 1 -%}

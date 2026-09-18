@@ -1,4 +1,10 @@
 {%- liquid
+  assign gg_page = template.name
+  if template.suffix != blank
+    assign gg_page = gg_page | append: '_' | append: template.suffix
+  endif
+-%}
+{%- liquid
   assign items = blank
   if section.settings.product_source and product != blank
     assign items = product.metafields.custom.reviews.value
@@ -24,14 +30,14 @@
 <section class="gg-reviews gg-section {{ bg_class }} gg-section--rule-top" id="reviews">
   <div class="gg-container gg-section__inner gg-reviews__inner">
     {%- if section.settings.use_section_heading -%}
-      {%- capture h_eyebrow -%}{% render 'gg-t', sid: section.id, field: 'eyebrow', value: section.settings.eyebrow %}{%- endcapture -%}
-      {%- capture h_title -%}{% render 'gg-t', sid: section.id, field: 'heading', value: section.settings.heading %}{%- endcapture -%}
-      {%- capture h_lead -%}{% render 'gg-t', sid: section.id, field: 'lead', value: section.settings.lead %}{%- endcapture -%}
+      {%- capture h_eyebrow -%}{% render 'gg-t', page: gg_page, sid: section.id, field: 'eyebrow', value: section.settings.eyebrow %}{%- endcapture -%}
+      {%- capture h_title -%}{% render 'gg-t', page: gg_page, sid: section.id, field: 'heading', value: section.settings.heading %}{%- endcapture -%}
+      {%- capture h_lead -%}{% render 'gg-t', page: gg_page, sid: section.id, field: 'lead', value: section.settings.lead %}{%- endcapture -%}
       {%- render 'gg-heading', eyebrow: h_eyebrow, title: h_title, lead: h_lead -%}
     {%- else -%}
       <div class="gg-reviews__head">
-        {%- if section.settings.eyebrow != blank -%}<span class="gg-eyebrow">{% render 'gg-t', sid: section.id, field: 'eyebrow', value: section.settings.eyebrow %}</span>{%- endif -%}
-        {%- if section.settings.heading != blank -%}<h2 class="gg-h2">{% render 'gg-t', sid: section.id, field: 'heading', value: section.settings.heading %}</h2>{%- endif -%}
+        {%- if section.settings.eyebrow != blank -%}<span class="gg-eyebrow">{% render 'gg-t', page: gg_page, sid: section.id, field: 'eyebrow', value: section.settings.eyebrow %}</span>{%- endif -%}
+        {%- if section.settings.heading != blank -%}<h2 class="gg-h2">{% render 'gg-t', page: gg_page, sid: section.id, field: 'heading', value: section.settings.heading %}</h2>{%- endif -%}
       </div>
     {%- endif -%}
     <div class="gg-reviews__grid">
