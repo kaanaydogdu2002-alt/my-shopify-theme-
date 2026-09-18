@@ -19,6 +19,10 @@
   endif
   assign key = 'gg.' | append: page
   if sid != blank
+    comment
+      In JSON templates section.id looks like template--123__main; keep only the part after '__'.
+    endcomment
+    assign sid = sid | split: '__' | last
     assign key = key | append: '.' | append: sid
   endif
   if bid != blank
