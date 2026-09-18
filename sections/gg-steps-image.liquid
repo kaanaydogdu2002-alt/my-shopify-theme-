@@ -9,13 +9,19 @@
       assign hide = true
     endif
   endif
-  assign eyebrow = section.settings.eyebrow
-  assign heading = section.settings.heading
-  assign image_note = section.settings.image_note
+  capture eyebrow
+    render 'gg-t', sid: section.id, field: 'eyebrow', value: section.settings.eyebrow
+  endcapture
+  capture heading
+    render 'gg-t', sid: section.id, field: 'heading', value: section.settings.heading
+  endcapture
+  capture image_note
+    render 'gg-t', sid: section.id, field: 'image_note', value: section.settings.image_note
+  endcapture
   if data != blank
-    assign eyebrow = data.eyebrow | default: section.settings.eyebrow
-    assign heading = data.heading | default: section.settings.heading
-    assign image_note = data.image_note | default: section.settings.image_note
+    assign eyebrow = data.eyebrow | default: eyebrow
+    assign heading = data.heading | default: heading
+    assign image_note = data.image_note | default: image_note
   endif
 -%}
 {%- unless hide -%}
@@ -37,7 +43,7 @@
             {%- for block in section.blocks -%}
               <div class="gg-step" {{ block.shopify_attributes }}>
                 <span class="gg-step__n">{{ forloop.index }}</span>
-                <span class="gg-step__text"><strong>{{ block.settings.title }}</strong>{% if block.settings.body != blank %} — {{ block.settings.body }}{% endif %}</span>
+                <span class="gg-step__text"><strong>{% render 'gg-t', sid: section.id, bid: block.id, field: 'title', value: block.settings.title %}</strong>{% if block.settings.body != blank %} — {% render 'gg-t', sid: section.id, bid: block.id, field: 'body', value: block.settings.body %}{% endif %}</span>
               </div>
             {%- endfor -%}
           {%- endif -%}

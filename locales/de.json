@@ -527,5 +527,269 @@
       "expanded": "Formular für den Empfänger des Gutscheins erweitert",
       "collapsed": "Formular für den Empfänger des Gutscheins minimiert"
     }
+  },
+  "gg": {
+    "general": {
+      "home": "Startseite",
+      "view": "Ansehen",
+      "no_products": "Noch keine Produkte. Füge in Shopify Produkte hinzu, dann erscheinen sie hier.",
+      "payment_methods": "Zahlungsarten"
+    },
+    "header": {
+      "search_placeholder": "Suchen"
+    },
+    "reviews": {
+      "read": "Bewertungen lesen",
+      "previous": "Vorherige Bewertung",
+      "next": "Nächste Bewertung",
+      "verified": "Verifizierter Kauf",
+      "out_of_five": "{{ value }} von 5",
+      "count": "({{ count }} Bewertungen)"
+    },
+    "trust": {
+      "secure": {
+        "text": "Sicher bezahlen",
+        "text_mobile": "Sicher bezahlen"
+      },
+      "shipping": {
+        "text": "Weltweiter Versand mit Tracking",
+        "text_mobile": "Versand mit Tracking"
+      },
+      "returns": {
+        "text": "30 Tage Rückgaberecht",
+        "text_mobile": "30 Tage Rückgaberecht"
+      }
+    },
+    "footer": {
+      "tagline": "Ein kleiner, kuratierter Shop für Zuhause und Alltag.",
+      "vat": "USt-IdNr. NL005545467B86",
+      "shop": {
+        "heading": "Shop"
+      },
+      "policies": {
+        "heading": "Rechtliches"
+      },
+      "contact": {
+        "heading": "Kontakt",
+        "vat": "USt-IdNr. NL005545467B86"
+      }
+    },
+    "cart": {
+      "progress_label": "Bestellfortschritt",
+      "steps": {
+        "steps": "Warenkorb, Informationen, Zahlung"
+      },
+      "cart-footer": {
+        "gg_reassurance": "30 Tage Zeit, es dir anders zu überlegen · Sichere, verschlüsselte Zahlung · Weltweiter Versand mit Tracking"
+      }
+    },
+    "product": {
+      "breadcrumb_label": "Navigationspfad",
+      "benefits_label": "Vorteile",
+      "main": {
+        "shop_label": "Shop",
+        "price_note_1": "inkl. MwSt.",
+        "price_note_2": "zzgl. Versandkosten, berechnet an der Kasse",
+        "add_label": "In den Warenkorb",
+        "trust_1": "Sicher bezahlen",
+        "trust_2": "Weltweiter Versand mit Tracking",
+        "trust_3": "30 Tage Rückgaberecht",
+        "fact_stock": "Auf Lager · Versand innerhalb von 1–2 Werktagen",
+        "fact_delivery": "Voraussichtliche Lieferzeit: 5–20 Werktage · mit Sendungsverfolgung",
+        "fact_returns": "14 Tage Widerrufsrecht laut EU-Recht – bei uns sind es 30.",
+        "image_note": "Produktbild – füge in Shopify Fotos zu diesem Produkt hinzu",
+        "thumb_notes": "Detail, Größe, Set, Im Einsatz"
+      },
+      "benefits": {
+        "heading": "Das bekommst du",
+        "image_note": "Produktbild – beide Bretter nebeneinander auf der Arbeitsfläche"
+      },
+      "included": {
+        "eyebrow": "Das ist dabei",
+        "heading": "Zwei Teile, eine Methode, vier Minuten"
+      },
+      "reviews": {
+        "eyebrow": "Von Kunden",
+        "heading": "Was Kunden nach einem Monat sagen",
+        "lead": "Bewertungen sammeln wir nach der Lieferung und veröffentlichen sie unverändert."
+      },
+      "faq": {
+        "eyebrow": "Gut zu wissen",
+        "heading": "Häufige Fragen",
+        "q1": {
+          "title": "Wie lange dauert der Versand?",
+          "content_html": "<p>Die meisten Bestellungen kommen je nach Artikel und Lieferadresse innerhalb von 5–20 Werktagen an. Jede Bestellung wird mit Sendungsverfolgung verschickt – den Tracking-Link bekommst du per E-Mail, sobald das Paket unterwegs ist.</p>"
+        },
+        "q2": {
+          "title": "Was, wenn ich es mir anders überlege?",
+          "content_html": "<p>Du hast 30 Tage nach der Lieferung Zeit, einen unbenutzten Artikel in der Originalverpackung zurückzuschicken. Schreib uns eine E-Mail mit deiner Bestellnummer, dann schicken wir dir die Rücksendeadresse in den Niederlanden. Die Rücksendekosten trägst du selbst – außer der Artikel ist defekt oder wir haben den falschen geschickt, dann übernehmen wir sie. Die Erstattung geht innerhalb von 14 Tagen auf dein ursprüngliches Zahlungsmittel zurück.</p>"
+        },
+        "q3": {
+          "title": "Woraus besteht es?",
+          "content_html": "<p>Material und Pflege findest du bei jedem Produkt.</p>"
+        }
+      },
+      "cta": {
+        "text": "auf Lager · Versand innerhalb von 1–2 Werktagen · weltweiter Versand mit Tracking",
+        "button_label": "In den Warenkorb"
+      }
+    },
+    "index": {
+      "hero": {
+        "eyebrow": "Dinge für jeden Tag",
+        "heading": "Alltagsdinge, die bleiben",
+        "text": "Unser Sortiment ist bewusst klein. Jedes Stück muss ein Problem lösen, das du täglich hast – und auch in einem Jahr noch etwas wert sein.",
+        "button_label": "Zum Sortiment",
+        "image_note": "Lifestyle-Bild – Pour-over-Set auf einer Küchenarbeitsfläche, Tageslicht"
+      },
+      "range": {
+        "eyebrow": "Das Sortiment",
+        "heading": "Produkte, hinter denen wir stehen",
+        "lead": "Kleine Stückzahlen, klar benannte Materialien – und Reparatur oder Erstattung, falls dich eines im Stich lässt.",
+        "payments_label": "Sicher bezahlen mit"
+      },
+      "story": {
+        "eyebrow": "Über uns",
+        "heading": "Warum unser Sortiment klein bleibt",
+        "text_html": "<p>Die meisten Onlineshops verkaufen tausende Dinge. Wir verkaufen eine Handvoll. Das ist keine Bescheidenheit, das ist die ganze Idee. Jedes Stück hier musste sich seinen Platz verdienen: Es muss ein kleines Alltagsproblem lösen und auch in einem Jahr noch etwas wert sein. Das meiste, was wir uns anschauen, schafft es nicht ins Sortiment. Wir sind ein kleines Unternehmen, kein Lager. Wenn etwas, das wir verkaufen, nicht hält, wollen wir davon hören.</p>",
+        "image_note": "Stillleben – Leinen, Keramik und Holz auf einem Holztisch, Tageslicht"
+      },
+      "newsletter": {
+        "heading": "Ein Brief im Monat",
+        "text": "Neue Stücke, Nachschub und was wir über die Hersteller gelernt haben. Höchstens zwölf E-Mails im Jahr, abmelden geht mit einem Klick.",
+        "placeholder": "du@beispiel.de",
+        "button_label": "Anmelden",
+        "note": "Deine Adresse geben wir nie weiter."
+      }
+    },
+    "collection": {
+      "filter_label": "Filter",
+      "pagination_label": "Seitennavigation",
+      "previous": "Zurück",
+      "next": "Weiter",
+      "page_of": "Seite {{ current }} von {{ total }}",
+      "main": {
+        "eyebrow": "Shop",
+        "all_title": "Das ganze Sortiment",
+        "lead": "Alles, was wir verkaufen, auf einer Seite. Jedes Stück hat sich seinen Platz verdient, weil es ein kleines Alltagsproblem löst – und das auch ein Jahr später noch. Filtere nach Raum, oder lies die drei Fakten unter jedem Produkt.",
+        "all_label": "Alle",
+        "filters": "Küche:kitchen, Wohnen:living, Schreibtisch:desk",
+        "empty_text": "Hier ist noch nichts. Probier einen anderen Filter oder schreib uns."
+      },
+      "before": {
+        "eyebrow": "Bevor du bestellst",
+        "heading": "Drei Dinge, die du wissen solltest",
+        "c1": {
+          "title": "Versand innerhalb von 1–2 Werktagen",
+          "body": "Weltweiter Versand mit Sendungsverfolgung. Die Lieferung dauert je nach Artikel und Lieferadresse meist 5–20 Werktage. Die genauen Versandkosten siehst du an der Kasse, bevor du bezahlst."
+        },
+        "c2": {
+          "title": "30 Tage Bedenkzeit",
+          "body": "Schick uns alles Unbenutzte in der Verpackung zurück. Mail uns deine Bestellnummer, wir schicken dir die Adresse – die Erstattung geht auf dein ursprüngliches Zahlungsmittel."
+        }
+      },
+      "faq": {
+        "eyebrow": "Bestellen",
+        "heading": "Fragen zur Bestellung",
+        "q1": {
+          "title": "Was kostet der Versand?",
+          "content_html": "<p>Die Versandkosten hängen von deinem Land ab und werden an der Kasse berechnet, bevor du bezahlst. Du siehst den genauen Betrag immer vor dem Abschluss der Bestellung.</p>"
+        },
+        "q2": {
+          "title": "Liefert ihr in mein Land?",
+          "content_html": "<p>Ja, wir verschicken weltweit mit Sendungsverfolgung. Außerhalb der EU erhebt dein Zoll Einfuhrabgaben und lokale Steuern, die nicht in unserem Preis enthalten sind.</p>"
+        },
+        "q3": {
+          "title": "Sind die Preise inklusive Mehrwertsteuer?",
+          "content_html": "<p>Die Preise verstehen sich inklusive der jeweils geltenden Steuer. Den genauen Betrag für dein Land berechnen wir an der Kasse.</p>"
+        }
+      },
+      "cta": {
+        "heading": "Nicht sicher, welches?",
+        "text": "Schreib uns, was du suchst. Wir sagen dir ehrlich, welches Stück passt – oder ob keines davon.",
+        "button_label": "Kontakt"
+      }
+    },
+    "page_about": {
+      "intro": {
+        "eyebrow": "Über uns",
+        "heading": "Ein kleiner Shop, sechs Dinge auf einmal",
+        "text_html": "<p>Mantel and Moss ist ein Ein-Personen-Shop aus den Niederlanden. Die Idee ist einfach: Das meiste, was wir für unser Zuhause kaufen, wird viel früher ersetzt, als es müsste. Statt tausende Dinge zu lagern, wählen wir eine Handvoll aus – und behalten nur, was sich seinen Platz verdient.</p><p>Kein Lager, kein Showroom, kein Einkaufsteam. Nur sorgfältige Auswahl, ehrliche Beschreibungen und jemand, der deine E-Mail wirklich liest.</p>",
+        "image_note": "Lifestyle-Bild – das Regal zu Hause, Morgenlicht"
+      },
+      "how": {
+        "heading": "Wie wir auswählen, was wir verkaufen",
+        "text_html": "<p>Das Sortiment bleibt bewusst klein. Etwas Neues aufzunehmen heißt meist, etwas anderes zu streichen – diese Regel hat uns vor vielen mittelmäßigen Produkten bewahrt. Wir suchen Dinge aus einem ehrlichen Material, die nicht ersetzt werden müssen und eine Aufgabe richtig erfüllen.</p><p>Nichts kommt in den Shop, bevor wir es selbst in der Hand hatten. Wir kaufen es, benutzen es und achten auf das, was ein Produktfoto nie zeigt: wie es sich nach einer Woche anfühlt, ob es Flecken bekommt, ob es nervig zu reinigen ist. Enttäuscht es uns, kommt es nicht auf die Seite. Deshalb dauert Nachschub manchmal ein paar Wochen: lieber ausverkauft als stillschweigend etwas anderes hineinschieben.</p>"
+      },
+      "values": {
+        "eyebrow": "Warum Mantel and Moss",
+        "heading": "Drei Dinge, an die wir uns halten",
+        "lead": "Kein Leitbild. Nur die Regeln, nach denen wir den Shop wirklich führen.",
+        "v1": {
+          "title": "Weniger, besser",
+          "body": "Weniger, besser\nEin kleines Sortiment, keine Saisonware, kein Ausverkaufsregal. Wenn wir nicht in einem Satz erklären können, warum es ein Ding gibt, nehmen wir es nicht auf.\n\nEhrlich bei den Kompromissen\nAuf jeder Produktseite steht auch, was das Ding nicht gut kann. Der Versand dauert, weil wir beim Hersteller bestellen, statt Lager zu halten."
+        },
+        "v2": {
+          "title": "Hersteller, die wir kennen",
+          "body": "Jede Werkstatt wird auf der Produktseite genannt. Wir besuchen sie vor der ersten Bestellung und zahlen innerhalb von vierzehn Tagen vollständig."
+        }
+      },
+      "cta": {
+        "heading": "Schau dir das Sortiment an",
+        "text": "Oder schreib uns zuerst.",
+        "button_label": "Zum Sortiment",
+        "button2_label": "Kontakt"
+      }
+    },
+    "page_contact": {
+      "contact": {
+        "eyebrow": "Kontakt",
+        "heading": "Schreib uns",
+        "text": "Jede Nachricht liest ein echter Mensch. Geht es um eine Bestellung, gib die Bestellnummer an – dann reicht eine Antwort statt drei.",
+        "form_heading": "Nachricht senden",
+        "label_name": "Name",
+        "placeholder_name": "Dein Name",
+        "label_email": "E-Mail",
+        "placeholder_email": "du@beispiel.de",
+        "label_order": "Bestellnummer",
+        "placeholder_order": "#1042",
+        "hint_order": "Optional – beschleunigt die Antwort.",
+        "label_message": "Nachricht",
+        "placeholder_message": "Wobei können wir helfen?",
+        "button_label": "Nachricht senden",
+        "privacy_note": "Deine Angaben nutzen wir nur, um diese Nachricht zu beantworten. Siehe Datenschutzerklärung.",
+        "c1": {
+          "title": "E-Mail",
+          "note": "Der schnellste Weg."
+        },
+        "c2": {
+          "title": "Telefon",
+          "note": "Werktags 09:00–17:00 Uhr MEZ."
+        },
+        "c3": {
+          "title": "Adresse",
+          "value": "Kristiansandstraat 8, 2548 JT Den Haag, Niederlande",
+          "note": "Eingetragene Geschäftsadresse."
+        },
+        "c4": {
+          "title": "Erreichbarkeit",
+          "value": "Montag bis Freitag, 09:00–17:00 Uhr MEZ",
+          "note": "An niederländischen Feiertagen geschlossen. Nachrichten vom Wochenende beantworten wir am Montag."
+        }
+      },
+      "note": {
+        "eyebrow": "Bevor du schreibst",
+        "heading": "Die meisten Antworten stehen schon auf den Produktseiten",
+        "text_html": "<p>Lieferzeiten, Rückgabe, Garantie und Materialien findest du bei jedem Produkt. Den Tracking-Link bekommst du per E-Mail, sobald deine Bestellung verschickt ist.</p>"
+      }
+    },
+    "404": {
+      "main": {
+        "heading": "Diese Seite ist verschwunden",
+        "text_html": "<p>Die Seite, die du suchst, gibt es nicht – oder der Link hat sich geändert. Alles, was wir verkaufen, steht auf einer Seite, du bist also nie weit davon entfernt.</p>",
+        "button_label": "Zum Sortiment",
+        "button2_label": "Kontakt"
+      }
+    }
   }
 }

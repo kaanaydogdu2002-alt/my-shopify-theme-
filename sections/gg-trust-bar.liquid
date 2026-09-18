@@ -3,8 +3,9 @@
     {%- for block in section.blocks -%}
       <span class="gg-trust__item" {{ block.shopify_attributes }}>
         {%- render 'gg-icon', icon: block.settings.icon, class: block.settings.icon_class -%}
-        <span class="gg-hide-mobile">{{ block.settings.text }}</span>
-        <span class="gg-hide-desktop">{{ block.settings.text_mobile | default: block.settings.text }}</span>
+        <span class="gg-hide-mobile">{% render 'gg-t', page: 'trust', bid: block.id, field: 'text', value: block.settings.text %}</span>
+        {%- assign text_mobile = block.settings.text_mobile | default: block.settings.text -%}
+        <span class="gg-hide-desktop">{% render 'gg-t', page: 'trust', bid: block.id, field: 'text_mobile', value: text_mobile %}</span>
       </span>
     {%- endfor -%}
   </div>

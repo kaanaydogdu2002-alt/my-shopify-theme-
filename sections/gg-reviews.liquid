@@ -24,11 +24,14 @@
 <section class="gg-reviews gg-section {{ bg_class }} gg-section--rule-top" id="reviews">
   <div class="gg-container gg-section__inner gg-reviews__inner">
     {%- if section.settings.use_section_heading -%}
-      {%- render 'gg-heading', eyebrow: section.settings.eyebrow, title: section.settings.heading, lead: section.settings.lead -%}
+      {%- capture h_eyebrow -%}{% render 'gg-t', sid: section.id, field: 'eyebrow', value: section.settings.eyebrow %}{%- endcapture -%}
+      {%- capture h_title -%}{% render 'gg-t', sid: section.id, field: 'heading', value: section.settings.heading %}{%- endcapture -%}
+      {%- capture h_lead -%}{% render 'gg-t', sid: section.id, field: 'lead', value: section.settings.lead %}{%- endcapture -%}
+      {%- render 'gg-heading', eyebrow: h_eyebrow, title: h_title, lead: h_lead -%}
     {%- else -%}
       <div class="gg-reviews__head">
-        {%- if section.settings.eyebrow != blank -%}<span class="gg-eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
-        {%- if section.settings.heading != blank -%}<h2 class="gg-h2">{{ section.settings.heading }}</h2>{%- endif -%}
+        {%- if section.settings.eyebrow != blank -%}<span class="gg-eyebrow">{% render 'gg-t', sid: section.id, field: 'eyebrow', value: section.settings.eyebrow %}</span>{%- endif -%}
+        {%- if section.settings.heading != blank -%}<h2 class="gg-h2">{% render 'gg-t', sid: section.id, field: 'heading', value: section.settings.heading %}</h2>{%- endif -%}
       </div>
     {%- endif -%}
     <div class="gg-reviews__grid">
@@ -52,7 +55,7 @@
           <div class="gg-review__meta">
             {%- if block.settings.who != blank -%}<span class="gg-review__who">{{ block.settings.who }}</span>{%- endif -%}
             {%- if block.settings.verified -%}
-              <span class="gg-review__verified">{% render 'gg-icon', icon: 'shield-check' %}Verified purchase</span>
+              <span class="gg-review__verified">{% render 'gg-icon', icon: 'shield-check' %}{{ 'gg.reviews.verified' | t }}</span>
             {%- endif -%}
             {%- if block.settings.note != blank -%}<span class="gg-review__note">{{ block.settings.note }}</span>{%- endif -%}
           </div>

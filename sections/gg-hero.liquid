@@ -2,17 +2,18 @@
   <div class="gg-container gg-hero__inner">
     <div class="gg-split gg-split--wide-media">
       <div class="gg-split__text">
-        {%- if section.settings.eyebrow != blank -%}<span class="gg-eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
-        {%- if section.settings.heading != blank -%}<h1 class="gg-display">{{ section.settings.heading }}</h1>{%- endif -%}
-        {%- if section.settings.text != blank -%}<p class="gg-lead">{{ section.settings.text }}</p>{%- endif -%}
+        {%- if section.settings.eyebrow != blank -%}<span class="gg-eyebrow">{% render 'gg-t', sid: section.id, field: 'eyebrow', value: section.settings.eyebrow %}</span>{%- endif -%}
+        {%- if section.settings.heading != blank -%}<h1 class="gg-display">{% render 'gg-t', sid: section.id, field: 'heading', value: section.settings.heading %}</h1>{%- endif -%}
+        {%- if section.settings.text != blank -%}<p class="gg-lead">{% render 'gg-t', sid: section.id, field: 'text', value: section.settings.text %}</p>{%- endif -%}
         {%- if section.settings.button_label != blank -%}
           <div class="gg-hero__actions">
-            <a href="{{ section.settings.button_link | default: '#shop' }}" class="gg-btn gg-btn--lg">{{ section.settings.button_label }}{% render 'gg-icon', icon: 'arrow-right' %}</a>
+            <a href="{{ section.settings.button_link | default: '#shop' }}" class="gg-btn gg-btn--lg">{% render 'gg-t', sid: section.id, field: 'button_label', value: section.settings.button_label %}{% render 'gg-icon', icon: 'arrow-right' %}</a>
           </div>
         {%- endif -%}
       </div>
       <div class="gg-split__media">
-        {%- render 'gg-media', image: section.settings.image, ratio: '4x3', placeholder: section.settings.image_note, loading: 'eager', sizes: '(min-width: 990px) 640px, 100vw' -%}
+        {%- capture image_note -%}{% render 'gg-t', sid: section.id, field: 'image_note', value: section.settings.image_note %}{%- endcapture -%}
+        {%- render 'gg-media', image: section.settings.image, ratio: '4x3', placeholder: image_note, loading: 'eager', sizes: '(min-width: 990px) 640px, 100vw' -%}
       </div>
     </div>
   </div>

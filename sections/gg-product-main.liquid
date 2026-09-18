@@ -10,15 +10,24 @@
   endif
   assign main_alt = product.featured_media.alt | default: product.title | escape
   assign benefits = product.metafields.custom.benefits.value
+  if request.locale.iso_code == 'de' and product.metafields.custom.benefits_de.value != blank
+    assign benefits = product.metafields.custom.benefits_de.value
+  endif
+  capture add_label
+    render 'gg-t', sid: section.id, field: 'add_label', value: section.settings.add_label
+  endcapture
+  capture thumb_notes
+    render 'gg-t', sid: section.id, field: 'thumb_notes', value: section.settings.thumb_notes
+  endcapture
   assign slider_reviews = product.metafields.custom.reviews.value
 -%}
 
 <section class="gg-product gg-section gg-section--page" data-gg-product data-section-id="{{ section.id }}">
   <div class="gg-container gg-product__crumbs">
-    <nav class="gg-crumbs" aria-label="Breadcrumb">
-      <a href="{{ routes.root_url }}">Home</a>
+    <nav class="gg-crumbs" aria-label="{{ 'gg.product.breadcrumb_label' | t }}">
+      <a href="{{ routes.root_url }}">{{ 'gg.general.home' | t }}</a>
       {%- render 'gg-icon', icon: 'chevron-right' -%}
-      <a href="{{ shop_link }}">{{ section.settings.shop_label }}</a>
+      <a href="{{ shop_link }}">{% render 'gg-t', sid: section.id, field: 'shop_label', value: section.settings.shop_label %}</a>
       {%- render 'gg-icon', icon: 'chevron-right' -%}
       <span class="gg-crumbs__current">{{ product.title }}</span>
     </nav>
@@ -33,7 +42,7 @@
         {%- else -%}
           <span class="gg-media__placeholder">
             {%- render 'gg-icon', icon: 'photo' -%}
-            <span>{{ section.settings.image_note }}</span>
+            <span>{% render 'gg-t', sid: section.id, field: 'image_note', value: section.settings.image_note %}</span>
           </span>
         {%- endif -%}
       </div>
@@ -47,7 +56,7 @@
               </button>
             {%- endfor -%}
           {%- else -%}
-            {%- assign notes = section.settings.thumb_notes | split: ',' -%}
+            {%- assign notes = thumb_notes | split: ',' -%}
             {%- for note in notes limit: 4 -%}
               <div class="gg-gallery__thumb" aria-hidden="true">{{ note | strip }}</div>
             {%- endfor -%}
@@ -77,7 +86,7 @@
         endif
       -%}
       {%- if rating_value != blank -%}
-        <a href="#reviews" class="gg-product__rating-link" aria-label="Read the reviews">
+        <a href="#reviews" class="gg-product__rating-link" aria-label="{{ 'gg.reviews.read' | t }}">
           {%- render 'gg-rating', value: rating_value, count: rating_count, size: 16, show_value: true -%}
         </a>
       {%- endif -%}
@@ -88,13 +97,13 @@
           <span class="gg-price__compare" data-gg-compare{% unless current_variant.compare_at_price > current_variant.price %} hidden{% endunless %}>{{ current_variant.compare_at_price | money }}</span>
         </span>
         <div class="gg-product__notes">
-          {%- if section.settings.price_note_1 != blank -%}<span>{{ section.settings.price_note_1 | replace: '[currency]', cart.currency.iso_code }}</span>{%- endif -%}
-          {%- if section.settings.price_note_2 != blank -%}<span>{{ section.settings.price_note_2 }}</span>{%- endif -%}
+          {%- if section.settings.price_note_1 != blank -%}{%- capture price_note_1 -%}{% render 'gg-t', sid: section.id, field: 'price_note_1', value: section.settings.price_note_1 %}{%- endcapture -%}<span>{{ price_note_1 | replace: '[currency]', cart.currency.iso_code }}</span>{%- endif -%}
+          {%- if section.settings.price_note_2 != blank -%}<span>{% render 'gg-t', sid: section.id, field: 'price_note_2', value: section.settings.price_note_2 %}</span>{%- endif -%}
         </div>
       </div>
 
       {%- if section.settings.show_benefits and benefits != blank -%}
-        <ul class="gg-benefits" aria-label="Benefits">
+        <ul class="gg-benefits" aria-label="{{ 'gg.product.benefits_label' | t }}">
           {%- for line in benefits limit: 4 -%}
             <li class="gg-benefits__item"><span class="gg-benefits__check">{% render 'gg-icon', icon: 'check' %}</span><span>{{ line }}</span></li>
           {%- endfor -%}
@@ -117,9 +126,9 @@
           </div>
           {%- if slider_reviews.size > 1 -%}
             <div class="gg-rslider__nav">
-              <button type="button" class="gg-rslider__btn" data-gg-rslider-prev aria-label="Previous review">{% render 'gg-icon', icon: 'chevron-left' %}</button>
+              <button type="button" class="gg-rslider__btn" data-gg-rslider-prev aria-label="{{ 'gg.reviews.previous' | t }}">{% render 'gg-icon', icon: 'chevron-left' %}</button>
               <div class="gg-rslider__dots" data-gg-rslider-dots></div>
-              <button type="button" class="gg-rslider__btn" data-gg-rslider-next aria-label="Next review">{% render 'gg-icon', icon: 'chevron-right' %}</button>
+              <button type="button" class="gg-rslider__btn" data-gg-rslider-next aria-label="{{ 'gg.reviews.next' | t }}">{% render 'gg-icon', icon: 'chevron-right' %}</button>
             </div>
           {%- endif -%}
         </div>
@@ -156,11 +165,11 @@
             <input id="gg-qty-{{ section.id }}" class="gg-qty__input" type="number" name="quantity" value="1" min="1" max="99" inputmode="numeric">
             <button type="button" class="gg-qty__btn" data-gg-qty-plus aria-label="{{ 'products.product.quantity.increase' | t: product: product.title | escape }}">{% render 'gg-icon', icon: 'plus' %}</button>
           </div>
-          <button type="submit" name="add" class="gg-btn gg-btn--lg" data-gg-add data-gg-add-label="{{ section.settings.add_label | escape }}" data-gg-sold-out="{{ 'products.product.sold_out' | t }}" data-gg-unavailable="{{ 'products.product.unavailable' | t }}"{% unless current_variant.available %} disabled{% endunless %}>
+          <button type="submit" name="add" class="gg-btn gg-btn--lg" data-gg-add data-gg-add-label="{{ add_label | escape }}" data-gg-sold-out="{{ 'products.product.sold_out' | t }}" data-gg-unavailable="{{ 'products.product.unavailable' | t }}"{% unless current_variant.available %} disabled{% endunless %}>
             {%- render 'gg-icon', icon: 'shopping-bag' -%}
             <span data-gg-add-text>
               {%- if current_variant.available -%}
-                {{ section.settings.add_label }} · {{ current_variant.price | money }}
+                {{ add_label }} · {{ current_variant.price | money }}
               {%- else -%}
                 {{ 'products.product.sold_out' | t }}
               {%- endif -%}
@@ -171,9 +180,9 @@
 
       {%- if section.settings.trust_1 != blank or section.settings.trust_2 != blank or section.settings.trust_3 != blank -%}
         <div class="gg-product__trust">
-          {%- if section.settings.trust_1 != blank -%}<span>{% render 'gg-icon', icon: 'lock' %}{{ section.settings.trust_1 }}</span>{%- endif -%}
-          {%- if section.settings.trust_2 != blank -%}<span>{% render 'gg-icon', icon: 'truck' %}{{ section.settings.trust_2 }}</span>{%- endif -%}
-          {%- if section.settings.trust_3 != blank -%}<span>{% render 'gg-icon', icon: 'rotate' %}{{ section.settings.trust_3 }}</span>{%- endif -%}
+          {%- if section.settings.trust_1 != blank -%}<span>{% render 'gg-icon', icon: 'lock' %}{% render 'gg-t', sid: section.id, field: 'trust_1', value: section.settings.trust_1 %}</span>{%- endif -%}
+          {%- if section.settings.trust_2 != blank -%}<span>{% render 'gg-icon', icon: 'truck' %}{% render 'gg-t', sid: section.id, field: 'trust_2', value: section.settings.trust_2 %}</span>{%- endif -%}
+          {%- if section.settings.trust_3 != blank -%}<span>{% render 'gg-icon', icon: 'rotate' %}{% render 'gg-t', sid: section.id, field: 'trust_3', value: section.settings.trust_3 %}</span>{%- endif -%}
         </div>
       {%- endif -%}
 
@@ -183,10 +192,10 @@
 
       <div class="gg-product__facts">
         {%- if section.settings.fact_stock != blank -%}
-          <span data-gg-availability{% unless current_variant.available %} hidden{% endunless %}>{% render 'gg-icon', icon: 'check' %}{{ section.settings.fact_stock }}</span>
+          <span data-gg-availability{% unless current_variant.available %} hidden{% endunless %}>{% render 'gg-icon', icon: 'check' %}{% render 'gg-t', sid: section.id, field: 'fact_stock', value: section.settings.fact_stock %}</span>
         {%- endif -%}
-        {%- if section.settings.fact_delivery != blank -%}<span>{% render 'gg-icon', icon: 'truck' %}{{ section.settings.fact_delivery }}</span>{%- endif -%}
-        {%- if section.settings.fact_returns != blank -%}<span>{% render 'gg-icon', icon: 'rotate' %}{{ section.settings.fact_returns }}</span>{%- endif -%}
+        {%- if section.settings.fact_delivery != blank -%}<span>{% render 'gg-icon', icon: 'truck' %}{% render 'gg-t', sid: section.id, field: 'fact_delivery', value: section.settings.fact_delivery %}</span>{%- endif -%}
+        {%- if section.settings.fact_returns != blank -%}<span>{% render 'gg-icon', icon: 'rotate' %}{% render 'gg-t', sid: section.id, field: 'fact_returns', value: section.settings.fact_returns %}</span>{%- endif -%}
       </div>
     </div>
   </div>
@@ -197,9 +206,9 @@
         <span class="gg-sticky-buy__title">{{ product.title }}</span>
         <span class="gg-price gg-price--sm"><span class="gg-price__amount" data-gg-price>{{ current_variant.price | money }}</span></span>
       </div>
-      <button type="button" class="gg-btn" data-gg-sticky-submit data-gg-add data-gg-add-label="{{ section.settings.add_label | escape }}" data-gg-sold-out="{{ 'products.product.sold_out' | t }}" data-gg-unavailable="{{ 'products.product.unavailable' | t }}">
+      <button type="button" class="gg-btn" data-gg-sticky-submit data-gg-add data-gg-add-label="{{ add_label | escape }}" data-gg-sold-out="{{ 'products.product.sold_out' | t }}" data-gg-unavailable="{{ 'products.product.unavailable' | t }}">
         {%- render 'gg-icon', icon: 'shopping-bag' -%}
-        <span data-gg-add-text>{{ section.settings.add_label }} · {{ current_variant.price | money }}</span>
+        <span data-gg-add-text>{{ add_label }} · {{ current_variant.price | money }}</span>
       </button>
     </div>
   {%- endif -%}
@@ -220,8 +229,8 @@
     { "type": "text", "id": "shop_label", "label": "Shop crumb label", "default": "Shop" },
     { "type": "url", "id": "shop_link", "label": "Shop crumb link", "info": "Defaults to /collections/all." },
     { "type": "header", "content": "Price notes" },
-    { "type": "text", "id": "price_note_1", "label": "Note 1", "default": "Shown in [currency] · converted at checkout", "info": "[currency] is replaced with the active currency." },
-    { "type": "text", "id": "price_note_2", "label": "Note 2", "default": "Shipping calculated at checkout for your country" },
+    { "type": "text", "id": "price_note_1", "label": "Note 1", "default": "incl. VAT", "info": "[currency] is replaced with the active currency." },
+    { "type": "text", "id": "price_note_2", "label": "Note 2", "default": "Shipping calculated at checkout" },
     { "type": "header", "content": "Benefits and reviews" },
     { "type": "checkbox", "id": "show_benefits", "label": "Show benefit bullets (product metafield custom.benefits)", "default": true },
     { "type": "checkbox", "id": "show_review_slider", "label": "Show review slider (product metafield custom.reviews)", "default": false },

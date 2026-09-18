@@ -274,7 +274,6 @@
       "announcement": "Announcement",
       "announcement_bar": "Announcement bar"
     },
-
     "header": {
       "announcement": "Announcement",
       "menu": "Menu",
@@ -527,6 +526,39 @@
       "max_characters": "{{ max_chars }} characters max",
       "send_on": "YYYY-MM-DD",
       "send_on_label": "Send on (optional)"
+    }
+  },
+  "gg": {
+    "general": {
+      "home": "Home",
+      "view": "View",
+      "no_products": "No products yet. Add products in Shopify and they will appear here.",
+      "payment_methods": "Payment methods"
+    },
+    "header": {
+      "search_placeholder": "Search"
+    },
+    "product": {
+      "breadcrumb_label": "Breadcrumb",
+      "benefits_label": "Benefits"
+    },
+    "reviews": {
+      "read": "Read the reviews",
+      "previous": "Previous review",
+      "next": "Next review",
+      "verified": "Verified purchase",
+      "out_of_five": "{{ value }} out of 5",
+      "count": "({{ count }} reviews)"
+    },
+    "collection": {
+      "filter_label": "Filter",
+      "pagination_label": "Pagination",
+      "previous": "Previous",
+      "next": "Next",
+      "page_of": "Page {{ current }} of {{ total }}"
+    },
+    "cart": {
+      "progress_label": "Checkout progress"
     }
   }
 }

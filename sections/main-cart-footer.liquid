@@ -121,7 +121,7 @@
               {%- if section.settings.gg_show_trust -%}
                 <div class="gg-cart-trust">
                   {%- render 'gg-payments', center: true -%}
-                  {%- if section.settings.gg_reassurance != blank -%}<p class="gg-cart-trust__line">{{ section.settings.gg_reassurance }}</p>{%- endif -%}
+                  {%- if section.settings.gg_reassurance != blank -%}<p class="gg-cart-trust__line">{% render 'gg-t', sid: section.id, field: 'gg_reassurance', value: section.settings.gg_reassurance %}</p>{%- endif -%}
                 </div>
               {%- endif -%}
 

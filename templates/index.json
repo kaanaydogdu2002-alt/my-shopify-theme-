@@ -1,26 +1,8 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "trust": {
       "type": "gg-trust-bar",
       "blocks": {
-        "reviews": {
-          "type": "item",
-          "settings": {
-            "icon": "star-filled",
-            "icon_class": "gg-icon--gold",
-            "text": "4,7 from 312 reviews",
-            "text_mobile": "4,7 · 312 reviews"
-          }
-        },
         "secure": {
           "type": "item",
           "settings": {
@@ -50,7 +32,6 @@
         }
       },
       "block_order": [
-        "reviews",
         "secure",
         "shipping",
         "returns"
@@ -78,58 +59,10 @@
         "collection": "",
         "limit": 6,
         "show_rating": true,
-        "placeholder_rating": 4.8,
+        "placeholder_rating": 0,
         "placeholder_count": 126,
         "show_payments": true,
         "payments_label": "Secure checkout with"
-      }
-    },
-    "reviews": {
-      "type": "gg-reviews",
-      "blocks": {
-        "r1": {
-          "type": "review",
-          "settings": {
-            "stars": 5,
-            "body": "The pour-over set replaced two things on my counter, which was the point. Third month of daily use and the glaze still looks new.",
-            "who": "Marieke, Netherlands",
-            "verified": true,
-            "note": ""
-          }
-        },
-        "r2": {
-          "type": "review",
-          "settings": {
-            "stars": 4,
-            "body": "I ordered the apron expecting something stiff. It softened after one wash and the ties are long enough to knot in front. The pocket could be a little deeper.",
-            "who": "Jonas, Germany",
-            "verified": true,
-            "note": ""
-          }
-        },
-        "r3": {
-          "type": "review",
-          "settings": {
-            "stars": 5,
-            "body": "Had a question about a parcel and got a real answer from a person, not a bot. The lamp itself is heavier and better made than the photos suggest.",
-            "who": "Aoife, Ireland",
-            "verified": true,
-            "note": ""
-          }
-        }
-      },
-      "block_order": [
-        "r1",
-        "r2",
-        "r3"
-      ],
-      "settings": {
-        "eyebrow": "What customers say",
-        "heading": "4,7 from 312 reviews",
-        "lead": "",
-        "use_section_heading": false,
-        "product_source": false,
-        "background": "warm"
       }
     },
     "story": {
@@ -167,7 +100,6 @@
     "trust",
     "hero",
     "range",
-    "reviews",
     "story",
     "newsletter"
   ]

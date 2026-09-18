@@ -1,0 +1,37 @@
+{% comment %}
+  Locale-aware text for section settings.
+  Looks up gg.<page>.<sid>[.<bid>].<field> in the active locale file; when that key
+  does not exist (English, which lives in the theme editor settings) it prints the
+  setting value unchanged. German lives in locales/de.json under the same keys.
+  <page> is the template name (index, product, collection, cart, 404, page_about, ...)
+  unless a fixed page is passed (footer, header, trust).
+  Usage:
+    {% render 'gg-t', sid: section.id, field: 'heading', value: section.settings.heading %}
+    {% render 'gg-t', sid: section.id, bid: block.id, field: 'content', value: block.settings.content, html: true %}
+    {% render 'gg-t', page: 'footer', field: 'tagline', value: section.settings.tagline %}
+{% endcomment %}
+{%- liquid
+  if page == blank
+    assign page = template.name
+    if template.suffix != blank
+      assign page = page | append: '_' | append: template.suffix
+    endif
+  endif
+  assign key = 'gg.' | append: page
+  if sid != blank
+    assign key = key | append: '.' | append: sid
+  endif
+  if bid != blank
+    assign key = key | append: '.' | append: bid
+  endif
+  assign key = key | append: '.' | append: field
+  if html
+    assign key = key | append: '_html'
+  endif
+  assign out = key | t
+  assign probe = out | downcase
+  if probe contains 'translation missing'
+    assign out = value
+  endif
+  echo out
+-%}

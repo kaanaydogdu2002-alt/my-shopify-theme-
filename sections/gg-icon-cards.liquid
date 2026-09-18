@@ -2,6 +2,9 @@
   assign items = blank
   if section.settings.product_source and product != blank
     assign items = product.metafields.custom.reasons.value
+    if request.locale.iso_code == 'de' and product.metafields.custom.reasons_de.value != blank
+      assign items = product.metafields.custom.reasons_de.value
+    endif
   endif
   assign intro = blank
   if section.settings.intro_from_description and product != blank
@@ -21,13 +24,17 @@
 {%- unless hide -%}
 <section class="gg-section {{ bg_class }} gg-section--rule-top">
   <div class="gg-container gg-section__inner" style="display:flex;flex-direction:column;gap:{% if section.settings.align == 'center' %}32px{% else %}28px{% endif %}">
-    {%- render 'gg-heading', eyebrow: section.settings.eyebrow, title: section.settings.heading, lead: section.settings.lead, align: section.settings.align -%}
+    {%- capture h_eyebrow -%}{% render 'gg-t', sid: section.id, field: 'eyebrow', value: section.settings.eyebrow %}{%- endcapture -%}
+    {%- capture h_title -%}{% render 'gg-t', sid: section.id, field: 'heading', value: section.settings.heading %}{%- endcapture -%}
+    {%- capture h_lead -%}{% render 'gg-t', sid: section.id, field: 'lead', value: section.settings.lead %}{%- endcapture -%}
+    {%- render 'gg-heading', eyebrow: h_eyebrow, title: h_title, lead: h_lead, align: section.settings.align -%}
     {%- if intro != blank -%}
       <div class="gg-intro gg-rte">{{ intro }}</div>
     {%- endif -%}
     {%- if section.settings.show_image -%}
       <div class="gg-intro-media">
-        {%- render 'gg-media', image: section.settings.image, ratio: '4x3', placeholder: section.settings.image_note, alt: section.settings.heading, sizes: '(min-width: 990px) 860px, 100vw' -%}
+        {%- capture image_note -%}{% render 'gg-t', sid: section.id, field: 'image_note', value: section.settings.image_note %}{%- endcapture -%}
+        {%- render 'gg-media', image: section.settings.image, ratio: '4x3', placeholder: image_note, alt: h_title, sizes: '(min-width: 990px) 860px, 100vw' -%}
       </div>
     {%- endif -%}
     {%- if items != blank -%}
@@ -45,8 +52,8 @@
         {%- for block in section.blocks -%}
           <div class="gg-card{{ card_class }}" {{ block.shopify_attributes }}>
             {%- if block.settings.icon != 'none' -%}<span class="gg-card__icon">{% render 'gg-icon', icon: block.settings.icon %}</span>{%- endif -%}
-            <h3 class="gg-card__title">{{ block.settings.title }}</h3>
-            <p class="gg-card__body">{{ block.settings.body }}</p>
+            <h3 class="gg-card__title">{% render 'gg-t', sid: section.id, bid: block.id, field: 'title', value: block.settings.title %}</h3>
+            <p class="gg-card__body">{% render 'gg-t', sid: section.id, bid: block.id, field: 'body', value: block.settings.body %}</p>
           </div>
         {%- endfor -%}
       </div>

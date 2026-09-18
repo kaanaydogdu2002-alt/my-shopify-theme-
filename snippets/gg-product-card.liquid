@@ -11,8 +11,14 @@
     endif
   endfor
   assign subtitle = product.metafields.custom.subtitle.value
+  if request.locale.iso_code == 'de' and product.metafields.custom.subtitle_de.value != blank
+    assign subtitle = product.metafields.custom.subtitle_de.value
+  endif
   assign img_alt = product.featured_image.alt | default: product.title | escape
   assign benefits = product.metafields.custom.benefits.value
+  if request.locale.iso_code == 'de' and product.metafields.custom.benefits_de.value != blank
+    assign benefits = product.metafields.custom.benefits_de.value
+  endif
   if subtitle == blank
     assign plain = product.description | strip_html | strip
     assign subtitle = plain | split: '. ' | first
@@ -67,5 +73,5 @@
       </span>
     {%- endif -%}
   </span>
-  <span class="gg-pcard__foot">View{% render 'gg-icon', icon: 'arrow-right' %}</span>
+  <span class="gg-pcard__foot">{{ 'gg.general.view' | t }}{% render 'gg-icon', icon: 'arrow-right' %}</span>
 </a>

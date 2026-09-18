@@ -3,15 +3,6 @@
     "trust": {
       "type": "gg-trust-bar",
       "blocks": {
-        "reviews": {
-          "type": "item",
-          "settings": {
-            "icon": "star-filled",
-            "icon_class": "gg-icon--gold",
-            "text": "4,7 from 312 reviews",
-            "text_mobile": "4,7 · 312 reviews"
-          }
-        },
         "secure": {
           "type": "item",
           "settings": {
@@ -41,7 +32,6 @@
         }
       },
       "block_order": [
-        "reviews",
         "secure",
         "shipping",
         "returns"

@@ -1,10 +1,13 @@
 {%- liquid
-  assign labels = section.settings.steps | split: ','
+  capture steps_text
+    render 'gg-t', sid: section.id, field: 'steps', value: section.settings.steps
+  endcapture
+  assign labels = steps_text | split: ','
   assign current = section.settings.current
 -%}
 <div class="gg-section gg-section--page">
   <div class="gg-container">
-    <ol class="gg-progress" aria-label="Checkout progress">
+    <ol class="gg-progress" aria-label="{{ 'gg.cart.progress_label' | t }}">
       {%- for label in labels -%}
         <li class="gg-progress__step{% if forloop.index == current %} is-current{% elsif forloop.index < current %} is-done{% endif %}"{% if forloop.index == current %} aria-current="step"{% endif %}>{{ label | strip }}</li>
       {%- endfor -%}

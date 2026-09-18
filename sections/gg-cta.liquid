@@ -9,12 +9,12 @@
     {%- if section.settings.use_product_title and product != blank -%}
       <h2 class="gg-cta__title">{{ product.title }}</h2>
     {%- elsif section.settings.heading != blank -%}
-      <h2 class="gg-cta__title">{{ section.settings.heading }}</h2>
+      <h2 class="gg-cta__title">{% render 'gg-t', sid: section.id, field: 'heading', value: section.settings.heading %}</h2>
     {%- endif -%}
     {%- if section.settings.text != blank -%}
       <p class="gg-cta__meta">
         {%- if section.settings.prefix_price and product != blank -%}<span data-gg-price>{{ product.selected_or_first_available_variant.price | money }}</span> · {% endif -%}
-        {{- section.settings.text -}}
+        {%- render 'gg-t', sid: section.id, field: 'text', value: section.settings.text -%}
       </p>
     {%- endif -%}
     <div class="gg-cta__actions">
@@ -22,14 +22,14 @@
         {%- if section.settings.button_adds_to_bag and product != blank -%}
           <button type="button" class="gg-btn gg-btn--lg{% if inverse %} gg-btn--light{% else %} gg-btn--gold{% endif %}" data-gg-submit-product-form>
             {%- render 'gg-icon', icon: 'shopping-bag' -%}
-            <span>{{ section.settings.button_label }} · <span data-gg-price>{{ product.selected_or_first_available_variant.price | money }}</span></span>
+            <span>{% render 'gg-t', sid: section.id, field: 'button_label', value: section.settings.button_label %} · <span data-gg-price>{{ product.selected_or_first_available_variant.price | money }}</span></span>
           </button>
         {%- else -%}
-          <a href="{{ section.settings.button_link }}" class="gg-btn gg-btn--lg{% if inverse %} gg-btn--light{% endif %}">{{ section.settings.button_label }}{% unless inverse %}{% render 'gg-icon', icon: 'arrow-right' %}{% endunless %}</a>
+          <a href="{{ section.settings.button_link }}" class="gg-btn gg-btn--lg{% if inverse %} gg-btn--light{% endif %}">{% render 'gg-t', sid: section.id, field: 'button_label', value: section.settings.button_label %}{% unless inverse %}{% render 'gg-icon', icon: 'arrow-right' %}{% endunless %}</a>
         {%- endif -%}
       {%- endif -%}
       {%- if section.settings.button2_label != blank -%}
-        <a href="{{ section.settings.button2_link }}" class="gg-btn gg-btn--lg gg-btn--secondary">{{ section.settings.button2_label }}</a>
+        <a href="{{ section.settings.button2_link }}" class="gg-btn gg-btn--lg gg-btn--secondary">{% render 'gg-t', sid: section.id, field: 'button2_label', value: section.settings.button2_label %}</a>
       {%- endif -%}
     </div>
   </div>

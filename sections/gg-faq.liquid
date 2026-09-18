@@ -1,13 +1,21 @@
 <section class="gg-section gg-section--page gg-section--rule-top">
   <div class="gg-container gg-container--narrow gg-section__inner" style="display:flex;flex-direction:column;gap:20px">
-    {%- render 'gg-heading', eyebrow: section.settings.eyebrow, title: section.settings.heading, lead: section.settings.lead -%}
+    {%- capture h_eyebrow -%}{% render 'gg-t', sid: section.id, field: 'eyebrow', value: section.settings.eyebrow %}{%- endcapture -%}
+    {%- capture h_title -%}{% render 'gg-t', sid: section.id, field: 'heading', value: section.settings.heading %}{%- endcapture -%}
+    {%- capture h_lead -%}{% render 'gg-t', sid: section.id, field: 'lead', value: section.settings.lead %}{%- endcapture -%}
+    {%- render 'gg-heading', eyebrow: h_eyebrow, title: h_title, lead: h_lead -%}
     <div class="gg-accordion">
       {%- for block in section.blocks -%}
         {%- liquid
-          assign content = block.settings.content
+          capture content
+            render 'gg-t', sid: section.id, bid: block.id, field: 'content', value: block.settings.content, html: true
+          endcapture
           assign skip = false
           if block.settings.use_product_metafield
             assign materials = product.metafields.custom.materials.value
+            if request.locale.iso_code == 'de' and product.metafields.custom.materials_de.value != blank
+              assign materials = product.metafields.custom.materials_de.value
+            endif
             if materials != blank
               assign content = materials | newline_to_br
             else
@@ -18,7 +26,7 @@
         {%- if skip -%}{%- continue -%}{%- endif -%}
         <details class="gg-accordion__item"{% if forloop.first and section.settings.open_first %} open{% endif %} {{ block.shopify_attributes }}>
           <summary class="gg-accordion__summary">
-            <span>{{ block.settings.title }}</span>
+            <span>{% render 'gg-t', sid: section.id, bid: block.id, field: 'title', value: block.settings.title %}</span>
             {%- render 'gg-icon', icon: 'plus', class: 'gg-icon--plus' -%}
             {%- render 'gg-icon', icon: 'minus', class: 'gg-icon--minus' -%}
           </summary>

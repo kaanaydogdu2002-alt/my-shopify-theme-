@@ -1,7 +1,7 @@
 <section class="gg-newsletter gg-section gg-section--page gg-section--rule-top">
   <div class="gg-container gg-container--tight gg-section__inner gg-newsletter__inner">
-    {%- if section.settings.heading != blank -%}<h2 class="gg-h2">{{ section.settings.heading }}</h2>{%- endif -%}
-    {%- if section.settings.text != blank -%}<p class="gg-body" style="max-width:52ch">{{ section.settings.text }}</p>{%- endif -%}
+    {%- if section.settings.heading != blank -%}<h2 class="gg-h2">{% render 'gg-t', sid: section.id, field: 'heading', value: section.settings.heading %}</h2>{%- endif -%}
+    {%- if section.settings.text != blank -%}<p class="gg-body" style="max-width:52ch">{% render 'gg-t', sid: section.id, field: 'text', value: section.settings.text %}</p>{%- endif -%}
     {%- form 'customer', id: 'gg-newsletter-form', class: 'gg-newsletter__form' -%}
       <input type="hidden" name="contact[tags]" value="newsletter">
       {%- if form.posted_successfully? -%}
@@ -9,13 +9,13 @@
       {%- else -%}
         <div class="gg-field">
           <label class="gg-visually-hidden" for="gg-newsletter-email">{{ 'newsletter.label' | t }}</label>
-          <input id="gg-newsletter-email" class="gg-field__input" type="email" name="contact[email]" value="{{ form.email }}" placeholder="{{ section.settings.placeholder }}" required autocomplete="email">
+          <input id="gg-newsletter-email" class="gg-field__input" type="email" name="contact[email]" value="{{ form.email }}" placeholder="{% render 'gg-t', sid: section.id, field: 'placeholder', value: section.settings.placeholder %}" required autocomplete="email">
           {%- if form.errors -%}<span class="gg-field__error">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</span>{%- endif -%}
         </div>
-        <button type="submit" class="gg-btn">{{ section.settings.button_label }}</button>
+        <button type="submit" class="gg-btn">{% render 'gg-t', sid: section.id, field: 'button_label', value: section.settings.button_label %}</button>
       {%- endif -%}
     {%- endform -%}
-    {%- if section.settings.note != blank -%}<span class="gg-small">{{ section.settings.note }}</span>{%- endif -%}
+    {%- if section.settings.note != blank -%}<span class="gg-small">{% render 'gg-t', sid: section.id, field: 'note', value: section.settings.note %}</span>{%- endif -%}
   </div>
 </section>
 

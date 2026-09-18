@@ -1,12 +1,3 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "main": {
@@ -20,7 +11,7 @@
         "filters": "Kitchen:kitchen, Living:living, Desk:desk",
         "show_benefits": true,
         "show_rating": true,
-        "placeholder_rating": 4.8,
+        "placeholder_rating": 0,
         "placeholder_count": 126,
         "per_page": 12,
         "empty_text": "Nothing here yet. Try another filter, or write to us."

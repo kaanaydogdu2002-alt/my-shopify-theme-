@@ -68,7 +68,7 @@
       <form action="{{ routes.search_url }}" method="get" role="search" class="gg-search__form">
         <span class="gg-search__icon">{% render 'gg-icon', icon: 'search' %}</span>
         <label class="gg-visually-hidden" for="gg-search-input">{{ 'general.search.search' | t }}</label>
-        <input id="gg-search-input" class="gg-search__input" type="search" name="q" value="{{ search.terms | escape }}" placeholder="Search" autocomplete="off" enterkeyhint="search">
+        <input id="gg-search-input" class="gg-search__input" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'gg.header.search_placeholder' | t }}" autocomplete="off" enterkeyhint="search">
         <input type="hidden" name="options[prefix]" value="last">
         <button type="button" class="gg-search__close" aria-label="{{ 'accessibility.close' | t }}" data-gg-search-close>{% render 'gg-icon', icon: 'x' %}</button>
       </form>

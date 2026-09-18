@@ -1,26 +1,8 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "trust": {
       "type": "gg-trust-bar",
       "blocks": {
-        "reviews": {
-          "type": "item",
-          "settings": {
-            "icon": "star-filled",
-            "icon_class": "gg-icon--gold",
-            "text": "4,7 from 312 reviews",
-            "text_mobile": "4,7 · 312 reviews"
-          }
-        },
         "secure": {
           "type": "item",
           "settings": {
@@ -50,7 +32,6 @@
         }
       },
       "block_order": [
-        "reviews",
         "secure",
         "shipping",
         "returns"
@@ -62,8 +43,8 @@
       "settings": {
         "shop_label": "Shop",
         "shop_link": "/collections/all",
-        "price_note_1": "Shown in [currency] · converted at checkout",
-        "price_note_2": "Shipping calculated at checkout for your country",
+        "price_note_1": "incl. VAT",
+        "price_note_2": "Shipping calculated at checkout",
         "show_benefits": true,
         "show_review_slider": false,
         "slider_interval": 6,
@@ -76,7 +57,7 @@
         "fact_stock": "In stock · dispatched within 1–2 working days",
         "fact_delivery": "Estimated delivery: 5–20 business days · tracked",
         "fact_returns": "Fourteen days to withdraw under EU law, and thirty with us.",
-        "fallback_rating": 4.8,
+        "fallback_rating": 0,
         "fallback_rating_count": 126,
         "image_note": "Product image — add photos to this product in Shopify",
         "thumb_notes": "Detail, Scale, Set, In use"

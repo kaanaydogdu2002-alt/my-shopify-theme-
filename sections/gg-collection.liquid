@@ -1,13 +1,20 @@
 {%- liquid
   assign title = collection.title
   if collection.handle == 'all' and section.settings.all_title != blank
-    assign title = section.settings.all_title
+    capture title
+      render 'gg-t', sid: section.id, field: 'all_title', value: section.settings.all_title
+    endcapture
   endif
-  assign lead = section.settings.lead
+  capture lead
+    render 'gg-t', sid: section.id, field: 'lead', value: section.settings.lead
+  endcapture
   if collection.handle != 'all' and collection.description != blank
     assign lead = collection.description | strip_html
   endif
-  assign filters = section.settings.filters | split: ','
+  capture filters_text
+    render 'gg-t', sid: section.id, field: 'filters', value: section.settings.filters
+  endcapture
+  assign filters = filters_text | split: ','
   assign base_url = collection.url
   if collection.handle == 'all'
     assign base_url = '/collections/all'
@@ -16,13 +23,13 @@
 -%}
 <section class="gg-collection gg-section gg-section--page">
   <div class="gg-container gg-collection__intro">
-    {%- if section.settings.eyebrow != blank -%}<span class="gg-eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+    {%- if section.settings.eyebrow != blank -%}<span class="gg-eyebrow">{% render 'gg-t', sid: section.id, field: 'eyebrow', value: section.settings.eyebrow %}</span>{%- endif -%}
     <h1 class="gg-h1" style="max-width:16ch">{{ title }}</h1>
     {%- if lead != blank -%}<p class="gg-lead gg-measure">{{ lead }}</p>{%- endif -%}
 
     {%- if section.settings.show_filters and filters.size > 0 -%}
-      <nav class="gg-chips" aria-label="Filter">
-        <a href="{{ base_url }}" class="gg-chip{% unless active_tag %} is-active{% endunless %}">{{ section.settings.all_label }}</a>
+      <nav class="gg-chips" aria-label="{{ 'gg.collection.filter_label' | t }}">
+        <a href="{{ base_url }}" class="gg-chip{% unless active_tag %} is-active{% endunless %}">{% render 'gg-t', sid: section.id, field: 'all_label', value: section.settings.all_label %}</a>
         {%- for f in filters -%}
           {%- assign parts = f | split: ':' -%}
           {%- assign label = parts[0] | strip -%}
@@ -39,14 +46,14 @@
         {%- for product in collection.products -%}
           {%- render 'gg-product-card', product: product, show_benefits: section.settings.show_benefits, show_rating: section.settings.show_rating, placeholder_rating: section.settings.placeholder_rating, placeholder_count: section.settings.placeholder_count -%}
         {%- else -%}
-          <div class="gg-products__empty" style="grid-column: 1 / -1">{{ section.settings.empty_text }}</div>
+          <div class="gg-products__empty" style="grid-column: 1 / -1">{% render 'gg-t', sid: section.id, field: 'empty_text', value: section.settings.empty_text %}</div>
         {%- endfor -%}
       </div>
       {%- if paginate.pages > 1 -%}
-        <nav class="gg-pagination" aria-label="Pagination">
-          {%- if paginate.previous -%}<a href="{{ paginate.previous.url }}" class="gg-btn gg-btn--secondary gg-btn--sm">{% render 'gg-icon', icon: 'chevron-left' %}Previous</a>{%- endif -%}
-          <span class="gg-small">Page {{ paginate.current_page }} of {{ paginate.pages }}</span>
-          {%- if paginate.next -%}<a href="{{ paginate.next.url }}" class="gg-btn gg-btn--secondary gg-btn--sm">Next{% render 'gg-icon', icon: 'chevron-right' %}</a>{%- endif -%}
+        <nav class="gg-pagination" aria-label="{{ 'gg.collection.pagination_label' | t }}">
+          {%- if paginate.previous -%}<a href="{{ paginate.previous.url }}" class="gg-btn gg-btn--secondary gg-btn--sm">{% render 'gg-icon', icon: 'chevron-left' %}{{ 'gg.collection.previous' | t }}</a>{%- endif -%}
+          <span class="gg-small">{{ 'gg.collection.page_of' | t: current: paginate.current_page, total: paginate.pages }}</span>
+          {%- if paginate.next -%}<a href="{{ paginate.next.url }}" class="gg-btn gg-btn--secondary gg-btn--sm">{{ 'gg.collection.next' | t }}{% render 'gg-icon', icon: 'chevron-right' %}</a>{%- endif -%}
         </nav>
       {%- endif -%}
     {%- endpaginate -%}

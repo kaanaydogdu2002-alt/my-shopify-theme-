@@ -10,8 +10,9 @@
   assign full = value_x2 | divided_by: 2
   assign half = value_x2 | modulo: 2
   assign next = full | plus: 1
+  assign value_rounded = value | round: 1
 -%}
-<span class="gg-rating" style="--gg-star: {{ size }}px" aria-label="{{ value | round: 1 }} out of 5">
+<span class="gg-rating" style="--gg-star: {{ size }}px" aria-label="{{ 'gg.reviews.out_of_five' | t: value: value_rounded }}">
   <span class="gg-rating__stars">
     {%- for i in (1..5) -%}
       {%- if i <= full -%}
@@ -24,5 +25,5 @@
     {%- endfor -%}
   </span>
   {%- if show_value -%}<span>{{ value | round: 1 | replace: '.', ',' }}</span>{%- endif -%}
-  {%- if count != blank -%}<span>({{ count }} reviews)</span>{%- endif -%}
+  {%- if count != blank -%}<span>{{ 'gg.reviews.count' | t: count: count }}</span>{%- endif -%}
 </span>

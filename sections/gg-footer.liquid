@@ -15,7 +15,7 @@
           <span class="gg-footer__wordmark">{% render 'gg-wordmark' %}</span>
         </div>
         {%- if section.settings.tagline != blank -%}
-          <p class="gg-footer__tagline">{{ section.settings.tagline }}</p>
+          <p class="gg-footer__tagline">{% render 'gg-t', page: 'footer', field: 'tagline', value: section.settings.tagline %}</p>
         {%- endif -%}
       </div>
 
@@ -24,7 +24,8 @@
           {%- when 'menu' -%}
             {%- if block.settings.menu != blank -%}
               <div class="gg-footer__col{% if block.settings.hide_on_mobile %} gg-footer__col--hide-mobile{% endif %}" {{ block.shopify_attributes }}>
-                <span class="gg-footer__heading">{{ block.settings.heading | default: block.settings.menu.title }}</span>
+                {%- assign col_heading = block.settings.heading | default: block.settings.menu.title -%}
+                <span class="gg-footer__heading">{% render 'gg-t', page: 'footer', bid: block.id, field: 'heading', value: col_heading %}</span>
                 {%- for link in block.settings.menu.links -%}
                   <a href="{{ link.url }}">{{ link.title }}</a>
                 {%- endfor -%}
@@ -32,14 +33,14 @@
             {%- endif -%}
           {%- when 'contact' -%}
             <div class="gg-footer__col" {{ block.shopify_attributes }}>
-              <span class="gg-footer__heading">{{ block.settings.heading }}</span>
+              <span class="gg-footer__heading">{% render 'gg-t', page: 'footer', bid: block.id, field: 'heading', value: block.settings.heading %}</span>
               {%- if block.settings.email != blank -%}<a href="mailto:{{ block.settings.email }}">{{ block.settings.email }}</a>{%- endif -%}
               {%- if block.settings.phone != blank -%}<span>{{ block.settings.phone }}</span>{%- endif -%}
               {%- if block.settings.address != blank -%}<span class="gg-footer__muted">{{ block.settings.address }}</span>{%- endif -%}
               {%- if block.settings.registration != blank or block.settings.vat != blank -%}
                 <span class="gg-footer__reg">
                   {%- if block.settings.registration != blank -%}<span class="gg-footer__muted">{{ block.settings.registration }}</span>{%- endif -%}
-                  {%- if block.settings.vat != blank -%}<span class="gg-footer__muted">{{ block.settings.vat }}</span>{%- endif -%}
+                  {%- if block.settings.vat != blank -%}<span class="gg-footer__muted">{% render 'gg-t', page: 'footer', bid: block.id, field: 'vat', value: block.settings.vat %}</span>{%- endif -%}
                 </span>
               {%- endif -%}
             </div>
@@ -54,7 +55,7 @@
     {%- endif -%}
 
     <div class="gg-footer__legal">
-      <span>{{ brand_name }}{% if section.settings.legal != blank %} · {{ section.settings.legal }}{% endif %}{% if section.settings.vat != blank %} · {{ section.settings.vat }}{% endif %} · © {{ 'now' | date: '%Y' }}</span>
+      <span>{{ brand_name }}{% if section.settings.legal != blank %} · {{ section.settings.legal }}{% endif %}{% if section.settings.vat != blank %} · {% render 'gg-t', page: 'footer', field: 'vat', value: section.settings.vat %}{% endif %} · © {{ 'now' | date: '%Y' }}</span>
       {%- if section.settings.show_policy_links -%}
         <span class="gg-hide-desktop">
           {%- for policy in shop.policies -%}
