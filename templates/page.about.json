@@ -20,6 +20,7 @@
         "large_text": true,
         "button_label": "",
         "button_link": "",
+        "image": "shopify://shop_images/about-image-dark-1600x1200.png",
         "image_note": "Lifestyle image — the shelf at home, morning light",
         "ratio": "4x3",
         "image_position": "right",
@@ -78,6 +79,9 @@
         "lead": "Not a mission statement. Just the rules we actually run the shop by.",
         "align": "left",
         "background": "page",
+        "intro_from_description": false,
+        "show_image": false,
+        "image_note": "Product image — the boards side by side on a counter",
         "product_source": false
       }
     },
